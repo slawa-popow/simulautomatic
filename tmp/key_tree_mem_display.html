@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ru-RU">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/brython@3.11.0/brython.min.js">
+    </script>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/brython@3.11.0/brython_stdlib.js">
+    </script>
+    <!-- шрифты -->
+    <link
+    href="https://fonts.googleapis.com/css?family=Roboto:400,300,700&subset=latin,Cyrillic"
+    rel="stylesheet"
+    type="text/css"
+    />
+    <!-- 7 segment -->
+    <link href="https://fonts.cdnfonts.com/css/seven-segment" rel="stylesheet">
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/segment7" type="text/css"/> 
+    <!-- font-family: 'Seven Segment', sans-serif; 
+
+        font-family: 'Segment7Standard';
+        font-weight: normal;
+        font-style: italic; 
+    -->
+
+    <title>клавиатура память дисплей меню</title>
+
+    <style>
+        /* сброс стилей браузера */
+        * {
+        box-sizing: border-box; 
+        }
+        html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, 
+        figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            vertical-align: baseline;
+        }
+        article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+        body {
+            line-height: 1.2;
+        }
+        ol { 
+            padding-left: 1.4em;
+            list-style: decimal;
+        }
+        ul {
+            padding-left: 1.4em;
+            list-style: square;
+        }
+        li {
+            padding: 4px;
+            padding-top: 10px;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        } 
+        /* конец кода сброса стилей браузера */
+         .clear:after {
+            content: " ";
+            display: table;
+            clear: both;
+        }
+
+        .clear {
+            zoom: 1;	
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: 'Roboto', serif;
+            background-color: rgb(240, 240, 240);
+            -webkit-hyphens: auto;
+            -moz-hyphens: auto;
+            -ms-hyphens: auto;
+            hyphens: auto;
+            word-wrap: break-word;	
+        }
+
+        .page {
+            width: 90%;
+            margin: 0 auto;
+            background-color: white;
+            border: 1px solid rgb(223, 223, 230);
+            
+        }
+        .page h1, h2 {
+           text-align: center; 
+        }
+        
+        .page h1 {
+            font-size: 1.8em;
+            margin: 25px 0;
+            font-weight: 500;
+        }
+        .page h2 {
+            font-size: 1.5em;
+            font-weight: 300;
+            margin: 20px 0;
+        }
+        .header {
+            min-height: 150px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: rgba(42, 98, 211, 0.868);
+            color: white;
+           
+        }
+        .content {
+            padding: 10px;
+            min-height: 1500px;
+            display: flex;
+            flex-flow: column wrap;
+        }
+        .content h1 {
+            background-color: rgba(95, 171, 243, 0.567);
+            padding: 10px 0;
+        }
+        .content .line{
+            display: inline;
+            border-bottom: 1px solid black;
+            margin: 10px 0;
+        }
+        .segment {
+            font-family: 'Segment7Standard';
+            font-weight: normal;
+            font-style: italic; 
+            font-size: 5em;
+            color: rgba(227, 13, 13, 0.805);
+        }
+        .memory {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-around;
+            align-items: center;
+            min-height: 250px;
+            border: 1px solid rgb(220, 220, 220);
+            padding: 15px 0 15px 0;
+        }
+        .mempoint {
+            display: flex;
+            flex-flow: column nowrap;
+            margin: 10px;
+            height: 150px;
+            width: 150px;
+            border: 1px solid rgb(130, 65, 25);
+        }
+        
+        .mempoint__data {
+            margin: 5px;
+            padding: 2px;
+            min-height: 40px;
+            background-color: rgb(233, 233, 233);
+        }
+        .mempoint__data:first-child {
+            background-color: white;
+        }
+        .mempoint__data_field-0 {
+            display: inline-block; 
+            text-align: center; 
+            color: white; 
+            font-size: 1.4em; 
+            background-color: rgb(185, 133, 133); 
+            width: 36px; 
+            height: 36px;
+        }
+        .mempoint__data_field-1, .mempoint__data_field-2{
+            display: inline-block; 
+            font-family: 'Segment7Standard';
+            font-size: 2em;
+            text-align: center; 
+             
+        }
+        .mempoint__data_field-1 {
+            color: rgba(227, 13, 13, 0.805);
+        }
+        .mempoint__data_field-2 {
+            color: rgba(4, 80, 5, 0.805);
+        }
+
+    </style>
+ 
+</head>
+<body onload="brython({debug: 1})">
+
+    
+    <div class="page">
+        <div class="header">
+            <h1>Дисплей, кнопки, дерево меню, память</h1>
+            <h2>Прототип</h2>
+        </div>
+        <!---->
+        <div class="content">
+            <h1>Шрифт семисегментного индикатора</h1>
+            <span class="line"></span>
+            <p>a b c d e f g h i j k l m n o p q r s t u w v x y z</p>
+            <span class="segment"> a b c d e f g h i j k l m n o p q r s t u w v x y z</span>
+            <span class="line"></span>
+
+            <p>A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
+            <span class="segment">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</span>
+            <span class="line"></span>
+
+            <p>1 2 3 4 5 6 7 8 9 0 . \ | [ ] % * / # @ + - ( ) _ ^ ? !</p>
+            <span class="segment">1 2 3 4 5 6 7 8 9 0 . \ | [ ] % * / # @ + - ( ) _ ^ ? ! </span>
+            <span class="line"></span>
+        
+            <h1>Ячейки памяти (Не полно. Для примера.)</h1>
+            <div class="memory" id="memory_draw">
+                <div class="mempoint" id="p0">
+                    <div class="mempoint__data"><span class="mempoint__data_field-0">0</span></div>
+                    <div class="mempoint__data"></div>
+                    <div class="mempoint__data"></div>
+                </div>
+                <div class="mempoint" id="p1">
+                    <div class="mempoint__data"><span class="mempoint__data_field-0">1</span></div>
+                    <div class="mempoint__data"></div>
+                    <div class="mempoint__data"></div>
+                </div>
+                <div class="mempoint" id="p2">
+                    <div class="mempoint__data"><span class="mempoint__data_field-0">2</span></div>
+                    <div class="mempoint__data"></div>
+                    <div class="mempoint__data"></div>                
+                </div>
+                <div class="mempoint" id="p3">
+                    <div class="mempoint__data"><span class="mempoint__data_field-0">3</span></div>
+                    <div class="mempoint__data"></div>
+                    <div class="mempoint__data"></div>                    
+                </div>
+                <div class="mempoint" id="p4">
+                    <div class="mempoint__data"><span class="mempoint__data_field-0">4</span></div>
+                    <div class="mempoint__data"></div>
+                    <div class="mempoint__data"></div>                    
+                </div>
+                <div class="mempoint" id="p5">
+                    <div class="mempoint__data"><span class="mempoint__data_field-0">5</span></div>
+                    <div class="mempoint__data"></div>
+                    <div class="mempoint__data"></div>                    
+                </div>
+                <div class="mempoint" id="p6">
+                    <div class="mempoint__data"><span class="mempoint__data_field-0">6</span></div>
+                    <div class="mempoint__data"></div>
+                    <div class="mempoint__data"></div>                    
+                </div>
+
+                <div class="mempoint" id="p7">
+                    <div class="mempoint__data"><span class="mempoint__data_field-0">7</span></div>
+                    <div class="mempoint__data"></div>
+                    <div class="mempoint__data"></div>                    
+                </div>
+                <div class="mempoint" id="p7">
+                    <div class="mempoint__data"><span class="mempoint__data_field-0">8</span></div>
+                    <div class="mempoint__data"></div>
+                    <div class="mempoint__data"></div>                    
+                </div>
+                <div class="mempoint" id="p8">
+                    <div class="mempoint__data"><span class="mempoint__data_field-0">9</span></div>
+                    <div class="mempoint__data"></div>
+                    <div class="mempoint__data"></div>                    
+                </div>
+                <div class="mempoint" id="p9">
+                    <div class="mempoint__data"><span class="mempoint__data_field-0">10</span></div>
+                    <div class="mempoint__data"></div>
+                    <div class="mempoint__data"></div>                    
+                </div>
+                <div class="mempoint" id="p10">
+                    <div class="mempoint__data"><span class="mempoint__data_field-0">11</span></div>
+                    <div class="mempoint__data"></div>
+                    <div class="mempoint__data"></div>                    
+                </div>
+                <div class="mempoint" id="p11">
+                    <div class="mempoint__data"><span class="mempoint__data_field-0">12</span></div>
+                    <div class="mempoint__data"></div>
+                    <div class="mempoint__data"></div>                    
+                </div>
+                <div class="mempoint" id="p12">
+                    <div class="mempoint__data"><span class="mempoint__data_field-0">13</span></div>
+                    <div class="mempoint__data"></div>
+                    <div class="mempoint__data"></div>                    
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+
+
+
+<script type="text/python">
+
+    from browser import window, html, document, bind
+    from functools import wraps
+    from typing import Any, Callable, Generator
+    from abc import ABC, abstractmethod
+    import time
+    import math
+    import random
+
+
+    class MemPoint:
+        """Ячейка памяти"""
+
+        def __init__(self, id_mem: str, name: str) -> None:
+            self._mem: object = document[id_mem]
+            self._fields: list = self._mem.children
+            self._name: str = name
+            self._value: Any = "--"
+
+            self._field_name = self._create_field(1, self.name)
+            self._field_value = self._create_field(2, self.value)
+
+        @property
+        def name(self) -> str:
+            return self._name
+
+        @name.setter
+        def name(self, v: str) -> None:
+            self._name = v
+            self._field_name.textContent = str(v)
+
+        @property
+        def value(self) -> Any:
+            return self._value
+
+        @value.setter
+        def value(self, v: Any) -> None:
+            self._value = v
+            self._field_value.textContent = str(v)
+            
+
+        def _create_span(self, text: Any) -> object:
+            span = document.createElement("span")
+            span.textContent = str(text)
+            
+            return span
+
+
+        def _style_span(self, obj_span: object, num_field: int) -> object:
+            obj_span.classList.add("mempoint__data_field-" + str(num_field))
+            obj_span.attrs["id"] = "field" + str(num_field)
+
+            return obj_span
+
+
+        def _create_field(self, num_field: int, value: Any) -> object:
+            field = self._style_span(self._create_span(value), num_field)
+            self._fields[num_field].appendChild(field)
+
+            return field
+
+        
+
+
+
+
+    class DescriptorMem:
+        """Дескриптор данных для MemoryMap"""
+
+        def __init__(self, mempoint: MemPoint) -> None:
+            self._mempoint: object = mempoint
+            self._name = ""
+
+        def __set_name__(self, owner: type, name: str) -> None:
+            self._name: str = '_' + name
+    
+        def __get__(self, instance: object, owner: type) -> Any:
+            return getattr(instance, self._name)
+    
+        def __set__(self, instance: object, value: Any) -> None:
+            self._mempoint.value = value
+            setattr(instance, self._name, str(value))
+
+
+
+    class MemoryMap:
+        """ Память настроек. ТИП ЗНАЧЕНИЙ АТРИБУТОВ 
+        ПОСЛЕ ПРИСВАИВАНИЯ ЗНАЧЕНИЙ - СТРОКА """
+
+        ln_T = DescriptorMem(MemPoint("p0", "ln-t"))
+        ln_B = DescriptorMem(MemPoint("p1", "ln-b"))
+        uni_t = DescriptorMem(MemPoint("p2", "UnI t"))
+        nau_F = DescriptorMem(MemPoint("p3", "nAuF"))
+        out = DescriptorMem(MemPoint("p4", "oUt"))
+        t = DescriptorMem(MemPoint("p5", "t"))
+        d = DescriptorMem(MemPoint("p6", "d"))
+
+        def __init__(self) -> None:
+            self.ln_B = 0
+            self.ln_T = "eCA"
+            self.uni_t = "^C"
+            self.nau_F = 8.1
+            self.out = "rLY"
+            self.t = 20.0
+            self.d = 0
+            
+
+    m = MemoryMap()
+    
+    print(m.ln_B)
+    print(m.__dict__)
+    
+
+</script>
+    
+</body>
+</html>
