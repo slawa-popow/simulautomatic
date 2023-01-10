@@ -298,6 +298,8 @@
             <textarea name="logarea" id="logging" cols="30" rows="10"></textarea>
             <div style="display: block;">
                 <button id="clear-area" style="padding: 8px;">очистить</button>
+                <button id="mnext" style="padding: 8px;">next</button>
+                <button id="mprev" style="padding: 8px;">prev</button>
             </div>
             <h1>Дерево меню</h1>
             
@@ -317,6 +319,7 @@
     import time
     import math
     import javascript
+
 
 
 
@@ -391,14 +394,13 @@
     class MemoryMap:
 
         def __init__(self) -> None:
-
                 # список объектов ячеек
             self._memlist: list = list()
                 # Ключ - имя ячейки, значение - параметр ячейки
             self._memmap: dict = dict()
-
             self._area = document["logging"]
             document["clear-area"].bind("click", self.clear_area)
+
 
 
         def add_mempoint(self, mempoint: MemPoint) -> None:
@@ -409,49 +411,15 @@
                 self._memmap[mempoint.name] = mempoint.value
 
 
+
         def clear_area(self, evn) -> None:
             self._area.value = ""
+
 
         def log_area(self, message: str) -> None:
             self._area.value += message
 
 
-    
-    class AbstractMenu(ABC):
-        """Абстрактный меню"""
-
-        @abstractmethod
-        def up(self) -> None:
-            pass
-
-        @abstractmethod
-        def down(self) -> None:
-            pass
-
-        @abstractmethod
-        def left(self) -> None:
-            pass
-
-        @abstractmethod
-        def right(self) -> None:
-            pass
-
-        @abstractmethod
-        def add_component(self, component) -> None:
-            pass
-
-        @abstractmethod
-        def printlcd(self) -> None:
-            pass
-
-
-
-    class AbstractDisplay(ABC):
-        """Абстрактный для дисплея"""
-
-        @abstractmethod
-        def dprint(self) -> None:
-            pass
 
 
     class Component:
@@ -460,6 +428,12 @@
             self._components: deque = deque()
             self._component: MemPoint = None
             self._memory: MemoryMap = memory
+
+            self._next: object = None
+            self._prev: object = None
+
+                # Показывать этот пункт меню?
+            self._is_view: bool = True
             
 
         def bind_memory(self, mempoint: MemPoint) -> None:
@@ -468,23 +442,52 @@
 
 
         @property
+        def next(self) -> object:
+            return self._next
+
+        @next.setter
+        def next(self, obj: object) -> None:
+            self._next = obj
+
+        @property
+        def prev(self) -> object:
+            return self._prev
+
+        @prev.setter
+        def prev(self, obj: object) -> None:
+            self._prev = obj
+
+
+        @property
         def name(self) -> str:
             return self._component.name
+
 
         @name.setter
         def name(self, value: Any) -> None:
             pass
 
         @property
+        def is_view(self) -> bool:
+            return self._is_view
+
+        @is_view.setter
+        def is_view(self, b: bool) -> None:
+            self._is_view = b
+            
+
+        @property
         def value(self) -> Any:
             return self._component.value
+
 
         @value.setter
         def value(self, value: Any) -> None:
             if not self.is_empty():
                 self._component.value = value
             else:
-                self._memory.log_area("Попытка записи в пустой компонент")
+                self._memory.log_area("Попытка записи в пустой компонент\r\n")
+
 
         def is_empty(self) -> bool:
             return self.value == ""
@@ -492,8 +495,64 @@
         
 
 
+    class LinkedListComponent:
+        """Связанный список компонентов - ветка меню"""
 
-    class BaseMenu(AbstractMenu):
+        def __init__(self) -> None:
+            self._top: Component = None
+            self._end: Component = None
+            self._current: Component = None
+
+
+        @property
+        def current(self) -> Component:
+            if self._top is None and self._end is None:
+                raise Exception
+            return self._current
+
+
+        @current.setter
+        def current(self, obj: Component) -> None:
+            self._current = obj
+
+
+        @property
+        def next(self) -> Component:
+            self.current = self.current.next
+            if not self.current:
+                self.current = self._top
+
+            return self.current
+
+
+
+        @property
+        def prev(self) -> Component:
+            if self.current == self._top:
+                self.current = self._end
+                return self.current
+            if not self.current:
+                self.current = self._end
+            else:    
+                self.current = self.current.prev
+
+            return self.current
+
+
+
+        def addlist(self, obj: Component) -> None:
+            if not self._top:
+                self._top = self._end = self._current = obj
+            else:
+                self._end.next = obj
+                obj.prev = self._end
+                self._end = obj
+
+        
+
+
+
+    class BaseMenu:
         """Базовый для компонентов меню"""
 
         def __init__(self, memory) -> None:
@@ -530,29 +589,108 @@
 
 
     mems: list = [
-        MemPoint("p0", "ln-t", "eCA"),
-        MemPoint("p1", "ln-b", 0),
-        MemPoint("p2", "UnI t", "^C"),
-        MemPoint("p3", "nAuF", 8.1),
-        MemPoint("p4", "oUt", "rLY"),
-        MemPoint("p5", "t", 20.0),
-        MemPoint("p6", "d", 1.3),
-        MemPoint("p7", "PAr2")
+        MemPoint("p0", "PAr2"),
+        MemPoint("p1", "ln-t", "eCA"),
+        MemPoint("p2", "ln-b", 0),
+        MemPoint("p3", "UnI t", "^C"),
+        MemPoint("p4", "nAuF", 8.1),
+        MemPoint("p5", "oUt", "rLY"),
+        MemPoint("p6", "t", 20.0),
+        MemPoint("p7", "d", 1.3),
+        
     ]        
 
     m = MemoryMap()
     components: list = []
+    ll = LinkedListComponent()
     for comp in mems:
         obj_comp = Component(m)
         obj_comp.bind_memory(comp)
-        print(obj_comp.name, obj_comp.is_empty())
+        # print(obj_comp.name, obj_comp.is_empty())
         components.append(obj_comp)
+    
+    components[0].is_view = False
+    components[2].is_view = False
+    components[3].is_view = False
+    components[6].is_view = False
+    components[4].is_view = False
+    
+    for c in components:
+        ll.addlist(c) 
 
-    components[4].value = 26
-    components[2].value = 123
-    print("-"*40)
+
+    area = document["logging"]
+    area.value += f"текущий экран: {ll.current.name} = {ll.current.value}\r\n"
+    @bind(document["mnext"], "click")
+    def menu_next(evn):
+        ll.next
+        if not ll.current.is_view:
+            while not ll.current.is_view:
+                ll.next
+        area.value += f"текущий экран: {ll.current.name} = {ll.current.value}\r\n"
+
+
+
+    @bind(document["mprev"], "click")
+    def menu_prev(evn) -> None:
+        ll.prev
+        if not ll.current.is_view:
+            while not ll.current.is_view:
+                ll.prev
+        area.value += f"текущий экран: {ll.current.name} = {ll.current.value}\r\n"  
+
+    """
+    try:
+        print("-"*45)
+        print("current ->", ll.current.name)
+        print("-"*45)
+
+        for i in range(10):
+            ll.prev
+            if not ll.current.is_view:
+                while not ll.current.is_view:
+                    ll.prev
+            print(ll.current.name)
+
+        print("-"*45)
+        print("current ->", ll.current.name)
+        print("-"*45)
+    except Exception:
+        print("error") 
     
+    # ----------------------------------------------------------------------------------------
     
+       # Порядок: сначала получить текущий, потом по нему туда-сюда. Вывод инфы после next prev
+    try:
+        print("+"*45)
+        print(ll.current.name)
+        print("+"*45)
+
+        for i in range(8):
+            ll.next 
+            if not ll.current.is_view:
+                while not ll.current.is_view:
+                    ll.next
+            
+            print(f"current next: {ll.current.name}--{ll.current.value}")
+
+        
+        print("_"*45)
+        print(ll.current.name)
+        print("_"*45)
+
+        for i in range(16):
+            ll.prev
+            if not ll.current.is_view:
+                while not ll.current.is_view:
+                    ll.prev 
+            print(f"current prev: {ll.current.name}--{ll.current.value}")
+            
+    except Exception:
+        print("error") """
+
+        
+    # ----------------------------------------------------------------------------------------   
 
 </script>
     
