@@ -299,6 +299,7 @@
             <div style="display: block;">
                 <button id="clear-area" style="padding: 8px;">очистить</button>
             </div>
+            <h1>Дерево меню</h1>
             
         </div>
 
@@ -312,6 +313,7 @@
     from functools import wraps
     from typing import Any, Callable, Generator
     from abc import ABC, abstractmethod
+    from collections import deque
     import time
     import math
     import javascript
@@ -321,19 +323,22 @@
     class MemPoint:
         """Ячейка памяти"""
 
-        def __init__(self, id_mem: str, name: str) -> None: 
+        def __init__(self, id_mem: str, name: str, value: Any = None) -> None: 
             self._id_mem: str = id_mem
             self._mem: object = document[id_mem]
             self._fields: list = self._mem.children
             self._name: str = name
-            self._value: Any = "--"
+            self._value: Any = self.check_value(value) 
             self._date = javascript.Date.new()
 
             self._area = document["logging"]
-            document["clear-area"].bind("click", self._clear_area)
 
             self._field_name = self._create_field(1, self.name)
             self._field_value = self._create_field(2, self.value)
+
+
+        def check_value(self, value: Any) -> str:
+            return str(value) if value is not None else ""
 
         @property
         def name(self) -> str:
@@ -350,8 +355,9 @@
 
         @value.setter
         def value(self, v: Any) -> None:
-            self._value = v
-            self._field_value.textContent = str(v)
+            self._value = self.check_value(v)
+            
+            self._field_value.textContent = self.value
             self.change_data(f"{str.zfill(str(self._date.getHours()), 2)}:{str.zfill(str(self._date.getMinutes()), 2)}:{str.zfill(str(self._date.getSeconds()), 2)}")
             
 
@@ -374,8 +380,7 @@
 
             return field
 
-        def _clear_area(self, evn) -> None:
-            self._area.value = ""
+        
 
         def change_data(self, date_change) -> None:
             self._area.value += f"{date_change}  Ячейка[{self._id_mem[1:]}] имя {self.name}:  Изменение ячейки. на {self.value}\r\n"
@@ -383,56 +388,172 @@
 
 
 
-    class DescriptorMem:
-        """Дескриптор данных для MemoryMap"""
-
-        def __init__(self, mempoint: MemPoint) -> None:
-            self._mempoint: object = mempoint
-            self._name = ""
-
-        def __set_name__(self, owner: type, name: str) -> None:
-            self._name: str = '_' + name
-    
-        def __get__(self, instance: object, owner: type) -> Any:
-            return getattr(instance, self._name)
-    
-        def __set__(self, instance: object, value: Any) -> None:
-                self._mempoint.value = value
-                setattr(instance, self._name, str(value))
-
-
-
     class MemoryMap:
-        """ Память настроек. ТИП ЗНАЧЕНИЙ АТРИБУТОВ 
-        ПОСЛЕ ПРИСВАИВАНИЯ ЗНАЧЕНИЙ - СТРОКА """
-
-        ln_T = DescriptorMem(MemPoint("p0", "ln-t"))
-        ln_B = DescriptorMem(MemPoint("p1", "ln-b"))
-        uni_t = DescriptorMem(MemPoint("p2", "UnI t"))
-        nau_F = DescriptorMem(MemPoint("p3", "nAuF"))
-        out = DescriptorMem(MemPoint("p4", "oUt"))
-        t = DescriptorMem(MemPoint("p5", "t"))
-        d = DescriptorMem(MemPoint("p6", "d"))
 
         def __init__(self) -> None:
-            self.ln_B = 0
-            self.ln_T = "eCA"
-            self.uni_t = "^C"
-            self.nau_F = 8.1
-            self.out = "rLY"
-            self.t = 20.0
-            self.d = 0.7
 
-        def mtd(self):
-            print("message")
+                # список объектов ячеек
+            self._memlist: list = list()
+                # Ключ - имя ячейки, значение - параметр ячейки
+            self._memmap: dict = dict()
+
+            self._area = document["logging"]
+            document["clear-area"].bind("click", self.clear_area)
+
+
+        def add_mempoint(self, mempoint: MemPoint) -> None:
+            """Добавить ячейку в карту памяти"""
+
+            if mempoint not in self._memlist:
+                self._memlist.append(mempoint)
+                self._memmap[mempoint.name] = mempoint.value
+
+
+        def clear_area(self, evn) -> None:
+            self._area.value = ""
+
+        def log_area(self, message: str) -> None:
+            self._area.value += message
+
+
+    
+    class AbstractMenu(ABC):
+        """Абстрактный меню"""
+
+        @abstractmethod
+        def up(self) -> None:
+            pass
+
+        @abstractmethod
+        def down(self) -> None:
+            pass
+
+        @abstractmethod
+        def left(self) -> None:
+            pass
+
+        @abstractmethod
+        def right(self) -> None:
+            pass
+
+        @abstractmethod
+        def add_component(self, component) -> None:
+            pass
+
+        @abstractmethod
+        def printlcd(self) -> None:
+            pass
+
+
+
+    class AbstractDisplay(ABC):
+        """Абстрактный для дисплея"""
+
+        @abstractmethod
+        def dprint(self) -> None:
+            pass
+
+
+    class Component:
+
+        def __init__(self, memory: MemoryMap) -> None:
+            self._components: deque = deque()
+            self._component: MemPoint = None
+            self._memory: MemoryMap = memory
             
 
+        def bind_memory(self, mempoint: MemPoint) -> None:
+            self._memory.add_mempoint(mempoint)
+            self._component = mempoint
+
+
+        @property
+        def name(self) -> str:
+            return self._component.name
+
+        @name.setter
+        def name(self, value: Any) -> None:
+            pass
+
+        @property
+        def value(self) -> Any:
+            return self._component.value
+
+        @value.setter
+        def value(self, value: Any) -> None:
+            if not self.is_empty():
+                self._component.value = value
+            else:
+                self._memory.log_area("Попытка записи в пустой компонент")
+
+        def is_empty(self) -> bool:
+            return self.value == ""
+
+        
+
+
+
+    class BaseMenu(AbstractMenu):
+        """Базовый для компонентов меню"""
+
+        def __init__(self, memory) -> None:
+            self.memory = memory
+            self.components: deque = deque()
+            self._up = None
+            self._down = None
+            self._left = None
+            self._right = None
+
+
+            def up(self) -> None:
+                pass
+    
+
+            def down(self) -> None:
+                pass
+    
+            
+            def left(self) -> None:
+                pass
+    
+            
+            def right(self) -> None:
+                pass
+
+
+            def add_component(self, component: BaseMenu) -> None:
+                self.components.append(component)
+
+
+            def printlcd(self) -> None:
+                pass
+
+
+    mems: list = [
+        MemPoint("p0", "ln-t", "eCA"),
+        MemPoint("p1", "ln-b", 0),
+        MemPoint("p2", "UnI t", "^C"),
+        MemPoint("p3", "nAuF", 8.1),
+        MemPoint("p4", "oUt", "rLY"),
+        MemPoint("p5", "t", 20.0),
+        MemPoint("p6", "d", 1.3),
+        MemPoint("p7", "PAr2")
+    ]        
+
     m = MemoryMap()
+    components: list = []
+    for comp in mems:
+        obj_comp = Component(m)
+        obj_comp.bind_memory(comp)
+        print(obj_comp.name, obj_comp.is_empty())
+        components.append(obj_comp)
+
+    components[4].value = 26
+    components[2].value = 123
+    print("-"*40)
     
     
-    # area = document["logging"]
-    # area.value += "123456123\r\n"
-    # area.value += "asdfdsfg\r\n"
+
 </script>
     
 </body>
