@@ -135,7 +135,7 @@
             font-family: 'Segment7Standard';
             font-weight: normal;
             font-style: italic; 
-            font-size: 5em;
+            font-size: 4em;
             color: rgba(227, 13, 13, 0.805);
         }
         .memory {
@@ -186,6 +186,10 @@
         }
         .mempoint__data_field-2 {
             color: rgba(4, 80, 5, 0.805);
+        }
+        textarea {
+            margin: 10px 0 10px 0;
+            padding: 10px;
         }
 
     </style>
@@ -290,6 +294,12 @@
                 </div>
                 
             </div>
+
+            <textarea name="logarea" id="logging" cols="30" rows="10"></textarea>
+            <div style="display: block;">
+                <button id="clear-area" style="padding: 8px;">очистить</button>
+            </div>
+            
         </div>
 
     </div>
@@ -304,17 +314,23 @@
     from abc import ABC, abstractmethod
     import time
     import math
-    import random
+    import javascript
+
 
 
     class MemPoint:
         """Ячейка памяти"""
 
-        def __init__(self, id_mem: str, name: str) -> None:
+        def __init__(self, id_mem: str, name: str) -> None: 
+            self._id_mem: str = id_mem
             self._mem: object = document[id_mem]
             self._fields: list = self._mem.children
             self._name: str = name
             self._value: Any = "--"
+            self._date = javascript.Date.new()
+
+            self._area = document["logging"]
+            document["clear-area"].bind("click", self._clear_area)
 
             self._field_name = self._create_field(1, self.name)
             self._field_value = self._create_field(2, self.value)
@@ -336,6 +352,7 @@
         def value(self, v: Any) -> None:
             self._value = v
             self._field_value.textContent = str(v)
+            self.change_data(f"{str.zfill(str(self._date.getHours()), 2)}:{str.zfill(str(self._date.getMinutes()), 2)}:{str.zfill(str(self._date.getSeconds()), 2)}")
             
 
         def _create_span(self, text: Any) -> object:
@@ -347,7 +364,6 @@
 
         def _style_span(self, obj_span: object, num_field: int) -> object:
             obj_span.classList.add("mempoint__data_field-" + str(num_field))
-            obj_span.attrs["id"] = "field" + str(num_field)
 
             return obj_span
 
@@ -358,8 +374,12 @@
 
             return field
 
-        
+        def _clear_area(self, evn) -> None:
+            self._area.value = ""
 
+        def change_data(self, date_change) -> None:
+            self._area.value += f"{date_change}  Ячейка[{self._id_mem[1:]}] имя {self.name}:  Изменение ячейки. на {self.value}\r\n"
+            
 
 
 
@@ -377,8 +397,8 @@
             return getattr(instance, self._name)
     
         def __set__(self, instance: object, value: Any) -> None:
-            self._mempoint.value = value
-            setattr(instance, self._name, str(value))
+                self._mempoint.value = value
+                setattr(instance, self._name, str(value))
 
 
 
@@ -401,15 +421,18 @@
             self.nau_F = 8.1
             self.out = "rLY"
             self.t = 20.0
-            self.d = 0
+            self.d = 0.7
+
+        def mtd(self):
+            print("message")
             
 
     m = MemoryMap()
     
-    print(m.ln_B)
-    print(m.__dict__)
     
-
+    # area = document["logging"]
+    # area.value += "123456123\r\n"
+    # area.value += "asdfdsfg\r\n"
 </script>
     
 </body>
