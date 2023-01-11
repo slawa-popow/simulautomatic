@@ -359,9 +359,7 @@
         @value.setter
         def value(self, v: Any) -> None:
             self._value = self.check_value(v)
-            
             self._field_value.textContent = self.value
-            self.change_data(f"{str.zfill(str(self._date.getHours()), 2)}:{str.zfill(str(self._date.getMinutes()), 2)}:{str.zfill(str(self._date.getSeconds()), 2)}")
             
 
         def _create_span(self, text: Any) -> object:
@@ -382,13 +380,7 @@
             self._fields[num_field].appendChild(field)
 
             return field
-
-        
-
-        def change_data(self, date_change) -> None:
-            self._area.value += f"{date_change}  Ячейка[{self._id_mem[1:]}] имя {self.name}:  Изменение ячейки. на {self.value}\r\n"
             
-
 
 
     class MemoryMap:
@@ -422,135 +414,147 @@
 
 
 
-    class Component:
+    class ABCComponent(ABC):
 
-        def __init__(self, memory: MemoryMap) -> None:
-            self._components: deque = deque()
-            self._component: MemPoint = None
-            self._memory: MemoryMap = memory
+        stack_component: deque = deque()
 
-            self._next: object = None
-            self._prev: object = None
+        @abstractmethod
+        def bind_memory(self, mempoint: object) -> None:
+            pass
 
-                # Показывать этот пункт меню?
-            self._is_view: bool = True
-            
 
+        @property
+        @abstractmethod
+        def name(self) -> str:
+            pass
+
+
+        @property
+        @abstractmethod
+        def is_visible(self) -> bool:
+            pass
+
+
+        @abstractmethod
+        def write(self, data: Any) -> Any:
+            pass
+
+        @abstractmethod
+        def read(self) -> str:
+            pass
+
+
+    # -------------- Декоратор логгер ---------------------
+
+    def logger(log_area: object) -> Callable:
+        def extern(method: Callable) -> Callable:
+            @wraps(method)
+            def wrapper(self, value) -> None:
+                method(self, value)
+                log_area.value += self.loglist[-1]
+
+            return wrapper
+        return extern
+
+
+    # -----------------------------------------------------
+
+
+    class BaseComponent(ABCComponent):
+
+        logarea = document["logging"]
+        button_clear = document["clear-area"]
+
+        def __init__(self, mempoint: MemPoint):
+            self._mempoint: Mempoint = mempoint
+            self.loglist: list = list()
+            self._is_visible: bool = True
+            self.stack_component: deque = deque()
+            self.button_clear.bind("click", self.clear_area)
+            self._date = javascript.Date.new()
+        
         def bind_memory(self, mempoint: MemPoint) -> None:
-            self._memory.add_mempoint(mempoint)
-            self._component = mempoint
-
-
-        @property
-        def next(self) -> object:
-            return self._next
-
-        @next.setter
-        def next(self, obj: object) -> None:
-            self._next = obj
-
-        @property
-        def prev(self) -> object:
-            return self._prev
-
-        @prev.setter
-        def prev(self, obj: object) -> None:
-            self._prev = obj
+            self._mempoint = mempoint
 
 
         @property
         def name(self) -> str:
-            return self._component.name
+            return self._mempoint.name
 
 
         @name.setter
         def name(self, value: Any) -> None:
-            pass
+            self._mempoint.name = value
+
+        
+        def read(self) -> str:
+            return self._mempoint.value
+
+
+        
+        def write(self, value: Any) -> Any:
+            if not self._mempoint.value == "":
+                self._mempoint.value = value
+                date_str: str = f"{str.zfill(str(self._date.getHours()), 2)}:{str.zfill(str(self._date.getMinutes()), 2)}:{str.zfill(str(self._date.getSeconds()), 2)}"
+                self.loglist.append(f"{date_str}: [{self.__class__.__name__}] запись в компонент: {self.name} значения {str(value)}\r\n")
+            else:
+                if len(self.loglist) > 100:
+                    self.loglist.clear()
+                self.loglist.append("Попытка записи в пустой компонент\r\n")
+
 
         @property
-        def is_view(self) -> bool:
-            return self._is_view
+        def is_visible(self) -> bool:
+            return self._is_visible
 
-        @is_view.setter
-        def is_view(self, b: bool) -> None:
-            self._is_view = b
+
+        @is_visible.setter
+        def is_visible(self, b: bool) -> None:
+            self._is_visible = b
+
+        def clear_area(self, evn) -> None:
+            self.logarea.value = ""
+
+
+        
+        
+
+    class Component(BaseComponent):
+
+        def __init__(self, mempoint: MemPoint) -> None:
+            super().__init__(mempoint)
             
-
-        @property
-        def value(self) -> Any:
-            return self._component.value
-
-
-        @value.setter
-        def value(self, value: Any) -> None:
-            if not self.is_empty():
-                self._component.value = value
-            else:
-                self._memory.log_area("Попытка записи в пустой компонент\r\n")
+            
+        @logger(BaseComponent.logarea)
+        def write(self, value: Any) -> None:
+            super().write(value)
 
 
-        def is_empty(self) -> bool:
-            return self.value == ""
+     
+    class SelectComponent(BaseComponent):
 
-        
+        # stack deque:
+        # x = self.stack_component.popleft()
+        # self.stack_component.append(x)
+    
+        def __init__(self, mempoint: MemPoint, *params) -> None:
+            super().__init__(mempoint)
+            self.add_params_in_stack(list(*params))
+           
+                 
 
-
-    class LinkedListComponent:
-        """Связанный список компонентов - ветка меню"""
-
-        def __init__(self) -> None:
-            self._top: Component = None
-            self._end: Component = None
-            self._current: Component = None
-
-
-        @property
-        def current(self) -> Component:
-            if self._top is None and self._end is None:
-                raise Exception
-            return self._current
-
-
-        @current.setter
-        def current(self, obj: Component) -> None:
-            self._current = obj
-
-
-        @property
-        def next(self) -> Component:
-            self.current = self.current.next
-            if not self.current:
-                self.current = self._top
-
-            return self.current
-
-
-
-        @property
-        def prev(self) -> Component:
-            if self.current == self._top:
-                self.current = self._end
-                return self.current
-            if not self.current:
-                self.current = self._end
-            else:    
-                self.current = self.current.prev
-
-            return self.current
-
-
-
-        def addlist(self, obj: Component) -> None:
-            if not self._top:
-                self._top = self._end = self._current = obj
-            else:
-                self._end.next = obj
-                obj.prev = self._end
-                self._end = obj
+        def add_params_in_stack(self, params: tuple) -> None:
+            if params:
+                for p in params:
+                    self.stack_component.append(p)
 
         
+        @logger(BaseComponent.logarea)
+        def write(self, value: Any) -> None:
+            super().write(value)
 
-
+    
+    
 
     class BaseMenu:
         """Базовый для компонентов меню"""
@@ -600,45 +604,23 @@
         
     ]        
 
-    m = MemoryMap()
+    
+
     components: list = []
-    ll = LinkedListComponent()
+    
     for comp in mems:
-        obj_comp = Component(m)
-        obj_comp.bind_memory(comp)
-        # print(obj_comp.name, obj_comp.is_empty())
+        obj_comp = Component(comp)
+        components.append(obj_comp)
+
+    for i, comp in enumerate(mems[2:]):
+        obj_comp = SelectComponent(comp, (f"p{i*10}", f"d{i*20}", f"r{i*30}"))
         components.append(obj_comp)
     
-    components[0].is_view = False
-    components[2].is_view = False
-    components[3].is_view = False
-    components[6].is_view = False
-    components[4].is_view = False
     
-    for c in components:
-        ll.addlist(c) 
-
-
-    area = document["logging"]
-    area.value += f"текущий экран: {ll.current.name} = {ll.current.value}\r\n"
-    @bind(document["mnext"], "click")
-    def menu_next(evn):
-        ll.next
-        if not ll.current.is_view:
-            while not ll.current.is_view:
-                ll.next
-        area.value += f"текущий экран: {ll.current.name} = {ll.current.value}\r\n"
-
-
-
-    @bind(document["mprev"], "click")
-    def menu_prev(evn) -> None:
-        ll.prev
-        if not ll.current.is_view:
-            while not ll.current.is_view:
-                ll.prev
-        area.value += f"текущий экран: {ll.current.name} = {ll.current.value}\r\n"  
-
+    components[1].write(9999)
+    components[5].write("ABC-9")
+    components[2].write(2.68) 
+    components[7].write("7-p")
     
 
         
