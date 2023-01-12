@@ -298,8 +298,10 @@
             <textarea name="logarea" id="logging" cols="30" rows="10"></textarea>
             <div style="display: block;">
                 <button id="clear-area" style="padding: 8px;">очистить</button>
-                <button id="mnext" style="padding: 8px;">next</button>
-                <button id="mprev" style="padding: 8px;">prev</button>
+                <button id="mup" style="padding: 8px;">up</button>
+                <button id="mdown" style="padding: 8px;">down</button>
+                <button id="mleft" style="padding: 8px;">left</button>
+                <button id="mmode" style="padding: 8px;">mode</button>
             </div>
             <h1>Дерево меню</h1>
             
@@ -416,7 +418,8 @@
 
     class ABCComponent(ABC):
 
-        stack_component: deque = deque()
+        stack_component: deque = None
+        stack_select: deque = None
 
         @abstractmethod
         def bind_memory(self, mempoint: object) -> None:
@@ -443,6 +446,10 @@
         def read(self) -> str:
             pass
 
+        @abstractmethod
+        def select(self) -> Any:
+            pass
+
 
     # -------------- Декоратор логгер ---------------------
 
@@ -460,7 +467,7 @@
     # -----------------------------------------------------
 
 
-    class BaseComponent(ABCComponent):
+    class Component(ABCComponent):
 
         logarea = document["logging"]
         button_clear = document["clear-area"]
@@ -470,6 +477,8 @@
             self.loglist: list = list()
             self._is_visible: bool = True
             self.stack_component: deque = deque()
+            self.stack_select: deque = deque()
+            self._select_param: Any = None
             self.button_clear.bind("click", self.clear_area)
             self._date = javascript.Date.new()
         
@@ -486,9 +495,22 @@
         def name(self, value: Any) -> None:
             self._mempoint.name = value
 
+
+        @property
+        def select_param(self) -> Any:
+            return self._select_param
+
+        
+        @select_param.setter
+        def select_param(self, value: Any) -> None:
+            self._select_param = value
+
         
         def read(self) -> str:
             return self._mempoint.value
+
+        def select(self) -> None:
+            pass
 
 
         
@@ -519,25 +541,67 @@
         
         
 
-    class Component(BaseComponent):
+    class DigitComponent(Component):
 
         def __init__(self, mempoint: MemPoint) -> None:
             super().__init__(mempoint)
+            self.range_digit: int = len(self.read())
+            self.stack_select: deque = deque(range(self.range_digit))
+            self.select_param = self.select()
+            self.numbers_param: dict = dict()
+            self.convert_param(self.read())
+     
+            
+         
+        def convert_param(self, value: str) -> None:
+            self.numbers_param.clear()
+            for i, char in enumerate(value):
+                self.numbers_param[i] = char
             
             
-        @logger(BaseComponent.logarea)
+        @logger(Component.logarea)
         def write(self, value: Any) -> None:
             super().write(value)
+            self.convert_param(self.read())
+
+
+        def select(self) -> Any:
+            if self.stack_select:
+                self.select_param = self.stack_select.popleft()
+                self.stack_select.append(self.select_param)
+                
+            return self.select_param
+
+
+
+        def down_button(self, evn) -> None:
+            pass
+
+
+        def up_button(self, evn) -> None:
+            digit: str = int(self.numbers_param[self.select_param])  
+            digit += 1
+            digit = 0 if digit > 9 else digit
+            self.numbers_param[self.select_param] = str(digit)
+            self.write("".join([i for i in self.numbers_param.values()]))
+
+        def left_button(self, evn) -> None:
+            self.select()
+
+
+        def mode_button(self, evn) -> None:
+            pass
+
 
 
      
-    class SelectComponent(BaseComponent):
+    class SelectComponent(Component):
 
         # stack deque:
         # x = self.stack_component.popleft()
         # self.stack_component.append(x)
     
-        def __init__(self, mempoint: MemPoint, *params) -> None:
+        def __init__(self, mempoint: MemPoint, *params: tuple) -> None:
             super().__init__(mempoint)
             self.add_params_in_stack(list(*params))
            
@@ -548,8 +612,16 @@
                 for p in params:
                     self.stack_component.append(p)
 
+
+        def select(self) -> Any:
+            if self.stack_component:
+                self.select_param = self.stack_component.popleft()
+                self.stack_component.append(self.select_param)
+                
+            return self.select_param
+
         
-        @logger(BaseComponent.logarea)
+        @logger(Component.logarea)
         def write(self, value: Any) -> None:
             super().write(value)
 
@@ -594,7 +666,7 @@
 
     mems: list = [
         MemPoint("p0", "PAr2"),
-        MemPoint("p1", "ln-t", "eCA"),
+        MemPoint("p1", "ln-t", 888),
         MemPoint("p2", "ln-b", 0),
         MemPoint("p3", "UnI t", "^C"),
         MemPoint("p4", "nAuF", 8.1),
@@ -608,20 +680,19 @@
 
     components: list = []
     
-    for comp in mems:
-        obj_comp = Component(comp)
+    for comp in mems[:2]:
+        obj_comp = DigitComponent(comp)
         components.append(obj_comp)
 
-    for i, comp in enumerate(mems[2:]):
-        obj_comp = SelectComponent(comp, (f"p{i*10}", f"d{i*20}", f"r{i*30}"))
-        components.append(obj_comp)
     
     
-    components[1].write(9999)
-    components[5].write("ABC-9")
-    components[2].write(2.68) 
-    components[7].write("7-p")
     
+    components[1].write(111)
+    
+    print("list", components[1].__dict__)
+
+    document["mup"].bind("click", components[1].up_button)
+    document["mleft"].bind("click", components[1].left_button)
 
         
     # ----------------------------------------------------------------------------------------   
