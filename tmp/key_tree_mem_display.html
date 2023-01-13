@@ -135,7 +135,7 @@
             font-family: 'Segment7Standard';
             font-weight: normal;
             font-style: italic; 
-            font-size: 4em;
+            font-size: 2em;
             color: rgba(227, 13, 13, 0.805);
         }
         .memory {
@@ -182,7 +182,7 @@
              
         }
         .mempoint__data_field-1 {
-            color: rgba(227, 13, 13, 0.805);
+            color: rgba(253, 56, 56, 0.838);
         }
         .mempoint__data_field-2 {
             color: rgba(4, 80, 5, 0.805);
@@ -191,6 +191,17 @@
             margin: 10px 0 10px 0;
             padding: 10px;
         }
+
+        .tc4h {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: flex-start;
+            align-items: center;
+            width: 25%;
+            overflow: hidden;
+            margin: auto;
+        }
+        
 
     </style>
  
@@ -304,7 +315,103 @@
                 <button id="mmode" style="padding: 8px;">mode</button>
             </div>
             <h1>Дерево меню</h1>
-            
+            <div class="tc4h">
+            <svg viewBox="0 0 320 440" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+                <defs>
+                  <bx:grid x="0" y="0" width="2" height="2"></bx:grid>
+                </defs>
+                <g id="svg-tc4h" transform="matrix(1.066667, 0, 0, 1.047619, -10.666667, -10.476191)">
+                  <rect x="10" y="10" width="300" height="420" style="stroke: rgb(108, 108, 108); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(255, 255, 248);"></rect>
+                  <rect style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgba(91, 91, 91, 0.89);" x="15" y="20" width="290" height="400" rx="4" ry="4"></rect>
+                  <text style="fill: rgb(251, 250, 239); font-family: Arial, sans-serif; font-size: 14px; font-weight: 700; white-space: pre;" x="24" y="37.147">TC4H</text>
+                  <g id="tc4h-keyboard">
+                    <g id="mode-button" transform="matrix(1, 0, 0, 1, 3, 0)">
+                      <rect id="mode-button-rect" style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(202, 176, 91);" x="24" y="348" width="46" height="44" rx="6" ry="6"></rect>
+                      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 12.6px; font-weight: 700; white-space: pre;" transform="matrix(1, 0, 0, 1.666665, -1.794161, -244.822052)" x="30.109" y="373.114">MODE</text>
+                    </g>
+                    <g id="left-button">
+                      <rect id="left-button-rect" style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(255, 255, 255);" x="194" y="348" width="46" height="44" rx="6" ry="6"></rect>
+                      <g transform="matrix(2.896488, 0, 0, 2.418646, 185.802414, 346.368866)" style="">
+                        <defs></defs>
+                        <path d="M11.3534 15.8537C11.1585 16.0493 10.8419 16.0499 10.6463 15.855L5.16178 10.39C4.94607 10.1751 4.94607 9.82574 5.16178 9.6108L10.6463 4.14582C10.8419 3.9509 11.1585 3.95147 11.3534 4.14708C11.5483 4.34269 11.5477 4.65927 11.3521 4.85418L6.18753 10.0004L11.3521 15.1466C11.5477 15.3415 11.5483 15.6581 11.3534 15.8537ZM15.3524 15.8537C15.1575 16.0493 14.8409 16.0499 14.6453 15.855L9.16081 10.39C8.94509 10.1751 8.9451 9.82574 9.16081 9.6108L14.6453 4.14582C14.8409 3.9509 15.1575 3.95147 15.3524 4.14708C15.5473 4.34269 15.5467 4.65927 15.3511 4.85418L10.1866 10.0004L15.3511 15.1466C15.5467 15.3415 15.5473 15.6581 15.3524 15.8537Z" fill="#212121"></path>
+                      </g>
+                    </g>
+                    <g id="up-button">
+                      <rect id="up-button-rect" style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(255, 255, 255);" x="248" y="296" width="46" height="44" rx="6" ry="6"></rect>
+                      <g transform="matrix(2.544827, 0, 0, 2.509096, 245.918137, 292.32843)" style="">
+                        <defs></defs>
+                        <path d="M4.14581 9.64619C3.95091 9.84179 3.95147 10.1584 4.14707 10.3533C4.34266 10.5482 4.65922 10.5476 4.85413 10.352L10 5.18752L15.1459 10.352C15.3408 10.5476 15.6573 10.5482 15.8529 10.3533C16.0485 10.1584 16.0491 9.84179 15.8542 9.64619L10.3896 4.16178C10.1746 3.94607 9.82536 3.94607 9.61042 4.16178L4.14581 9.64619ZM4.14581 14.6471C3.95091 14.8427 3.95147 15.1593 4.14707 15.3542C4.34266 15.5491 4.65922 15.5485 4.85413 15.3529L10 10.1884L15.1459 15.3529C15.3408 15.5485 15.6573 15.5491 15.8529 15.3542C16.0485 15.1593 16.0491 14.8427 15.8542 14.6471L10.3896 9.16269C10.1746 8.94698 9.82536 8.94698 9.61042 9.16269L4.14581 14.6471Z" fill="#212121"></path>
+                      </g>
+                    </g>
+                    <g id="down-button">
+                      <rect id="down-button-rect" style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(252, 252, 252);" x="248" y="348" width="46" height="44" rx="6" ry="6"></rect>
+                      <g transform="matrix(2.615845, 0, 0, 2.723805, 245.487686, 343.910583)" style="">
+                        <defs></defs>
+                        <path d="M15.8537 8.64582C16.0493 8.84073 16.0499 9.15731 15.855 9.35292L10.39 14.8374C10.1751 15.0531 9.82574 15.0531 9.6108 14.8374L4.14582 9.35292C3.9509 9.15731 3.95147 8.84073 4.14708 8.64582C4.34269 8.4509 4.65927 8.45147 4.85418 8.64708L10.0004 13.8117L15.1466 8.64708C15.3415 8.45147 15.6581 8.4509 15.8537 8.64582ZM15.8537 4.64582C16.0493 4.84073 16.0499 5.15731 15.855 5.35292L10.39 10.8374C10.1751 11.0531 9.82574 11.0531 9.6108 10.8374L4.14582 5.35292C3.9509 5.15731 3.95147 4.84073 4.14708 4.64582C4.34269 4.4509 4.65927 4.45147 4.85418 4.64708L10.0004 9.81166L15.1466 4.64708C15.3415 4.45147 15.6581 4.4509 15.8537 4.64582Z" fill="#212121"></path>
+                      </g>
+                    </g>
+                  </g>
+                  <text style="fill: rgb(255, 251, 240); font-family: Arial, sans-serif; font-size: 10.5882px; font-weight: 700; line-height: 16.9412px; white-space: pre;" transform="matrix(1, 0, 0, 1.133334, 4.844986, -55.874195)" x="245.155" y="413.498">Autonics</text>
+                  <g id="tc4h-display">
+                    <path style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgba(65, 65, 65, 0.78);" d="M 296 282.653 C 296 282.653 233.884 291.739 165.828 291.739 C 105.624 291.739 24 281.4 24 281.4 L 24.899 50.461 C 24.899 50.461 104.328 39.769 161.914 39.769 C 222.118 39.769 296 50.461 296 50.461 L 296 282.653 Z"></path>
+                    <g id="digit-row">
+                      <g id="segment-0" transform="matrix(0.964285, 0, 0, 1.134726, 267.214111, -60.011513)" style="">
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-244 104 -192 104.127 -200.689 110.127 -235.334 110.127" id="seg-0-2"></polygon>
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-260.937 131.064 -226.736 130.896 -222.936 126.937 -226.736 122.937 -255.256 122.937" id="seg-0-1" transform="matrix(0, 1, -1, 0, -114.936012, 368.937004)"></polygon>
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-237.873 148 -232.905 152 -203.095 152 -198.127 148 -203.095 144 -232.905 144" id="seg-0-0"></polygon>
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-213.127 123 -178.927 123.04 -175.127 127 -178.927 131 -207.446 131" id="seg-0-3" transform="matrix(0, 1, -1, 0, -67.126999, 321.126999)"></polygon>
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-260.937 164.809 -226.736 164.977 -222.936 168.936 -226.736 172.936 -255.256 172.936" id="seg-0-6" transform="matrix(0, -1, 1, 0, -410.809013, -73.064003)"></polygon>
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-213.064 172.936 -178.863 172.768 -175.063 168.809 -178.863 164.809 -207.383 164.809" id="seg-0-4" transform="matrix(0, -1, 1, 0, -362.936005, -25.190994)"></polygon>
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-244 192.127 -192 192 -200 186 -236 186" id="seg-0-5"></polygon>
+                      </g>
+                      <g id="segment-1" transform="matrix(0.928571, 0, 0, 1.124326, 330.428497, -58.013355)" style="">
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-244 104 -192 104.127 -200.689 110.127 -235.334 110.127" id="seg-1-2"></polygon>
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-260.937 131.064 -226.736 130.896 -222.936 126.937 -226.736 122.937 -255.256 122.937" id="seg-1-1" transform="matrix(0, 1, -1, 0, -114.936012, 368.937004)"></polygon>
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-237.873 148 -232.905 152 -203.095 152 -198.127 148 -203.095 144 -232.905 144" id="seg-1-0"></polygon>
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-213.127 123 -178.927 123.04 -175.127 127 -178.927 131 -207.446 131" id="seg-1-3" transform="matrix(0, 1, -1, 0, -67.126999, 321.126999)"></polygon>
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-260.937 164.809 -226.736 164.977 -222.936 168.936 -226.736 172.936 -255.256 172.936" id="seg-1-6" transform="matrix(0, -1, 1, 0, -410.809013, -73.064003)"></polygon>
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-213.064 172.936 -178.863 172.768 -175.063 168.809 -178.863 164.809 -207.383 164.809" id="seg-1-4" transform="matrix(0, -1, 1, 0, -362.936005, -25.190994)"></polygon>
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-244 192.127 -192 192 -200 186 -236 186" id="seg-1-5"></polygon>
+                      </g>
+                      <g id="segment-2" transform="matrix(0.928572, 0, 0, 1.124326, 398.428711, -58.013355)" style="">
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-244 104 -192 104.127 -200.689 110.127 -235.334 110.127" id="seg-2-2"></polygon>
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-260.937 131.064 -226.736 130.896 -222.936 126.937 -226.736 122.937 -255.256 122.937" id="seg-2-1" transform="matrix(0, 1, -1, 0, -114.936012, 368.937004)"></polygon>
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-237.873 148 -232.905 152 -203.095 152 -198.127 148 -203.095 144 -232.905 144" id="seg-2-0"></polygon>
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-213.127 123 -178.927 123.04 -175.127 127 -178.927 131 -207.446 131" id="seg-2-3" transform="matrix(0, 1, -1, 0, -67.126999, 321.126999)"></polygon>
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-260.937 164.809 -226.736 164.977 -222.936 168.936 -226.736 172.936 -255.256 172.936" id="seg-2-6" transform="matrix(0, -1, 1, 0, -410.809013, -73.064003)"></polygon>
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-213.064 172.936 -178.863 172.768 -175.063 168.809 -178.863 164.809 -207.383 164.809" id="seg-2-4" transform="matrix(0, -1, 1, 0, -362.936005, -25.190994)"></polygon>
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-244 192.127 -192 192 -200 186 -236 186" id="seg-2-5"></polygon>
+                      </g>
+                      <g id="segment-3" transform="matrix(0.928571, 0, 0, 1.124324, 466.428497, -56.929691)" style="">
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-244 104 -192 104.127 -200.689 110.127 -235.334 110.127" id="seg-3-2"></polygon>
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-260.937 131.064 -226.736 130.896 -222.936 126.937 -226.736 122.937 -255.256 122.937" id="seg-3-1" transform="matrix(0, 1, -1, 0, -114.936012, 368.937004)"></polygon>
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-237.873 148 -232.905 152 -203.095 152 -198.127 148 -203.095 144 -232.905 144" id="seg-3-0"></polygon>
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-213.127 123 -178.927 123.04 -175.127 127 -178.927 131 -207.446 131" id="seg-3-3" transform="matrix(0, 1, -1, 0, -67.126999, 321.126999)"></polygon>
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-260.937 164.809 -226.736 164.977 -222.936 168.936 -226.736 172.936 -255.256 172.936" id="seg-3-6" transform="matrix(0, -1, 1, 0, -410.809013, -73.064003)"></polygon>
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-213.064 172.936 -178.863 172.768 -175.063 168.809 -178.863 164.809 -207.383 164.809" id="seg-3-4" transform="matrix(0, -1, 1, 0, -362.936005, -25.190994)"></polygon>
+                        <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-244 192.127 -192 192 -200 186 -236 186" id="seg-3-5"></polygon>
+                      </g>
+                      <rect x="92" y="154" width="4" height="4" style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" id="dot-1000"></rect>
+                      <rect x="160" y="154" width="4" height="4" style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" id="dot-100"></rect>
+                      <rect x="228" y="154" width="4" height="4" style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" id="dot-10"></rect>
+                    </g>
+                    <g id="alarm-lamp">
+                      <rect x="46" y="210" width="27" height="18" style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" id="alarm-norm"></rect>
+                      <path d="M 59.5 180 L 73 198 L 46 198 L 59.5 180 Z" style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" id="alarm-up" bx:shape="triangle 46 180 27 18 0.5 0 1@7f735208"></path>
+                      <path d="M 59.5 -258 L 73 -240 L 46 -240 L 59.5 -258 Z" style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" transform="matrix(1, 0, 0, -1, 0, 0)" id="alarm-down" bx:shape="triangle 46 -258 27 18 0.5 0 1@f76efca7"></path>
+                    </g>
+                    <g id="txt-lamp" transform="matrix(1, 0, 0, 1, 3.863329, 1.709167)">
+                      <text style="fill: rgb(119, 119, 119); font-family: Arial, sans-serif; font-size: 14px; font-weight: 700; white-space: pre;" id="txt-lamp-sv" x="203" y="220.881">SV</text>
+                      <text style="fill: rgb(119, 119, 119); font-family: Arial, sans-serif; font-size: 14px; font-weight: 700; white-space: pre;" x="266.293" y="221.027" id="txt-lamp-C">°C</text>
+                      <text style="fill: rgb(119, 119, 119); font-family: Arial, sans-serif; font-size: 14px; font-weight: 700; white-space: pre;" x="236" y="220.881" id="txt-lamp-F">°F</text>
+                      <text style="fill: rgb(119, 119, 119); font-family: Arial, sans-serif; font-size: 14px; font-weight: 700; white-space: pre;" x="203" y="252.881" transform="matrix(0.794132, 0, 0, 1, 41.791157, 0)" id="txt-lamp-AL1">AL1</text>
+                      <text style="fill: rgb(119, 119, 119); font-family: Arial, sans-serif; font-size: 14px; font-weight: 700; white-space: pre;" x="235.558" y="252.95" transform="matrix(0.773077, 0, 0, 1, 53.895542, -0.101632)" id="txt-lamp-AL2">AL2</text>
+                      <text style="fill: rgb(119, 119, 119); font-family: Arial, sans-serif; font-size: 14px; font-weight: 700; white-space: pre;" x="264" y="252.693" transform="matrix(0.666334, 0, 0, 0.999999, 90.380859, 0.127027)" id="txt-lamp-OUT">OUT</text>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
         </div>
 
     </div>
@@ -313,7 +420,7 @@
 
 <script type="text/python">
 
-    from browser import window, html, document, bind
+    from browser import window, html, document, bind, timer
     from functools import wraps
     from typing import Any, Callable, Generator
     from abc import ABC, abstractmethod
@@ -450,6 +557,49 @@
         def select(self) -> Any:
             pass
 
+        @abstractmethod
+        def up_button(self) -> None:
+            pass
+
+        @abstractmethod
+        def down_button(self) -> None:
+            pass
+
+        @abstractmethod
+        def left_button(self) -> None:
+            pass
+
+        @abstractmethod
+        def right_button(self) -> None:
+            pass
+
+        @abstractmethod
+        def mode_button(self) -> None:
+            pass
+
+
+
+    class ABCDisplay(ABC):
+
+        @abstractmethod
+        def printd(self, value: str) -> None:
+            pass
+
+        @abstractmethod
+        def print_seg(self, segment: int, value: str) -> None:
+            pass
+
+        @abstractmethod
+        def clear_segment(self, segment: int) -> None:
+            pass
+
+        @abstractmethod
+        def clear_all(self) -> None:
+            pass
+
+
+
+
 
     # -------------- Декоратор логгер ---------------------
 
@@ -538,8 +688,99 @@
             self.logarea.value = ""
 
 
-        
-        
+        def up_button(self) -> None:
+            pass
+        def down_button(self) -> None:
+            pass
+        def left_button(self) -> None:
+            pass
+        def right_button(self) -> None:
+            pass
+        def mode_button(self) -> None:
+            pass
+
+
+
+
+    class KeyBoard:
+
+        def __init__(self, id_up: str = "", 
+                    id_dwn: str = "",
+                    id_left: str = "",
+                    id_right: str = "",
+                    id_mode: str = "") -> None:
+    
+            self.upbutton: object = document[id_up] if id_up else None
+            self.downbutton: object = document[id_dwn] if id_dwn else None
+            self.leftbutton: object = document[id_left] if id_left else None
+            self.rightbutton: object = document[id_right] if id_right else None
+            self.modebutton: object = document[id_mode] if id_mode else None   
+
+            self._component: Component = None
+
+
+        @property
+        def component(self) -> Component:
+            return self._component
+
+        @component.setter
+        def component(self, obj: Component) -> None:
+            self._component = obj
+            
+            
+        def bind_methods_component(self) -> None:
+            if self.upbutton:
+                self.upbutton.bind("click", self.upButton)
+                self.upbutton.bind("mouseover", self.mouse_over)
+                self.upbutton.bind("mouseout", self.mouse_out)
+            if self.downbutton:
+                self.downbutton.bind("click", self.downButton)
+                self.downbutton.bind("mouseover", self.mouse_over)
+                self.downbutton.bind("mouseout", self.mouse_out)
+            if self.leftbutton:
+                self.leftbutton.bind("click", self.leftButton)
+                self.leftbutton.bind("mouseover", self.mouse_over)
+                self.leftbutton.bind("mouseout", self.mouse_out)
+            if self.rightbutton:
+                self.rightbutton.bind("click", self.rightButton)
+                self.rightbutton.bind("mouseover", self.mouse_over)
+                self.rightbutton.bind("mouseout", self.mouse_out)
+            if self.modebutton:
+                self.modebutton.bind("click", self.modeButton)
+                self.modebutton.bind("mouseover", self.mouse_over)
+                self.modebutton.bind("mouseout", self.mouse_out)
+
+
+        def upButton(self, evn) -> None:
+            if self.component:
+                self.component.up_button()
+
+        def downButton(self, evn) -> None:
+            if self.component:
+                self.component.down_button()
+
+        def leftButton(self, evn) -> None:
+            if self.component:
+                self.component.left_button()
+
+        def rightbutton(self, evn) -> None:
+            if self.component:
+                self.component.right_button()
+
+        def modeButton(self, evn) -> None:
+            if self.component:
+                self.component.mode_button()   
+
+
+        def mouse_over(self, evn) -> None:
+            fill_color: str = "rgb(202, 176, 91)" if evn.currentTarget.firstElementChild.id == "mode-button-rect" else "rgb(255, 255, 255)"
+            evn.currentTarget.firstElementChild.style = f"stroke: rgba(227, 13, 13, 0.805); vector-effect: non-scaling-stroke; paint-order: stroke; stroke-width: 4px; fill: {fill_color};"
+            
+
+        def mouse_out(self, evn) -> None:
+            fill_color: str = "rgb(202, 176, 91)" if evn.currentTarget.firstElementChild.id == "mode-button-rect" else "rgb(255, 255, 255)"
+            evn.currentTarget.firstElementChild.style = f"stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: {fill_color};"
+
 
     class DigitComponent(Component):
 
@@ -547,6 +788,7 @@
             super().__init__(mempoint)
             self.range_digit: int = len(self.read())
             self.stack_select: deque = deque(range(self.range_digit))
+            self.stack_select.reverse()
             self.select_param = self.select()
             self.numbers_param: dict = dict()
             self.convert_param(self.read())
@@ -574,23 +816,29 @@
 
 
 
-        def down_button(self, evn) -> None:
-            pass
+        def down_button(self) -> None:
+            digit: int = int(self.numbers_param[self.select_param])  
+            digit -= 1
+            digit = 9 if digit < 0 else digit
+            self.numbers_param[self.select_param] = str(digit)
+            self.write("".join([i for i in self.numbers_param.values()]))
 
 
-        def up_button(self, evn) -> None:
-            digit: str = int(self.numbers_param[self.select_param])  
+        def up_button(self) -> None:
+            digit: int = int(self.numbers_param[self.select_param])  
             digit += 1
             digit = 0 if digit > 9 else digit
             self.numbers_param[self.select_param] = str(digit)
             self.write("".join([i for i in self.numbers_param.values()]))
 
-        def left_button(self, evn) -> None:
+        def left_button(self) -> None:
             self.select()
 
 
-        def mode_button(self, evn) -> None:
+        def mode_button(self) -> None:
             pass
+
+        
 
 
 
@@ -604,7 +852,7 @@
         def __init__(self, mempoint: MemPoint, *params: tuple) -> None:
             super().__init__(mempoint)
             self.add_params_in_stack(list(*params))
-           
+            # self.select_param = self.select()
                  
 
         def add_params_in_stack(self, params: tuple) -> None:
@@ -625,43 +873,131 @@
         def write(self, value: Any) -> None:
             super().write(value)
 
-    
-    
+        
+        def up_button(self) -> None:
+            self.select_param = self.select()
+            self.mode_button()
 
-    class BaseMenu:
-        """Базовый для компонентов меню"""
+        def down_button(self) -> None:
+            self.select_param = self.select()
+            self.mode_button()
 
-        def __init__(self, memory) -> None:
-            self.memory = memory
-            self.components: deque = deque()
-            self._up = None
-            self._down = None
-            self._left = None
-            self._right = None
+        def left_button(self) -> None:
+            pass
 
 
-            def up(self) -> None:
-                pass
-    
+        def mode_button(self) -> None:
+            self.write(self.select_param)
+            print(self.select_param)
 
-            def down(self) -> None:
-                pass
-    
+
+
+    class Display(ABCDisplay):
+
+        digits: int = 4
+        part_id_digit: str = "segment-"
+
+        digit_code: dict = {
+            "1": (0, 0, 0, 1, 1, 0, 0),
+            "2": (1, 0, 1, 1, 0, 1, 1),
+            "3": (1, 0, 1, 1, 1, 1, 0),
+            "4": (1, 1, 0, 1, 1, 0, 0),
+            "5": (1, 1, 1, 0, 1, 1, 0),
+            "6": (1, 1, 1, 0, 1, 1, 1),
+            "7": (0, 0, 1, 1, 1, 0, 0),
+            "8": (1, 1, 1, 1, 1, 1, 1),
+            "9": (1, 1, 1, 1, 1, 1, 0),
+            "0": (0, 1, 1, 1, 1, 1, 1),
+        }
+
+        def __init__(self) -> None:
+            self.digitdict: dict = self._create_digit_map()
+            self._obj_setinterval: object = None
+            self._blink_flag: bool = True
+            self.current_value: tuple = None
+            self.blink_str(3207)
             
-            def left(self) -> None:
-                pass
+
+
+        def _create_digit_map(self) -> dict:
+            result_dict: dict = dict()
+            for i in range(self.digits):
+                for j in range(7):
+                    _id = f"seg-{i}-{j}"
+                    result_dict.setdefault(str(i), []).append(document[_id])
+
+            return result_dict
+
+
+
+        def blink(self, segment: int, value: str) -> None:
+            self.current_value = (segment, str(value),)
+            def start_blink():
+                if self._blink_flag:
+                    self.print_seg(segment, value)
+                else:
+                    self.clear_segment(segment)
+                self._blink_flag = not self._blink_flag    
+            self._obj_setinterval = window.setInterval(start_blink, 400)    
+                
+            start_blink()
+
+
+        def blink_str(self, value: str) -> None:
+            self.current_value = (value, )
+            def start_blink_str():
+                if self._blink_flag:
+                    self.printd(str(value))
+                else:
+                    self.clear_all()
+                self._blink_flag = not self._blink_flag    
+            self._obj_setinterval = window.setInterval(start_blink_str, 400)
+
+            start_blink_str()
+
+
+
+        def stop_blink(self) -> None:
+            window.clearInterval(self._obj_setinterval)
+            cur_seg, val = self.current_value
+            self.print_seg(cur_seg, val)
+        
+
+        
+        def printd(self, value: str) -> None:
+            value = str(value)
+            for i, char in enumerate(value, self.digits-len(value)):
+                self.print_seg(i, char)
+
+
+        
+        def print_seg(self, segment: int, value: str) -> None:
+            seg = self.digitdict[str(segment)]
+            data: tuple = self.digit_code[str(value)]
+            for i, obj in enumerate(seg):
+                if data[i]:
+                    obj.style["fill"] = "rgba(253, 56, 56, 0.838)"
+                else:
+                    obj.style["fill"] = "rgb(119, 119, 119)"
+
+
+        
+        def clear_segment(self, segment: int) -> None:
+            seg = self.digitdict[str(segment)]
+            for obj in seg:
+                obj.style["fill"] = "rgb(119, 119, 119)"
+
+        
+        def clear_all(self) -> None:
+            for obj in self.digitdict.values():
+                for seg in obj:
+                    seg.style["fill"] = "rgb(119, 119, 119)"
+
+
+
     
-            
-            def right(self) -> None:
-                pass
-
-
-            def add_component(self, component: BaseMenu) -> None:
-                self.components.append(component)
-
-
-            def printlcd(self) -> None:
-                pass
+    dsp = Display()
+   
 
 
     mems: list = [
@@ -677,6 +1013,7 @@
     ]        
 
     
+    keyb = KeyBoard(id_up="up-button", id_dwn="down-button", id_left="left-button", id_mode="mode-button")
 
     components: list = []
     
@@ -684,15 +1021,16 @@
         obj_comp = DigitComponent(comp)
         components.append(obj_comp)
 
+    sl = SelectComponent(mems[5], ("asf", "12f"))
+    
+    #keyb.component = components[1]
+    keyb.component = sl
+    keyb.bind_methods_component()
+    # components[1].write(111)
     
     
-    
-    components[1].write(111)
-    
-    print("list", components[1].__dict__)
 
-    document["mup"].bind("click", components[1].up_button)
-    document["mleft"].bind("click", components[1].left_button)
+    
 
         
     # ----------------------------------------------------------------------------------------   

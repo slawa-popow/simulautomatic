@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 320 440" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <bx:grid x="0" y="0" width="2" height="2"/>
+  </defs>
+  <g id="svg-tc4h" transform="matrix(1.066667, 0, 0, 1.047619, -10.666667, -10.476191)">
+    <rect x="10" y="10" width="300" height="420" style="stroke: rgb(108, 108, 108); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(255, 255, 248);"/>
+    <rect style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgba(91, 91, 91, 0.89);" x="15" y="20" width="290" height="400" rx="4" ry="4"/>
+    <text style="fill: rgb(251, 250, 239); font-family: Arial, sans-serif; font-size: 14px; font-weight: 700; white-space: pre;" x="24" y="37.147">TC4H</text>
+    <g id="tc4h-keyboard">
+      <g id="mode-button" transform="matrix(1, 0, 0, 1, 3, 0)">
+        <rect style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(202, 176, 91);" x="24" y="348" width="46" height="44" rx="6" ry="6"/>
+        <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 12.6px; font-weight: 700; white-space: pre;" transform="matrix(1, 0, 0, 1.666665, -1.794161, -244.822052)" x="30.109" y="373.114">MODE</text>
+      </g>
+      <g id="left-button">
+        <rect style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(255, 255, 255);" x="194" y="348" width="46" height="44" rx="6" ry="6"/>
+        <g transform="matrix(2.896488, 0, 0, 2.418646, 185.802414, 346.368866)" style="">
+          <path d="M11.3534 15.8537C11.1585 16.0493 10.8419 16.0499 10.6463 15.855L5.16178 10.39C4.94607 10.1751 4.94607 9.82574 5.16178 9.6108L10.6463 4.14582C10.8419 3.9509 11.1585 3.95147 11.3534 4.14708C11.5483 4.34269 11.5477 4.65927 11.3521 4.85418L6.18753 10.0004L11.3521 15.1466C11.5477 15.3415 11.5483 15.6581 11.3534 15.8537ZM15.3524 15.8537C15.1575 16.0493 14.8409 16.0499 14.6453 15.855L9.16081 10.39C8.94509 10.1751 8.9451 9.82574 9.16081 9.6108L14.6453 4.14582C14.8409 3.9509 15.1575 3.95147 15.3524 4.14708C15.5473 4.34269 15.5467 4.65927 15.3511 4.85418L10.1866 10.0004L15.3511 15.1466C15.5467 15.3415 15.5473 15.6581 15.3524 15.8537Z" fill="#212121"/>
+        </g>
+      </g>
+      <g id="up-button">
+        <rect style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(255, 255, 255);" x="248" y="296" width="46" height="44" rx="6" ry="6"/>
+        <g transform="matrix(2.544827, 0, 0, 2.509096, 245.918137, 292.32843)" style="">
+          <path d="M4.14581 9.64619C3.95091 9.84179 3.95147 10.1584 4.14707 10.3533C4.34266 10.5482 4.65922 10.5476 4.85413 10.352L10 5.18752L15.1459 10.352C15.3408 10.5476 15.6573 10.5482 15.8529 10.3533C16.0485 10.1584 16.0491 9.84179 15.8542 9.64619L10.3896 4.16178C10.1746 3.94607 9.82536 3.94607 9.61042 4.16178L4.14581 9.64619ZM4.14581 14.6471C3.95091 14.8427 3.95147 15.1593 4.14707 15.3542C4.34266 15.5491 4.65922 15.5485 4.85413 15.3529L10 10.1884L15.1459 15.3529C15.3408 15.5485 15.6573 15.5491 15.8529 15.3542C16.0485 15.1593 16.0491 14.8427 15.8542 14.6471L10.3896 9.16269C10.1746 8.94698 9.82536 8.94698 9.61042 9.16269L4.14581 14.6471Z" fill="#212121"/>
+        </g>
+      </g>
+      <g id="down-button">
+        <rect style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(252, 252, 252);" x="248" y="348" width="46" height="44" rx="6" ry="6"/>
+        <g transform="matrix(2.615845, 0, 0, 2.723805, 245.487686, 343.910583)" style="">
+          <path d="M15.8537 8.64582C16.0493 8.84073 16.0499 9.15731 15.855 9.35292L10.39 14.8374C10.1751 15.0531 9.82574 15.0531 9.6108 14.8374L4.14582 9.35292C3.9509 9.15731 3.95147 8.84073 4.14708 8.64582C4.34269 8.4509 4.65927 8.45147 4.85418 8.64708L10.0004 13.8117L15.1466 8.64708C15.3415 8.45147 15.6581 8.4509 15.8537 8.64582ZM15.8537 4.64582C16.0493 4.84073 16.0499 5.15731 15.855 5.35292L10.39 10.8374C10.1751 11.0531 9.82574 11.0531 9.6108 10.8374L4.14582 5.35292C3.9509 5.15731 3.95147 4.84073 4.14708 4.64582C4.34269 4.4509 4.65927 4.45147 4.85418 4.64708L10.0004 9.81166L15.1466 4.64708C15.3415 4.45147 15.6581 4.4509 15.8537 4.64582Z" fill="#212121"/>
+        </g>
+      </g>
+    </g>
+    <text style="fill: rgb(255, 251, 240); font-family: Arial, sans-serif; font-size: 10.5882px; font-weight: 700; line-height: 16.9412px; white-space: pre;" transform="matrix(1, 0, 0, 1.133334, 4.844986, -55.874195)" x="245.155" y="413.498">Autonics</text>
+    <g id="tc4h-display">
+      <path style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgba(65, 65, 65, 0.78);" d="M 296 282.653 C 296 282.653 233.884 291.739 165.828 291.739 C 105.624 291.739 24 281.4 24 281.4 L 24.899 50.461 C 24.899 50.461 104.328 39.769 161.914 39.769 C 222.118 39.769 296 50.461 296 50.461 L 296 282.653 Z"/>
+      <g id="digit-row">
+        <g id="segment-0" transform="matrix(0.964285, 0, 0, 1.134726, 267.214111, -60.011513)" style="">
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-244 104 -192 104.127 -200.689 110.127 -235.334 110.127" id="seg-0-2"/>
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-260.937 131.064 -226.736 130.896 -222.936 126.937 -226.736 122.937 -255.256 122.937" id="seg-0-1" transform="matrix(0, 1, -1, 0, -114.936012, 368.937004)"/>
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-237.873 148 -232.905 152 -203.095 152 -198.127 148 -203.095 144 -232.905 144" id="seg-0-0"/>
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-213.127 123 -178.927 123.04 -175.127 127 -178.927 131 -207.446 131" id="seg-0-3" transform="matrix(0, 1, -1, 0, -67.126999, 321.126999)"/>
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-260.937 164.809 -226.736 164.977 -222.936 168.936 -226.736 172.936 -255.256 172.936" id="seg-0-6" transform="matrix(0, -1, 1, 0, -410.809013, -73.064003)"/>
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-213.064 172.936 -178.863 172.768 -175.063 168.809 -178.863 164.809 -207.383 164.809" id="seg-0-4" transform="matrix(0, -1, 1, 0, -362.936005, -25.190994)"/>
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-244 192.127 -192 192 -200 186 -236 186" id="seg-0-5"/>
+        </g>
+        <g id="segment-1" transform="matrix(0.928571, 0, 0, 1.124326, 330.428497, -58.013355)" style="">
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-244 104 -192 104.127 -200.689 110.127 -235.334 110.127" id="seg-1-2"/>
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-260.937 131.064 -226.736 130.896 -222.936 126.937 -226.736 122.937 -255.256 122.937" id="seg-1-1" transform="matrix(0, 1, -1, 0, -114.936012, 368.937004)"/>
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-237.873 148 -232.905 152 -203.095 152 -198.127 148 -203.095 144 -232.905 144" id="seg-1-0"/>
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-213.127 123 -178.927 123.04 -175.127 127 -178.927 131 -207.446 131" id="seg-1-3" transform="matrix(0, 1, -1, 0, -67.126999, 321.126999)"/>
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-260.937 164.809 -226.736 164.977 -222.936 168.936 -226.736 172.936 -255.256 172.936" id="seg-1-6" transform="matrix(0, -1, 1, 0, -410.809013, -73.064003)"/>
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-213.064 172.936 -178.863 172.768 -175.063 168.809 -178.863 164.809 -207.383 164.809" id="seg-1-4" transform="matrix(0, -1, 1, 0, -362.936005, -25.190994)"/>
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-244 192.127 -192 192 -200 186 -236 186" id="seg-1-5"/>
+        </g>
+        <g id="segment-2" transform="matrix(0.928572, 0, 0, 1.124326, 398.428711, -58.013355)" style="">
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-244 104 -192 104.127 -200.689 110.127 -235.334 110.127" id="seg-2-2"/>
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-260.937 131.064 -226.736 130.896 -222.936 126.937 -226.736 122.937 -255.256 122.937" id="seg-2-1" transform="matrix(0, 1, -1, 0, -114.936012, 368.937004)"/>
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-237.873 148 -232.905 152 -203.095 152 -198.127 148 -203.095 144 -232.905 144" id="seg-2-0"/>
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-213.127 123 -178.927 123.04 -175.127 127 -178.927 131 -207.446 131" id="seg-2-3" transform="matrix(0, 1, -1, 0, -67.126999, 321.126999)"/>
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-260.937 164.809 -226.736 164.977 -222.936 168.936 -226.736 172.936 -255.256 172.936" id="seg-2-6" transform="matrix(0, -1, 1, 0, -410.809013, -73.064003)"/>
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-213.064 172.936 -178.863 172.768 -175.063 168.809 -178.863 164.809 -207.383 164.809" id="seg-2-4" transform="matrix(0, -1, 1, 0, -362.936005, -25.190994)"/>
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-244 192.127 -192 192 -200 186 -236 186" id="seg-2-5"/>
+        </g>
+        <g id="segment-3" transform="matrix(0.928571, 0, 0, 1.124324, 466.428497, -56.929691)" style="">
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-244 104 -192 104.127 -200.689 110.127 -235.334 110.127" id="seg-3-2"/>
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-260.937 131.064 -226.736 130.896 -222.936 126.937 -226.736 122.937 -255.256 122.937" id="seg-3-1" transform="matrix(0, 1, -1, 0, -114.936012, 368.937004)"/>
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-237.873 148 -232.905 152 -203.095 152 -198.127 148 -203.095 144 -232.905 144" id="seg-3-0"/>
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-213.127 123 -178.927 123.04 -175.127 127 -178.927 131 -207.446 131" id="seg-3-3" transform="matrix(0, 1, -1, 0, -67.126999, 321.126999)"/>
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-260.937 164.809 -226.736 164.977 -222.936 168.936 -226.736 172.936 -255.256 172.936" id="seg-3-6" transform="matrix(0, -1, 1, 0, -410.809013, -73.064003)"/>
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-213.064 172.936 -178.863 172.768 -175.063 168.809 -178.863 164.809 -207.383 164.809" id="seg-3-4" transform="matrix(0, -1, 1, 0, -362.936005, -25.190994)"/>
+          <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-244 192.127 -192 192 -200 186 -236 186" id="seg-3-5"/>
+        </g>
+        <rect x="92" y="154" width="4" height="4" style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" id="dot-1000"/>
+        <rect x="160" y="154" width="4" height="4" style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" id="dot-100"/>
+        <rect x="228" y="154" width="4" height="4" style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" id="dot-10"/>
+      </g>
+      <g id="alarm-lamp">
+        <rect x="46" y="210" width="27" height="18" style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" id="alarm-norm"/>
+        <path d="M 59.5 180 L 73 198 L 46 198 L 59.5 180 Z" style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" id="alarm-up" bx:shape="triangle 46 180 27 18 0.5 0 1@7f735208"/>
+        <path d="M 59.5 -258 L 73 -240 L 46 -240 L 59.5 -258 Z" style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" transform="matrix(1, 0, 0, -1, 0, 0)" id="alarm-down" bx:shape="triangle 46 -258 27 18 0.5 0 1@f76efca7"/>
+      </g>
+      <g id="txt-lamp" transform="matrix(1, 0, 0, 1, 3.863329, 1.709167)">
+        <text style="fill: rgb(119, 119, 119); font-family: Arial, sans-serif; font-size: 14px; font-weight: 700; white-space: pre;" id="txt-lamp-sv" x="203" y="220.881">SV</text>
+        <text style="fill: rgb(119, 119, 119); font-family: Arial, sans-serif; font-size: 14px; font-weight: 700; white-space: pre;" x="266.293" y="221.027" id="txt-lamp-C">°C</text>
+        <text style="fill: rgb(119, 119, 119); font-family: Arial, sans-serif; font-size: 14px; font-weight: 700; white-space: pre;" x="236" y="220.881" id="txt-lamp-F">°F</text>
+        <text style="fill: rgb(119, 119, 119); font-family: Arial, sans-serif; font-size: 14px; font-weight: 700; white-space: pre;" x="203" y="252.881" transform="matrix(0.794132, 0, 0, 1, 41.791157, 0)" id="txt-lamp-AL1">AL1</text>
+        <text style="fill: rgb(119, 119, 119); font-family: Arial, sans-serif; font-size: 14px; font-weight: 700; white-space: pre;" x="235.558" y="252.95" transform="matrix(0.773077, 0, 0, 1, 53.895542, -0.101632)" id="txt-lamp-AL2">AL2</text>
+        <text style="fill: rgb(119, 119, 119); font-family: Arial, sans-serif; font-size: 14px; font-weight: 700; white-space: pre;" x="264" y="252.693" transform="matrix(0.666334, 0, 0, 0.999999, 90.380859, 0.127027)" id="txt-lamp-OUT">OUT</text>
+      </g>
+    </g>
+  </g>
+</svg>
