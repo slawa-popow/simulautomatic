@@ -17,7 +17,7 @@
     type="text/css"
     />
     <!-- 7 segment -->
-    <link href="https://fonts.cdnfonts.com/css/seven-segment" rel="stylesheet">
+    
     <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/segment7" type="text/css"/> 
     <!-- font-family: 'Seven Segment', sans-serif; 
 
@@ -182,7 +182,7 @@
              
         }
         .mempoint__data_field-1 {
-            color: rgba(253, 56, 56, 0.838);
+            color: rgba(253, 56, 56, 0.952);
         }
         .mempoint__data_field-2 {
             color: rgba(4, 80, 5, 0.805);
@@ -201,6 +201,18 @@
             overflow: hidden;
             margin: auto;
         }
+
+        @media (max-width: 480px) {
+            .tc4h {
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: flex-start;
+                align-items: center;
+                width: 95%;
+                overflow: hidden;
+                margin: auto;
+        }
+        }
         
 
     </style>
@@ -216,19 +228,6 @@
         </div>
         <!---->
         <div class="content">
-            <h1>Шрифт семисегментного индикатора</h1>
-            <span class="line"></span>
-            <p>a b c d e f g h i j k l m n o p q r s t u w v x y z</p>
-            <span class="segment"> a b c d e f g h i j k l m n o p q r s t u w v x y z</span>
-            <span class="line"></span>
-
-            <p>A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</p>
-            <span class="segment">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</span>
-            <span class="line"></span>
-
-            <p>1 2 3 4 5 6 7 8 9 0 . \ | [ ] % * / # @ + - ( ) _ ^ ? !</p>
-            <span class="segment">1 2 3 4 5 6 7 8 9 0 . \ | [ ] % * / # @ + - ( ) _ ^ ? ! </span>
-            <span class="line"></span>
         
             <h1>Ячейки памяти (Не полно. Для примера.)</h1>
             <div class="memory" id="memory_draw">
@@ -273,32 +272,32 @@
                     <div class="mempoint__data"></div>
                     <div class="mempoint__data"></div>                    
                 </div>
-                <div class="mempoint" id="p7">
+                <div class="mempoint" id="p8">
                     <div class="mempoint__data"><span class="mempoint__data_field-0">8</span></div>
                     <div class="mempoint__data"></div>
                     <div class="mempoint__data"></div>                    
                 </div>
-                <div class="mempoint" id="p8">
+                <div class="mempoint" id="p9">
                     <div class="mempoint__data"><span class="mempoint__data_field-0">9</span></div>
                     <div class="mempoint__data"></div>
                     <div class="mempoint__data"></div>                    
                 </div>
-                <div class="mempoint" id="p9">
+                <div class="mempoint" id="p10">
                     <div class="mempoint__data"><span class="mempoint__data_field-0">10</span></div>
                     <div class="mempoint__data"></div>
                     <div class="mempoint__data"></div>                    
                 </div>
-                <div class="mempoint" id="p10">
+                <div class="mempoint" id="p11">
                     <div class="mempoint__data"><span class="mempoint__data_field-0">11</span></div>
                     <div class="mempoint__data"></div>
                     <div class="mempoint__data"></div>                    
                 </div>
-                <div class="mempoint" id="p11">
+                <div class="mempoint" id="p12">
                     <div class="mempoint__data"><span class="mempoint__data_field-0">12</span></div>
                     <div class="mempoint__data"></div>
                     <div class="mempoint__data"></div>                    
                 </div>
-                <div class="mempoint" id="p12">
+                <div class="mempoint" id="p13">
                     <div class="mempoint__data"><span class="mempoint__data_field-0">13</span></div>
                     <div class="mempoint__data"></div>
                     <div class="mempoint__data"></div>                    
@@ -391,9 +390,9 @@
                         <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-213.064 172.936 -178.863 172.768 -175.063 168.809 -178.863 164.809 -207.383 164.809" id="seg-3-4" transform="matrix(0, -1, 1, 0, -362.936005, -25.190994)"></polygon>
                         <polygon style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" points="-244 192.127 -192 192 -200 186 -236 186" id="seg-3-5"></polygon>
                       </g>
-                      <rect x="92" y="154" width="4" height="4" style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" id="dot-1000"></rect>
-                      <rect x="160" y="154" width="4" height="4" style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" id="dot-100"></rect>
-                      <rect x="228" y="154" width="4" height="4" style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" id="dot-10"></rect>
+                      <rect x="90" y="154" width="8" height="7" style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" id="dot-1000"></rect>
+                      <rect x="158" y="154" width="8" height="7" style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" id="dot-100"></rect>
+                      <rect x="226" y="154" width="8" height="7" style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" id="dot-10"></rect>
                     </g>
                     <g id="alarm-lamp">
                       <rect x="46" y="210" width="27" height="18" style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: rgb(119, 119, 119);" id="alarm-norm"></rect>
@@ -432,44 +431,258 @@
 
 
 
+    class ABCComponent(ABC):
+        """Абстрактный класс для параметров"""
+
+            # Для веток меню
+        stack_component: deque = None
+
+            # Для цифр при редактировании параметров
+        stack_select: deque = None
+
+
+        @abstractmethod
+        def bind_memory(self, mempoint: object) -> None:
+            """Связать параметр с ячейкой памяти"""
+            pass
+
+
+        @property
+        @abstractmethod
+        def name(self) -> str:
+            """Имя параметра"""
+            pass
+
+
+        @property
+        @abstractmethod
+        def is_visible(self) -> bool:
+            """Показать параметр на дисплее?"""
+            pass
+
+
+        @abstractmethod
+        def write(self, data: Any) -> Any:
+            """Записать значение в параметр"""
+            pass
+
+        @abstractmethod
+        def read(self) -> str:
+            """Прочитать значение из параметра"""
+            pass
+
+        @abstractmethod
+        def select(self) -> Any:
+            """Выбор из очереди deque"""
+            pass
+
+
+        @abstractmethod
+        def up_button(self) -> None:
+            """Вызов после нажатия на кнопку вверх"""
+            pass
+
+        @abstractmethod
+        def down_button(self) -> None:
+            """Вызов после нажатия вниз"""
+            pass
+
+        @abstractmethod
+        def left_button(self) -> None:
+            """Вызов после нажатия влево"""
+            pass
+
+        @abstractmethod
+        def right_button(self) -> None:
+            """Вызов после нажатия вправо (если кнопка есть)"""
+            pass
+
+        @abstractmethod
+        def mode_button(self) -> None:
+            """Вызов после нажатия кнопки mode"""
+            pass
+
+
+
+
+
+    class ABCDisplay(ABC):
+        """Абстрактный класс дисплея"""
+
+        @abstractmethod
+        def printd(self, value: str) -> None:
+            """Вывод строки на дисплей"""
+            pass
+
+        @abstractmethod
+        def print_seg(self, segment: int, value: str) -> None:
+            """Вывод значения на один индикатор"""
+            pass
+
+        @abstractmethod
+        def clear_segment(self, segment: int) -> None:
+            """Очистить один индикатор"""
+            pass
+
+        @abstractmethod
+        def clear_all(self) -> None:
+            """Очистить все индикаторы"""
+            pass
+
+
+    # ----------------------------------------------------------------------------------------
+
+    class IntegerMemPoint:
+        """Миксин для проверки значения целочисленного 
+           параметра и форматирования значения для возможности
+           вывода на индикаторы"""
+
+        @classmethod
+        def check_value(cls, value: Any) -> str:
+            """Попытка преобразовать тип параметра в
+                int, если да, то преобразовать тип значения
+                параметра в строку, проверка длинны значения
+                если его можно вывести на дисплей, то возврат значения параметра.
+                Если нельзя вывести на дисплей, то берется и возвращается срез длинной 
+                кол-ва индикаторов. Или возврат строки ошибки"""
+
+            try:
+                value = int(value)
+            except ValueError:
+                print("Ошибка. Значение не целое число!")
+                return "Er-I"
+            else:
+                return_value: str = str(value)                    
+                if len(return_value) > 4:
+                    return return_value[:4]
+                else:
+                    return str.zfill(return_value, 4)
+
+
+    # ----------------------------------------------------------------------------------------                
+    
+    class FloatMemPoint:
+        """Миксин для проверки значения float 
+            параметра и форматирования значения для возможности
+            вывода на индикаторы"""
+
+        @classmethod
+        def check_value(cls, value: Any) -> tuple:
+            """Проверка значения параметра на float число.
+                Возвращает кортеж из значения без точки-разделителя
+                дробной части (для вывода на сегменты) и чило (10 или 100 или 1000) 
+                означающее тип дробной части (десятки, сотки, тысячные). Или ошибу."""
+
+            error: tuple = ("Er-F", None)
+            try:
+                _value = float(value)
+            except ValueError:
+                print("Ошибка. Значение не float число!")
+                return error
+            else:
+                result_valid: tuple = cls._valid_str_value(_value)
+                if result_valid:
+                    return_value, dot_position = result_valid
+                    dot_off: str = str.replace(return_value, ".", "")
+                    if len(dot_off) > 4:
+                        return error
+                    else:
+                        return (str.zfill(dot_off, 4), dot_position)
+                else:
+                    return error
+     
+
+        @classmethod
+        def _valid_str_value(cls, value: float) -> tuple:
+            value: str = str(value) 
+            dot_index: int = str.index(value, ".")
+            if len(value[dot_index+1 :]) == 1:
+                dot_index = 10
+            elif len(value[dot_index+1 :]) == 2:
+                dot_index = 100
+            elif len(value[dot_index+1 :]) == 3:
+                dot_index = 1000
+            else:
+                dot_index = 0
+            if str.count(value, '.') == 1 and dot_index:
+                return value, dot_index
+            return tuple()
+
+
+    # ----------------------------------------------------------------------------------------
+   
+    class StringMemPoint:
+        """Миксин для проверки значения строчного 
+            параметра и форматирования значения для возможности
+            вывода на индикаторы"""
+
+        @classmethod
+        def check_value(cls, value: Any) -> tuple:
+            """Значение строчного параметра должно 
+                влезать в индикаторы дисплея, иначе 
+                возврат среза длинной кол-ва индикаторов."""
+
+            value: str = str(value)
+            if 0 < len(value) <= 4:
+                return value
+            elif len(value) > 4:
+                return value[:4]
+            else:
+                return "Er-S"
+
+
+    # ----------------------------------------------------------------------------------------
+
     class MemPoint:
         """Ячейка памяти"""
 
-        def __init__(self, id_mem: str, name: str, value: Any = None) -> None: 
+            # Позволяет определить какую точку дробной части
+            # зажечь на дисплее
+        fraction_position: dict = {10: -1, 100: -2, 1000: -3}
+    
+        def __init__(self, id_mem: str, name: str) -> None:
+                # id html ячейки 
             self._id_mem: str = id_mem
             self._mem: object = document[id_mem]
+                # список дочерних div
             self._fields: list = self._mem.children
+
             self._name: str = name
-            self._value: Any = self.check_value(value) 
+            self._value: Any = None
+                # преобразованное значение для вывода на индикаторы
+            self._print_value: str = None
+                # число типа десятичной части числа (10, 100 или 1000) 
+            self._fraction: int = None
             self._date = javascript.Date.new()
 
             self._area = document["logging"]
 
-            self._field_name = self._create_field(1, self.name)
-            self._field_value = self._create_field(2, self.value)
-
-
-        def check_value(self, value: Any) -> str:
-            return str(value) if value is not None else ""
+                # имя и значение в html ячейки памяти
+            self._field_name: object = None
+            self._field_value: object = None
+           
+            
 
         @property
         def name(self) -> str:
             return self._name
 
         @name.setter
-        def name(self, v: str) -> None:
+        def name(self, v: Any) -> None:
             self._name = v
-            self._field_name.textContent = str(v)
+            self._field_name.textContent = self.name
 
         @property
-        def value(self) -> Any:
-            return self._value
+        def fraction(self) -> int:
+            return self._fraction
 
-        @value.setter
-        def value(self, v: Any) -> None:
-            self._value = self.check_value(v)
-            self._field_value.textContent = self.value
-            
+        @property
+        def print_value(self) -> str:
+            return self._print_value
+
+        @print_value.setter
+        def print_value(self, value: Any) -> None:
+            self._print_value = value    
 
         def _create_span(self, text: Any) -> object:
             span = document.createElement("span")
@@ -489,142 +702,281 @@
             self._fields[num_field].appendChild(field)
 
             return field
+
+        
+        def create_logger_boxfield(self, name: str, value: str) -> None:
+            self._field_name: object = self._create_field(1, name)
+            self._field_value: object = self._create_field(2, value)
+
+
+    # ----------------------------------------------------------------------------------------
+
+    class IMemPoint(MemPoint,IntegerMemPoint):
+        """Целочисленная ячека памяти."""
+
+        def __init__(self, id_mem: str, name: str, value: Any = None) -> None:
+            super().__init__(id_mem, name)
+            self._print_value = self.check_value(value)
+            self.create_logger_boxfield(name, value)
+            self.value = value
+         
+        @property
+        def print_value(self) -> str:
+            return self._print_value
+
+        @print_value.setter
+        def print_value(self, value: Any) -> None:
+            self._print_value = value
+
+        @property
+        def value(self) -> Any:
+            return self._value
+
+        @value.setter
+        def value(self, v: int) -> None:
+            self._value = int(self.check_value(v))
+            self.print_value = self.check_value(self._value)
+            self._field_value.textContent = f"{self._value}"
+
+
+    # ----------------------------------------------------------------------------------------
+
+    class FMemPoint(MemPoint, FloatMemPoint):
+        """Float ячейка памяти"""
+
+        def __init__(self, id_mem: str, name: str, value: Any = None) -> None:
+            super().__init__(id_mem, name)
+            self.print_value, self._fraction = self.check_value(value)
+            self.create_logger_boxfield(name, value)
+            self.value = value
+
+        @property
+        def name(self) -> str:
+            return self._name
+
+        @name.setter
+        def name(self, v: Any) -> None:
+            self._name = v
+            self._field_name.textContent = self.name
+
+        @property
+        def print_value(self) -> str: 
+            return self._print_value
+
+        @print_value.setter
+        def print_value(self, value: str) -> None:
+            self._print_value = value                
+
+        @property
+        def value(self) -> Any:
+            return self._value
+
+        @value.setter
+        def value(self, v: Any) -> None:
+            self._value = float(v)
+            self.print_value, self._fraction = self.check_value(self._value) 
+            self._field_value.textContent = f"{self._value}"
             
 
 
-    class MemoryMap:
 
-        def __init__(self) -> None:
-                # список объектов ячеек
-            self._memlist: list = list()
-                # Ключ - имя ячейки, значение - параметр ячейки
-            self._memmap: dict = dict()
-            self._area = document["logging"]
-            document["clear-area"].bind("click", self.clear_area)
+    # --------------- Декоратор мигать дисплеем -----------
 
-
-
-        def add_mempoint(self, mempoint: MemPoint) -> None:
-            """Добавить ячейку в карту памяти"""
-
-            if mempoint not in self._memlist:
-                self._memlist.append(mempoint)
-                self._memmap[mempoint.name] = mempoint.value
-
-
-
-        def clear_area(self, evn) -> None:
-            self._area.value = ""
-
-
-        def log_area(self, message: str) -> None:
-            self._area.value += message
-
-
-
-
-    class ABCComponent(ABC):
-
-        stack_component: deque = None
-        stack_select: deque = None
-
-        @abstractmethod
-        def bind_memory(self, mempoint: object) -> None:
-            pass
-
-
-        @property
-        @abstractmethod
-        def name(self) -> str:
-            pass
-
-
-        @property
-        @abstractmethod
-        def is_visible(self) -> bool:
-            pass
-
-
-        @abstractmethod
-        def write(self, data: Any) -> Any:
-            pass
-
-        @abstractmethod
-        def read(self) -> str:
-            pass
-
-        @abstractmethod
-        def select(self) -> Any:
-            pass
-
-        @abstractmethod
-        def up_button(self) -> None:
-            pass
-
-        @abstractmethod
-        def down_button(self) -> None:
-            pass
-
-        @abstractmethod
-        def left_button(self) -> None:
-            pass
-
-        @abstractmethod
-        def right_button(self) -> None:
-            pass
-
-        @abstractmethod
-        def mode_button(self) -> None:
-            pass
-
-
-
-    class ABCDisplay(ABC):
-
-        @abstractmethod
-        def printd(self, value: str) -> None:
-            pass
-
-        @abstractmethod
-        def print_seg(self, segment: int, value: str) -> None:
-            pass
-
-        @abstractmethod
-        def clear_segment(self, segment: int) -> None:
-            pass
-
-        @abstractmethod
-        def clear_all(self) -> None:
-            pass
-
-
-
-
-
-    # -------------- Декоратор логгер ---------------------
-
-    def logger(log_area: object) -> Callable:
+    def blink_display(time_blink: int) -> Callable:
         def extern(method: Callable) -> Callable:
             @wraps(method)
-            def wrapper(self, value) -> None:
-                method(self, value)
-                log_area.value += self.loglist[-1]
+            def wrapper(self, *args) -> None:
+                self.current_value = args
+                def start_blink():
+                    method(self, *args)
+                    self._blink_flag = not self._blink_flag
+                self._obj_setinterval = window.setInterval(start_blink, time_blink)
+
+                start_blink()
 
             return wrapper
         return extern
 
 
-    # -----------------------------------------------------
+    # ---------------------------------------------------- 
 
+    class Display(ABCDisplay):
+        """Дисплей"""
+
+            # кол-во индикаторов
+        digits: int = 4
+
+            # часть строки id svg индикатора
+        part_id_digit: str = "segment-"
+
+            # svg объекты точек дробной чати
+        dots: dict = {10: document["dot-10"],
+                    100: document["dot-100"],
+                    1000: document["dot-1000"],
+            }
+
+            # символы которые можно показать на индикаторах
+        digit_code: dict = {
+            "1": (0, 0, 0, 1, 1, 0, 0),
+            "2": (1, 0, 1, 1, 0, 1, 1),
+            "3": (1, 0, 1, 1, 1, 1, 0),
+            "4": (1, 1, 0, 1, 1, 0, 0),
+            "5": (1, 1, 1, 0, 1, 1, 0),
+            "6": (1, 1, 1, 0, 1, 1, 1),
+            "7": (0, 0, 1, 1, 1, 0, 0),
+            "8": (1, 1, 1, 1, 1, 1, 1),
+            "9": (1, 1, 1, 1, 1, 1, 0),
+            "0": (0, 1, 1, 1, 1, 1, 1),
+            "-": (1, 0, 0, 0, 0, 0, 0),
+            "_": (0, 0, 0, 0, 0, 1, 0),
+            "a": (1, 0, 1, 0, 1, 0, 1),
+            "A": (1, 1, 1, 1, 1, 0, 1),
+            "L": (0, 1, 0, 0, 0, 1, 1),
+            "t": (1, 1, 0, 0, 0, 1, 1),
+            "p": (1, 1, 1, 1, 0, 0, 1),
+            "P": (1, 1, 1, 1, 0, 0, 1),
+            "I": (0, 1, 0, 0, 0, 0, 1),
+            "d": (1, 0, 0, 1, 1, 1, 1),
+            "r": (1, 0, 0, 0, 0, 0, 1),
+            "E": (1, 1, 1, 0, 0, 1, 1),
+            "S": (1, 1, 1, 0, 1, 1, 0),
+            "Y": (1, 1, 0, 1, 1, 1, 0),
+            "H": (1, 1, 0, 1, 1, 0, 1),
+            "u": (0, 0, 0, 0, 1, 1, 1),
+            "o": (1, 0, 0, 0, 1, 1, 1),
+            "*": (1, 1, 1, 1, 0, 0, 0),
+            "c": (1, 0, 0, 0, 0, 1, 1),
+            "C": (0, 1, 1, 0, 0, 1, 1),
+            "U": (0, 1, 0, 1, 1, 1, 1),
+            "y": (1, 1, 0, 1, 0, 1, 1),
+            "J": (0, 0, 0, 1, 1, 1, 1),
+            "F": (1, 1, 1, 0, 0, 0, 1),
+            "n": (1, 0, 0, 0, 1, 0, 1),
+            "b": (1, 1, 0, 0, 1, 1, 1),
+        }
+
+        def __init__(self) -> None:
+                # ключи-номера индикаторов, значения - svg объекты сегментов индикаторов
+            self.digitdict: dict = self._create_digit_map()
+
+                # объект таймера 
+            self._obj_setinterval: object = None
+
+                # флаг для мигания
+            self._blink_flag: bool = True
+            
+
+        def _create_digit_map(self) -> dict:
+            result_dict: dict = dict()
+            for i in range(self.digits):
+                for j in range(7):
+                    _id = f"seg-{i}-{j}"
+                    result_dict.setdefault(str(i), []).append(document[_id])
+
+            return result_dict
+
+
+        @blink_display(400)
+        def blink(self, segment: int, value: str) -> None:
+            """Мигать одним индикатором"""
+
+            if self._blink_flag:
+                self.print_seg(segment, value)
+            else:
+                self.clear_segment(segment)
+
+                
+
+        @blink_display(400)
+        def blink_str(self, value: str) -> None:
+            """Мигать всю строку"""
+
+            if self._blink_flag:
+                self.printd(str(value))
+            else:
+                self.clear_all()
+
+
+                
+        def stop_blink(self) -> None:
+            """Не мигать ничем"""
+
+            if self._obj_setinterval:
+                window.clearInterval(self._obj_setinterval)
+
+                    
+     
+        def printd(self, value: str) -> None:
+            """Вывести строку на индикаторы"""
+
+            value = str(value)
+            for i, char in enumerate(value, self.digits-len(value)):
+                self.print_seg(i, char)
+
+
+        
+        def print_seg(self, segment: int, value: str) -> None:
+            """Вывести значение на индикатор по его номеру в self.digitdict"""
+
+            seg = self.digitdict[str(segment)]
+            try:
+                data: tuple = self.digit_code[str(value)]
+            except KeyError:
+                data = self.digit_code["_"]
+            for i, obj in enumerate(seg):
+                if data[i]:
+                    obj.style["fill"] = "rgba(253, 56, 56, 0.952)"
+                else:
+                    obj.style["fill"] = "rgb(119, 119, 119)"
+
+
+        
+        def clear_segment(self, segment: int) -> None:
+            """Очистить один индикатор"""
+
+            seg = self.digitdict[str(segment)]
+            for obj in seg:
+                obj.style["fill"] = "rgb(119, 119, 119)"
+
+
+        
+        def clear_all(self) -> None:
+            """Очистить все индикаторы"""
+
+            for obj in self.digitdict.values():
+                for seg in obj:
+                    seg.style["fill"] = "rgb(119, 119, 119)"
+
+
+
+        def clear_dots(self) -> None:
+            """Очистить все точки-разделитель дроби"""
+
+            for dots in self.dots.values():
+                dots.style["fill"] = "rgb(119, 119, 119)"
+
+
+
+        def set_dot(self, fraction: int) -> None:
+            """Зажечь точку-разделитель дроби. fraction - значение в 
+                кортеже (10 иди 100 или 1000)
+                который возвращает check_value() для FMemPoint"""
+
+            self.clear_dots()
+            self.dots[fraction].style["fill"] = "rgba(253, 56, 56, 0.952)"
+
+
+    # ---------------------------------------------------------------------------------------
 
     class Component(ABCComponent):
+        """Базовый для парамотров"""
 
         logarea = document["logging"]
         button_clear = document["clear-area"]
 
         def __init__(self, mempoint: MemPoint):
+            self.display = Display()
             self._mempoint: Mempoint = mempoint
-            self.loglist: list = list()
             self._is_visible: bool = True
             self.stack_component: deque = deque()
             self.stack_select: deque = deque()
@@ -648,6 +1000,12 @@
 
         @property
         def select_param(self) -> Any:
+            """Свойство для хранения-редактирования
+                значения параметра пригодного для вывода
+                на индикаторы дисплея. Десятичная точка 
+                (если значение дробное число) показывается отдельно. 
+                Такое число (значение параметра напр. 12.8) хранится здесь без точки (0128)"""
+                
             return self._select_param
 
         
@@ -657,23 +1015,16 @@
 
         
         def read(self) -> str:
-            return self._mempoint.value
+            return self._mempoint.print_value
+
 
         def select(self) -> None:
             pass
 
-
         
         def write(self, value: Any) -> Any:
-            if not self._mempoint.value == "":
-                self._mempoint.value = value
-                date_str: str = f"{str.zfill(str(self._date.getHours()), 2)}:{str.zfill(str(self._date.getMinutes()), 2)}:{str.zfill(str(self._date.getSeconds()), 2)}"
-                self.loglist.append(f"{date_str}: [{self.__class__.__name__}] запись в компонент: {self.name} значения {str(value)}\r\n")
-            else:
-                if len(self.loglist) > 100:
-                    self.loglist.clear()
-                self.loglist.append("Попытка записи в пустой компонент\r\n")
-
+            self._mempoint.value = value
+                
 
         @property
         def is_visible(self) -> bool:
@@ -700,9 +1051,10 @@
             pass
 
 
-
+    # ----------------------------------------------------------------------------------------
 
     class KeyBoard:
+        """Клавиатура"""
 
         def __init__(self, id_up: str = "", 
                     id_dwn: str = "",
@@ -710,13 +1062,22 @@
                     id_right: str = "",
                     id_mode: str = "") -> None:
     
+                # svg объекты кнопок
             self.upbutton: object = document[id_up] if id_up else None
             self.downbutton: object = document[id_dwn] if id_dwn else None
             self.leftbutton: object = document[id_left] if id_left else None
             self.rightbutton: object = document[id_right] if id_right else None
             self.modebutton: object = document[id_mode] if id_mode else None   
 
+                # назначенный объект параметр
             self._component: Component = None
+
+                # объекты методов для обратного вызова
+            self.callback_up: Callable = None
+            self.callback_down: Callable = None
+            self.callback_left: Callable = None
+            self.callback_right: Callable = None
+            self.callback_mode: Callable = None
 
 
         @property
@@ -727,8 +1088,28 @@
         def component(self, obj: Component) -> None:
             self._component = obj
             
+
+
+        def registration_callback(self, up_method: Callable = None, 
+                                down_method: Callable = None,
+                                left_method: Callable = None,
+                                right_method: Callable = None,
+                                mode_method: Callable = None) -> None:
+
+            """Регистрация методов обратного вызова."""
+                    
+            self.callback_up = up_method
+            self.callback_down = down_method
+            self.callback_left = left_method
+            self.callback_right = right_method
+            self.callback_mode = mode_method
+
+
+            
             
         def bind_methods_component(self) -> None:
+            """Назначение обработчиков для кнопок"""
+
             if self.upbutton:
                 self.upbutton.bind("click", self.upButton)
                 self.upbutton.bind("mouseover", self.mouse_over)
@@ -750,26 +1131,43 @@
                 self.modebutton.bind("mouseover", self.mouse_over)
                 self.modebutton.bind("mouseout", self.mouse_out)
 
+            # Обработчики событий нажатия кнопок svg
+            # Если заданы методы обратного вызова, то они вызываются и всё.
+            # Иначе вызываются методы параметра
 
         def upButton(self, evn) -> None:
             if self.component:
-                self.component.up_button()
+                if self.callback_up:
+                    self.callback_up()
+                else:
+                    self.component.up_button()
+                
 
         def downButton(self, evn) -> None:
             if self.component:
                 self.component.down_button()
+                if self.callback_down:
+                    self.callback_down()
 
         def leftButton(self, evn) -> None:
             if self.component:
-                self.component.left_button()
+                if self.callback_left:
+                    self.callback_left()
+                else:
+                    self.component.left_button()
+                
 
-        def rightbutton(self, evn) -> None:
+        def rightButton(self, evn) -> None:
             if self.component:
                 self.component.right_button()
+                if self.callback_right:
+                    self.callback_right()
 
         def modeButton(self, evn) -> None:
             if self.component:
-                self.component.mode_button()   
+                self.component.mode_button()
+                if self.callback_mode:
+                    self.callback_mode()   
 
 
         def mouse_over(self, evn) -> None:
@@ -782,66 +1180,146 @@
             evn.currentTarget.firstElementChild.style = f"stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke; fill: {fill_color};"
 
 
+    # ----------------------------------------------------------------------------------------
+
     class DigitComponent(Component):
+        """Базовый для разных типов параметров."""
 
         def __init__(self, mempoint: MemPoint) -> None:
             super().__init__(mempoint)
-            self.range_digit: int = len(self.read())
-            self.stack_select: deque = deque(range(self.range_digit))
-            self.stack_select.reverse()
-            self.select_param = self.select()
-            self.numbers_param: dict = dict()
-            self.convert_param(self.read())
-     
             
-         
+                # длинна строки числа
+            self.range_digit: int = len(self.read())
+
+                # создание очереди из количества цифр числа
+            self.stack_select: deque = deque(range(self.range_digit))
+
+                # развернуть очередь, чтобы редактирование было справа
+            self.stack_select.reverse()
+            
+                # ключ-индекс цифры в строке числа, значение-цифра числа
+            self.numbers_param: dict = dict()
+
+                # заполнить словарь self.numbers_param
+            self.convert_param(self.read())
+
+                # выбрать из очереди цифру числа для редактирования
+            self.select_param = self.select()
+
+
         def convert_param(self, value: str) -> None:
             self.numbers_param.clear()
             for i, char in enumerate(value):
                 self.numbers_param[i] = char
-            
-            
-        @logger(Component.logarea)
+
+        
+        def setting(self) -> None:
+            """Вывод на дисплей значения числа. Мигать 
+                индикатором текущей редактируемой цифры числа"""
+
+            self._mempoint.print_value = "".join([i for i in self.numbers_param.values()])
+            self.display.stop_blink()
+            self.display.printd(self.read()) 
+            self.display.blink(self.select_param, self.numbers_param[self.select_param])
+    
+
         def write(self, value: Any) -> None:
-            super().write(value)
+            """Записать ячейку памяти значение"""
+
+            self._mempoint.value = value
             self.convert_param(self.read())
+            self.setting() 
 
 
         def select(self) -> Any:
+            """Выбор из очереди цифры числа значения."""
+
             if self.stack_select:
                 self.select_param = self.stack_select.popleft()
                 self.stack_select.append(self.select_param)
+                self.setting()
                 
             return self.select_param
 
 
-
         def down_button(self) -> None:
+            """По нажатии кнопки вниз, изменяется 
+                текущее выбранное из очереди значение
+                цифры числа и перезаписывается в словарь self.numbers_param"""
+
             digit: int = int(self.numbers_param[self.select_param])  
             digit -= 1
             digit = 9 if digit < 0 else digit
             self.numbers_param[self.select_param] = str(digit)
-            self.write("".join([i for i in self.numbers_param.values()]))
+            self.setting()
 
 
         def up_button(self) -> None:
+            """Тоже что и для down_button(), только изменение
+                цифры в плюс."""
+
             digit: int = int(self.numbers_param[self.select_param])  
             digit += 1
             digit = 0 if digit > 9 else digit
             self.numbers_param[self.select_param] = str(digit)
-            self.write("".join([i for i in self.numbers_param.values()]))
+            self.setting()
+
 
         def left_button(self) -> None:
+            """По нажатии кнопки влево 
+            выбор из очереди цифры числа"""
+
             self.select()
 
 
         def mode_button(self) -> None:
-            pass
+            """Записать отредактированное значение в 
+                ячейку памяти"""
 
-        
+            self.write("".join([i for i in self.numbers_param.values()]))
 
 
+    # ----------------------------------------------------------------------------------------
 
+    class IntComponent(DigitComponent):
+        """Целочисленный тип параметра"""
+
+        def __init__(self, mempoint: IMemPoint) -> None:
+            super().__init__(mempoint)
+                       
+
+    # ----------------------------------------------------------------------------------------
+
+    class FloatComponent(DigitComponent):
+        """Дробный тип параметра"""
+
+        def __init__(self, mempoint: FMemPoint) -> None:
+            super().__init__(mempoint)
+
+
+        def setting(self) -> None:
+            """Вызов кода родительского метода, потом
+                если есть число типа дробной части,
+                то зажигается соответстующая точка на дисплее"""
+
+            super().setting()
+            if self._mempoint.fraction:
+                self.display.set_dot(self._mempoint.fraction)
+            else:
+                self.display.clear_dots()
+                              
+
+        def mode_button(self) -> None:
+            """Отдельно записывается значение для вывода на 
+               дисплей значения без точки, отдельно запись
+               в ячейку памяти нормального числа с точкой"""
+
+            new_value = "".join([i for i in self.numbers_param.values()])
+            self._mempoint.print_value = new_value
+            _new_value = new_value[:self._mempoint.fraction_position[self._mempoint.fraction]] + "." + new_value[self._mempoint.fraction_position[self._mempoint.fraction]:]
+            self.write(str.lstrip(_new_value, "0"))
+
+    # ----------------------------------------------------------------------------------------
      
     class SelectComponent(Component):
 
@@ -867,9 +1345,8 @@
                 self.stack_component.append(self.select_param)
                 
             return self.select_param
-
+       
         
-        @logger(Component.logarea)
         def write(self, value: Any) -> None:
             super().write(value)
 
@@ -888,145 +1365,36 @@
 
         def mode_button(self) -> None:
             self.write(self.select_param)
-            print(self.select_param)
-
-
-
-    class Display(ABCDisplay):
-
-        digits: int = 4
-        part_id_digit: str = "segment-"
-
-        digit_code: dict = {
-            "1": (0, 0, 0, 1, 1, 0, 0),
-            "2": (1, 0, 1, 1, 0, 1, 1),
-            "3": (1, 0, 1, 1, 1, 1, 0),
-            "4": (1, 1, 0, 1, 1, 0, 0),
-            "5": (1, 1, 1, 0, 1, 1, 0),
-            "6": (1, 1, 1, 0, 1, 1, 1),
-            "7": (0, 0, 1, 1, 1, 0, 0),
-            "8": (1, 1, 1, 1, 1, 1, 1),
-            "9": (1, 1, 1, 1, 1, 1, 0),
-            "0": (0, 1, 1, 1, 1, 1, 1),
-        }
-
-        def __init__(self) -> None:
-            self.digitdict: dict = self._create_digit_map()
-            self._obj_setinterval: object = None
-            self._blink_flag: bool = True
-            self.current_value: tuple = None
-            self.blink_str(3207)
             
 
-
-        def _create_digit_map(self) -> dict:
-            result_dict: dict = dict()
-            for i in range(self.digits):
-                for j in range(7):
-                    _id = f"seg-{i}-{j}"
-                    result_dict.setdefault(str(i), []).append(document[_id])
-
-            return result_dict
-
-
-
-        def blink(self, segment: int, value: str) -> None:
-            self.current_value = (segment, str(value),)
-            def start_blink():
-                if self._blink_flag:
-                    self.print_seg(segment, value)
-                else:
-                    self.clear_segment(segment)
-                self._blink_flag = not self._blink_flag    
-            self._obj_setinterval = window.setInterval(start_blink, 400)    
-                
-            start_blink()
-
-
-        def blink_str(self, value: str) -> None:
-            self.current_value = (value, )
-            def start_blink_str():
-                if self._blink_flag:
-                    self.printd(str(value))
-                else:
-                    self.clear_all()
-                self._blink_flag = not self._blink_flag    
-            self._obj_setinterval = window.setInterval(start_blink_str, 400)
-
-            start_blink_str()
-
-
-
-        def stop_blink(self) -> None:
-            window.clearInterval(self._obj_setinterval)
-            cur_seg, val = self.current_value
-            self.print_seg(cur_seg, val)
-        
-
-        
-        def printd(self, value: str) -> None:
-            value = str(value)
-            for i, char in enumerate(value, self.digits-len(value)):
-                self.print_seg(i, char)
-
-
-        
-        def print_seg(self, segment: int, value: str) -> None:
-            seg = self.digitdict[str(segment)]
-            data: tuple = self.digit_code[str(value)]
-            for i, obj in enumerate(seg):
-                if data[i]:
-                    obj.style["fill"] = "rgba(253, 56, 56, 0.838)"
-                else:
-                    obj.style["fill"] = "rgb(119, 119, 119)"
-
-
-        
-        def clear_segment(self, segment: int) -> None:
-            seg = self.digitdict[str(segment)]
-            for obj in seg:
-                obj.style["fill"] = "rgb(119, 119, 119)"
-
-        
-        def clear_all(self) -> None:
-            for obj in self.digitdict.values():
-                for seg in obj:
-                    seg.style["fill"] = "rgb(119, 119, 119)"
-
+    # ----------------------------------------------------------------------------------------
 
 
     
-    dsp = Display()
-   
+    #first = MemPoint("p0", "PAr1")
+    """comp: list = [
+        DigitComponent(MemPoint("p1", "AL1", 1250)),
+        DigitComponent(MemPoint("p2", "AL2", 1250)),
+        SelectComponent(MemPoint("p3", "At", "oFF"), ("on", "oFF")),
+        DigitComponent(MemPoint("p4", "p", 10)),
+        DigitComponent(MemPoint("p5", "I", 0)),
+        DigitComponent(MemPoint("p6", "t", 25)),
+        DigitComponent(MemPoint("p7", "d", 0)),
+        DigitComponent(MemPoint("p8", "rESt", 50)),
+        DigitComponent(MemPoint("p9", "HYS", 2)),
+    ]"""
 
-
-    mems: list = [
-        MemPoint("p0", "PAr2"),
-        MemPoint("p1", "ln-t", 888),
-        MemPoint("p2", "ln-b", 0),
-        MemPoint("p3", "UnI t", "^C"),
-        MemPoint("p4", "nAuF", 8.1),
-        MemPoint("p5", "oUt", "rLY"),
-        MemPoint("p6", "t", 20.0),
-        MemPoint("p7", "d", 1.3),
-        
-    ]        
-
-    
     keyb = KeyBoard(id_up="up-button", id_dwn="down-button", id_left="left-button", id_mode="mode-button")
+    c = FloatComponent(FMemPoint("p1", "AL1", 7.3))
+    keyb.component = c
 
-    components: list = []
-    
-    for comp in mems[:2]:
-        obj_comp = DigitComponent(comp)
-        components.append(obj_comp)
-
-    sl = SelectComponent(mems[5], ("asf", "12f"))
-    
-    #keyb.component = components[1]
-    keyb.component = sl
     keyb.bind_methods_component()
-    # components[1].write(111)
+    c.write(24.64)
+    c.write(91.4)
+    
+    
+    
+    
     
     
 
