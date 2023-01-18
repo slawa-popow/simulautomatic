@@ -571,7 +571,7 @@
             """Проверка значения параметра на float число.
                 Возвращает кортеж из значения без точки-разделителя
                 дробной части (для вывода на сегменты) и чило (10 или 100 или 1000) 
-                означающее тип дробной части (десятки, сотки, тысячные). Или ошибу."""
+                означающее тип дробной части (десятки, сотки, тысячные). Или ошибку."""
 
             error: tuple = ("Er-F", None)
             try:
@@ -674,7 +674,12 @@
 
         @property
         def fraction(self) -> int:
+            """Возрвращает число тип дробной части
+                значения параметра с плавающей запятой.
+                10 или 100 или 1000"""
+
             return self._fraction
+
 
         @property
         def print_value(self) -> str:
@@ -705,8 +710,38 @@
 
         
         def create_logger_boxfield(self, name: str, value: str) -> None:
-            self._field_name: object = self._create_field(1, name)
-            self._field_value: object = self._create_field(2, value)
+            if (not self._field_name) and (not self._field_value):
+                self._field_name: object = self._create_field(1, name)
+                self._field_value: object = self._create_field(2, value)
+
+
+    # ----------------------------------------------------------------------------------------
+
+    class SMemPoint(MemPoint, StringMemPoint):
+
+        def __init__(self, id_mem: str, name: str, value: Any = None) -> None:
+            super().__init__(id_mem, name)
+            self._print_value = self.check_value(value)
+            self.create_logger_boxfield(name, value)
+            self.value = value
+
+        @property
+        def print_value(self) -> str:
+            return self._print_value
+
+        @print_value.setter
+        def print_value(self, value: Any) -> None:
+            self._print_value = value
+
+        @property
+        def value(self) -> Any:
+            return self._value
+
+        @value.setter
+        def value(self, v: str) -> None:
+            self._value = str(self.check_value(v))
+            self.print_value = self.check_value(self._value)
+            self._field_value.textContent = f"{self._value}"
 
 
     # ----------------------------------------------------------------------------------------
@@ -969,7 +1004,7 @@
     # ---------------------------------------------------------------------------------------
 
     class Component(ABCComponent):
-        """Базовый для парамотров"""
+        """Базовый для парамeтров"""
 
         logarea = document["logging"]
         button_clear = document["clear-area"]
@@ -1005,7 +1040,7 @@
                 на индикаторы дисплея. Десятичная точка 
                 (если значение дробное число) показывается отдельно. 
                 Такое число (значение параметра напр. 12.8) хранится здесь без точки (0128)"""
-                
+
             return self._select_param
 
         
@@ -1136,38 +1171,44 @@
             # Иначе вызываются методы параметра
 
         def upButton(self, evn) -> None:
-            if self.component:
-                if self.callback_up:
-                    self.callback_up()
-                else:
+            if self.callback_up:
+                self.callback_up()
+            else:
+                if self.component:
                     self.component.up_button()
                 
 
         def downButton(self, evn) -> None:
-            if self.component:
-                self.component.down_button()
-                if self.callback_down:
-                    self.callback_down()
+            if self.callback_down:
+                self.callback_down()
+            else:
+                if self.component:
+                    self.component.down_button()
+                
 
         def leftButton(self, evn) -> None:
-            if self.component:
-                if self.callback_left:
-                    self.callback_left()
-                else:
+            if self.callback_left:
+                self.callback_left()
+            else:
+                if self.component:
                     self.component.left_button()
                 
 
         def rightButton(self, evn) -> None:
-            if self.component:
-                self.component.right_button()
-                if self.callback_right:
-                    self.callback_right()
+            if self.callback_right:
+                self.callback_right()
+            else:
+                if self.component:
+                    self.component.right_button()
+                
 
         def modeButton(self, evn) -> None:
-            if self.component:
-                self.component.mode_button()
-                if self.callback_mode:
-                    self.callback_mode()   
+            if self.callback_mode:
+                self.callback_mode()
+            else:
+                if self.component:
+                    self.component.mode_button()
+                   
 
 
         def mouse_over(self, evn) -> None:
@@ -1204,7 +1245,15 @@
             self.convert_param(self.read())
 
                 # выбрать из очереди цифру числа для редактирования
-            self.select_param = self.select()
+            # self.select_param = self.select()
+
+                # Метод для выхода в меню выбора параметра из редактирования
+                # Передается в Branch конструкторе
+            self.return_callback: Callable = None
+
+
+        def set_return_callback(self, method: Callable) -> None:
+            self.return_callback = method
 
 
         def convert_param(self, value: str) -> None:
@@ -1224,7 +1273,7 @@
     
 
         def write(self, value: Any) -> None:
-            """Записать ячейку памяти значение"""
+            """Записать в ячейку памяти значение"""
 
             self._mempoint.value = value
             self.convert_param(self.read())
@@ -1272,11 +1321,21 @@
             self.select()
 
 
+        def return_in_menu(self) -> None:
+            """Возврат в меню выбора параметра"""
+            self.display.stop_blink()
+            self.display.clear_all()
+            self.display.clear_dots()
+            if self.return_callback:
+                self.return_callback()
+
+
         def mode_button(self) -> None:
             """Записать отредактированное значение в 
                 ячейку памяти"""
 
             self.write("".join([i for i in self.numbers_param.values()]))
+            self.return_in_menu()
 
 
     # ----------------------------------------------------------------------------------------
@@ -1307,6 +1366,16 @@
                 self.display.set_dot(self._mempoint.fraction)
             else:
                 self.display.clear_dots()
+
+            
+        def return_in_menu(self) -> None:
+            """Возврат в меню выбора параметра"""
+
+            self.display.stop_blink()
+            self.display.clear_all()
+            self.display.clear_dots()
+            if self.return_callback:
+                self.return_callback()
                               
 
         def mode_button(self) -> None:
@@ -1318,53 +1387,169 @@
             self._mempoint.print_value = new_value
             _new_value = new_value[:self._mempoint.fraction_position[self._mempoint.fraction]] + "." + new_value[self._mempoint.fraction_position[self._mempoint.fraction]:]
             self.write(str.lstrip(_new_value, "0"))
+            self.return_in_menu()
+            
 
     # ----------------------------------------------------------------------------------------
-     
+
     class SelectComponent(Component):
+        """Параметр с выбором значений"""
 
-        # stack deque:
-        # x = self.stack_component.popleft()
-        # self.stack_component.append(x)
-    
-        def __init__(self, mempoint: MemPoint, *params: tuple) -> None:
+        def __init__(self, mempoint: SMemPoint, select_values: tuple) -> None:
             super().__init__(mempoint)
-            self.add_params_in_stack(list(*params))
-            # self.select_param = self.select()
-                 
+            self.stack_select: deque = deque(select_values)
+            self.return_callback: Callable = None
 
-        def add_params_in_stack(self, params: tuple) -> None:
-            if params:
-                for p in params:
-                    self.stack_component.append(p)
+
+        def set_return_callback(self, method: Callable) -> None:
+            self.return_callback = method
 
 
         def select(self) -> Any:
-            if self.stack_component:
-                self.select_param = self.stack_component.popleft()
-                self.stack_component.append(self.select_param)
+            """Выбор из очереди значения."""
+
+            if self.stack_select:
+                self.select_param = self.stack_select.popleft()
+                self.stack_select.append(self.select_param)
+                self.setting()
                 
             return self.select_param
-       
-        
-        def write(self, value: Any) -> None:
-            super().write(value)
 
-        
-        def up_button(self) -> None:
-            self.select_param = self.select()
-            self.mode_button()
+
+        def setting(self) -> None:
+            self.display.stop_blink()
+            self.display.clear_all()
+            self.display.blink_str(self.select_param)
+
+
+        def write(self, value: Any) -> None:
+            """Записать ячейку памяти значение"""
+
+            self._mempoint.value = value
+            self.setting() 
+
 
         def down_button(self) -> None:
-            self.select_param = self.select()
-            self.mode_button()
+            self.select()
+            self.setting()
+
+
+        def up_button(self) -> None:
+            self.select()
+            self.setting()
+
 
         def left_button(self) -> None:
             pass
 
 
+        def return_in_menu(self) -> None:
+            """Возврат в меню выбора параметра"""
+
+            self.display.stop_blink()
+            self.display.clear_all()
+            self.display.clear_dots()
+            if self.return_callback:
+                self.return_callback()
+
+
         def mode_button(self) -> None:
+            """Записать отредактированное значение в 
+                ячейку памяти"""
+
             self.write(self.select_param)
+            self.return_in_menu()
+            
+
+    # ----------------------------------------------------------------------------------------
+
+    class MemoryMap:
+        """Память параметров прибора"""
+
+        par_1: dict = {"AL1": IMemPoint("p0", "AL1", 1250),
+                       "AL2": IMemPoint("p1", "AL2", 1250),
+                       "p": IMemPoint("p2", "p", 10),
+                       "I": IMemPoint("p3", "I", 0),
+                       "t": FMemPoint("p4", "t", 2.5),
+                       "d": IMemPoint("p5", "d", 0),
+                       "At": (SMemPoint("p6", "At", "oFF"), ("on", "oFF")),
+            }
+
+        
+
+    # ----------------------------------------------------------------------------------------
+     
+    class Branch:
+        """Ветка меню"""
+    
+        def __init__(self, display, keyb) -> None:
+            self.stack_component = deque()
+            self.display = display
+            self.keyb = keyb    
+            
+            for name, obj in MemoryMap.par_1.items():
+                if isinstance(obj, tuple):
+                    _obj = SelectComponent(obj[0], obj[1])
+                else:
+                    if issubclass(obj.__class__, IntegerMemPoint):
+                        _obj = IntComponent(obj)
+                    elif issubclass(obj.__class__, FloatMemPoint):               
+                        _obj = FloatComponent(obj)
+                _obj.set_return_callback(self.cback)
+                self.add_params_in_stack(_obj)
+
+            self.select_param = self.select()
+            self.keyb.component = self.select_param
+            
+            self.keyb.registration_callback(up_method=self.upbutton,
+                                    down_method=self.downbutton,
+                                    mode_method=self.modebutton)
+
+            self.keyb.bind_methods_component()
+
+
+
+
+        def add_params_in_stack(self, params: Component) -> None:
+            if params:
+                self.stack_component.append(params)
+
+
+        def select(self) -> Any:            
+                self.select_param = self.stack_component.popleft()
+                self.stack_component.append(self.select_param)
+                self.keyb.component = self.select_param 
+                self.display.clear_all()
+                self.display.printd(self.select_param.name)
+                
+                return self.select_param
+
+        
+        def upbutton(self) -> None:
+            self.keyb.registration_callback()
+            self.display.clear_all()
+            self.select_param.select()
+
+        def downbutton(self) -> None:
+            self.upbutton()
+            
+
+        def leftbutton(self) -> None:
+            pass
+
+
+        def modebutton(self) -> None:
+            self.select()
+            
+
+        def cback(self) -> None:
+            self.keyb.registration_callback(up_method=self.upbutton, 
+                                down_method=self.downbutton,
+                                mode_method=self.modebutton)
+                                           
+            self.select()
+            
+            
             
 
     # ----------------------------------------------------------------------------------------
@@ -1384,15 +1569,18 @@
         DigitComponent(MemPoint("p9", "HYS", 2)),
     ]"""
 
-    keyb = KeyBoard(id_up="up-button", id_dwn="down-button", id_left="left-button", id_mode="mode-button")
+    """keyb = KeyBoard(id_up="up-button", id_dwn="down-button", id_left="left-button", id_mode="mode-button")
     c = FloatComponent(FMemPoint("p1", "AL1", 7.3))
     keyb.component = c
 
     keyb.bind_methods_component()
     c.write(24.64)
-    c.write(91.4)
+    c.write(91.4)"""
     
-    
+    d = Display()
+    kb = KeyBoard(id_up="up-button", id_dwn="down-button", id_left="left-button", id_mode="mode-button")
+    b = Branch(d, kb)
+   
     
     
     
