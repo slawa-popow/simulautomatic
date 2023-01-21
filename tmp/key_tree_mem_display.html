@@ -408,6 +408,9 @@
                       <text style="fill: rgb(119, 119, 119); font-family: Arial, sans-serif; font-size: 14px; font-weight: 700; white-space: pre;" x="264" y="252.693" transform="matrix(0.666334, 0, 0, 0.999999, 90.380859, 0.127027)" id="txt-lamp-OUT">OUT</text>
                     </g>
                   </g>
+
+                    <text id="mode-timer" style="fill: rgb(241, 215, 112); font-family: Arial, sans-serif; font-size: 16px; white-space: pre;" x="17.674" y="335.922" transform="matrix(0.9375, 0, 0, 0.954546, 9.999998, 10.000001)">Нажато:</text>
+
                 </g>
               </svg>
             </div>
@@ -710,9 +713,8 @@
 
         
         def create_logger_boxfield(self, name: str, value: str) -> None:
-            if (not self._field_name) and (not self._field_value):
-                self._field_name: object = self._create_field(1, name)
-                self._field_value: object = self._create_field(2, value)
+            self._field_name: object = self._create_field(1, name)
+            self._field_value: object = self._create_field(2, value)
 
 
     # ----------------------------------------------------------------------------------------
@@ -772,6 +774,46 @@
             self._value = int(self.check_value(v))
             self.print_value = self.check_value(self._value)
             self._field_value.textContent = f"{self._value}"
+
+
+    # ----------------------------------------------------------------------------------------
+
+    class RunMemPoint(MemPoint, IntegerMemPoint):
+        """Текущая/установленная температура"""
+
+        def __init__(self, id_mem: str, value: int, sv: int = 0) -> None:
+            super().__init__(id_mem, str(sv))
+            self._print_value = self.check_value(value)
+            self.create_logger_boxfield(str(sv), value)
+            self.value = value
+         
+        @property
+        def print_value(self) -> str:
+            return self._print_value
+
+        @print_value.setter
+        def print_value(self, value: Any) -> None:
+            self._print_value = value
+
+        @property
+        def value(self) -> Any:
+            return self._value
+
+        @value.setter
+        def value(self, v: int) -> None:
+            self._value = int(self.check_value(v))
+            self.print_value = self.check_value(self._value)
+            self._field_value.textContent = f"{self._value}"
+
+
+        @property
+        def temperature(self) -> str:
+            return str(self.name)
+
+        @temperature.setter
+        def temperature(self, value: Any) -> None:
+            self.name = int(value)
+            
 
 
     # ----------------------------------------------------------------------------------------
@@ -1008,10 +1050,11 @@
 
         logarea = document["logging"]
         button_clear = document["clear-area"]
+        objdisplay: Display = None
 
         def __init__(self, mempoint: MemPoint):
-            self.display = Display()
             self._mempoint: Mempoint = mempoint
+            self.display: Display = self.objdisplay
             self._is_visible: bool = True
             self.stack_component: deque = deque()
             self.stack_select: deque = deque()
@@ -1102,7 +1145,10 @@
             self.downbutton: object = document[id_dwn] if id_dwn else None
             self.leftbutton: object = document[id_left] if id_left else None
             self.rightbutton: object = document[id_right] if id_right else None
-            self.modebutton: object = document[id_mode] if id_mode else None   
+            self.modebutton: object = document[id_mode] if id_mode else None
+
+            self.push_text: object = document["mode-timer"]
+            self.push_text.textContent = ""
 
                 # назначенный объект параметр
             self._component: Component = None
@@ -1112,7 +1158,11 @@
             self.callback_down: Callable = None
             self.callback_left: Callable = None
             self.callback_right: Callable = None
-            self.callback_mode: Callable = None
+
+            self.callback_mode: dict = None
+            self.time_push_mode: float = 0.0
+            self.current_time_push_mode: float = 0.0
+            self._obj_push_timer: object = None
 
 
         @property
@@ -1129,7 +1179,7 @@
                                 down_method: Callable = None,
                                 left_method: Callable = None,
                                 right_method: Callable = None,
-                                mode_method: Callable = None) -> None:
+                                mode_method: dict = {}) -> None:
 
             """Регистрация методов обратного вызова."""
                     
@@ -1146,31 +1196,76 @@
             """Назначение обработчиков для кнопок"""
 
             if self.upbutton:
-                self.upbutton.bind("click", self.upButton)
+                self.upbutton.bind("mouseup", self.upButton)
+                self.upbutton.bind("mousedown", self.mouse_over)
                 self.upbutton.bind("mouseover", self.mouse_over)
                 self.upbutton.bind("mouseout", self.mouse_out)
+                self.upbutton.bind("touchstart", self.mouse_over)
+                self.upbutton.bind("touchend", self.mouse_out)
+                self.upbutton.bind("contextmenu", self.off_context_menu)
             if self.downbutton:
-                self.downbutton.bind("click", self.downButton)
+                self.downbutton.bind("mouseup", self.downButton)
                 self.downbutton.bind("mouseover", self.mouse_over)
+                self.downbutton.bind("mousedown", self.mouse_over)
                 self.downbutton.bind("mouseout", self.mouse_out)
+                self.downbutton.bind("touchstart", self.mouse_over)
+                self.downbutton.bind("touchend", self.mouse_out)
+                self.downbutton.bind("contextmenu", self.off_context_menu)
             if self.leftbutton:
-                self.leftbutton.bind("click", self.leftButton)
+                self.leftbutton.bind("mouseup", self.leftButton)
                 self.leftbutton.bind("mouseover", self.mouse_over)
+                self.leftbutton.bind("mousedown", self.mouse_over)
                 self.leftbutton.bind("mouseout", self.mouse_out)
+                self.leftbutton.bind("touchstart", self.mouse_over)
+                self.leftbutton.bind("touchend", self.mouse_out)
+                self.leftbutton.bind("contextmenu", self.off_context_menu)
             if self.rightbutton:
-                self.rightbutton.bind("click", self.rightButton)
+                self.rightbutton.bind("mouseup", self.rightButton)
                 self.rightbutton.bind("mouseover", self.mouse_over)
+                self.rightbutton.bind("mousedown", self.mouse_over)
                 self.rightbutton.bind("mouseout", self.mouse_out)
+                self.rightbutton.bind("touchstart", self.mouse_over)
+                self.rightbutton.bind("touchend", self.mouse_out)
+                self.rightbutton.bind("contextmenu", self.off_context_menu)
             if self.modebutton:
-                self.modebutton.bind("click", self.modeButton)
+                self.modebutton.bind("mouseup", self.modeButton)
+                self.modebutton.bind("mousedown", self.timerModeButton)
+                self.modebutton.bind("touchend", self.modeButton)
+                self.modebutton.bind("touchstart", self.timerModeButton)
                 self.modebutton.bind("mouseover", self.mouse_over)
                 self.modebutton.bind("mouseout", self.mouse_out)
+                self.modebutton.bind("contextmenu", self.off_context_menu)
+
+
+        def unbind_events(self) -> None:
+            for evn_btn, method in ((self.upbutton, self.upButton),
+                                    (self.downbutton, self.downButton),
+                                    (self.leftbutton, self.leftButton),
+                                    (self.rightbutton, self.rightButton),):
+                if evn_btn:
+                    evn_btn.unbind("mouseup", method)
+                    evn_btn.unbind("mousedown", self.mouse_over)
+                    evn_btn.unbind("mouseover", self.mouse_over)
+                    evn_btn.unbind("mouseout", self.mouse_out)
+                    evn_btn.unbind("touchstart", self.mouse_over)
+                    evn_btn.unbind("touchend", self.mouse_out)
+                    evn_btn.unbind("contextmenu", self.off_context_menu)
+            if self.modebutton:
+                self.modebutton.unbind("mouseup", self.modeButton)
+                self.modebutton.unbind("mousedown", self.timerModeButton)
+                self.modebutton.unbind("touchend", self.modeButton)
+                self.modebutton.unbind("touchstart", self.timerModeButton)
+                self.modebutton.unbind("mouseover", self.mouse_over)
+                self.modebutton.unbind("mouseout", self.mouse_out)
+                self.modebutton.unbind("contextmenu", self.off_context_menu)
+
 
             # Обработчики событий нажатия кнопок svg
             # Если заданы методы обратного вызова, то они вызываются и всё.
-            # Иначе вызываются методы параметра
+            # Иначе вызываются методы компонента
 
         def upButton(self, evn) -> None:
+            self.mouse_out(evn)
             if self.callback_up:
                 self.callback_up()
             else:
@@ -1179,6 +1274,7 @@
                 
 
         def downButton(self, evn) -> None:
+            self.mouse_out(evn)
             if self.callback_down:
                 self.callback_down()
             else:
@@ -1187,6 +1283,7 @@
                 
 
         def leftButton(self, evn) -> None:
+            self.mouse_out(evn)
             if self.callback_left:
                 self.callback_left()
             else:
@@ -1195,6 +1292,7 @@
                 
 
         def rightButton(self, evn) -> None:
+            self.mouse_out(evn)
             if self.callback_right:
                 self.callback_right()
             else:
@@ -1202,13 +1300,53 @@
                     self.component.right_button()
                 
 
+        def timerModeButton(self, evn) -> None:
+            self.off_context_menu(evn)
+            self.time_push_mode = time.time()
+            self.mouse_over(evn)
+            def start_push_mode() -> None:
+                self.current_time_push_mode = time.time() - self.time_push_mode
+                self.push_text.textContent = f"Нажата MODE: {str(self.current_time_push_mode)[:3]} сек."
+                self.push_text.style = "fill: rgb(241, 215, 112); font-family: Arial, sans-serif; font-size: 16px; white-space: pre;"
+                if 2 <= self.current_time_push_mode < 4:
+                    self.push_text.style = "fill: rgba(91, 193, 241, 0.81); font-family: Arial, sans-serif; font-size: 16px; white-space: pre;"
+                elif self.current_time_push_mode >= 4:
+                    self.push_text.style = "fill: rgba(246, 165, 214, 0.92); font-family: Arial, sans-serif; font-size: 16px; white-space: pre;"
+
+            self._obj_push_timer = window.setInterval(start_push_mode, 50)
+
+
+
         def modeButton(self, evn) -> None:
+
+            if evn.type == "touchend":
+                evn.preventDefault()
+            self.mouse_out(evn)
+            if self._obj_push_timer:
+                window.clearInterval(self._obj_push_timer)
+            self.push_text.textContent = ""
             if self.callback_mode:
-                self.callback_mode()
+                if self.current_time_push_mode <= 1:
+                    self.current_time_push_mode = 0.0
+                    if self.callback_mode.get(1, None): 
+                        self.callback_mode[1]()
+                elif 2 <= self.current_time_push_mode <= 4:
+                    self.current_time_push_mode = 0.0
+                    if self.callback_mode.get(2, None): 
+                        self.callback_mode[2]()
+                elif self.current_time_push_mode > 4:
+                    self.current_time_push_mode = 0.0
+                    if self.callback_mode.get(3, None): 
+                        self.callback_mode[3]()
             else:
                 if self.component:
                     self.component.mode_button()
-                   
+
+
+
+        def off_context_menu(self, evn) -> None:
+            evn.preventDefault()
+
 
 
         def mouse_over(self, evn) -> None:
@@ -1306,7 +1444,7 @@
         def up_button(self) -> None:
             """Тоже что и для down_button(), только изменение
                 цифры в плюс."""
-
+                
             digit: int = int(self.numbers_param[self.select_param])  
             digit += 1
             digit = 0 if digit > 9 else digit
@@ -1326,8 +1464,15 @@
             self.display.stop_blink()
             self.display.clear_all()
             self.display.clear_dots()
-            if self.return_callback:
-                self.return_callback()
+            self.display.blink_str(self.read())
+            
+            def signal_return():                
+                self.display.stop_blink()
+                self.display.clear_all()
+                if self.return_callback:
+                    self.return_callback()
+            window.setTimeout(signal_return, 2500)
+            
 
 
         def mode_button(self) -> None:
@@ -1343,9 +1488,20 @@
     class IntComponent(DigitComponent):
         """Целочисленный тип параметра"""
 
-        def __init__(self, mempoint: IMemPoint) -> None:
+        def __init__(self, mempoint: RunMemPoint) -> None:
             super().__init__(mempoint)
                        
+
+    # ----------------------------------------------------------------------------------------
+
+    class RunModeComponent(DigitComponent):
+        """Рабочий режим"""
+
+        def __init__(self, mempoint: RunMemPoint) -> None:
+            super().__init__(mempoint)
+
+        def left_button(self) -> None:
+            pass
 
     # ----------------------------------------------------------------------------------------
 
@@ -1373,9 +1529,18 @@
 
             self.display.stop_blink()
             self.display.clear_all()
-            self.display.clear_dots()
-            if self.return_callback:
-                self.return_callback()
+            self.display.blink_str(self.read())
+            
+            def signal_return():                
+                self.display.stop_blink()
+                self.display.clear_dots()
+                self.display.clear_all()
+                if self.return_callback:
+                    self.return_callback()
+
+            window.setTimeout(signal_return, 2500)
+
+    
                               
 
         def mode_button(self) -> None:
@@ -1449,8 +1614,16 @@
             self.display.stop_blink()
             self.display.clear_all()
             self.display.clear_dots()
-            if self.return_callback:
-                self.return_callback()
+            self.display.blink_str(self.select_param)
+            
+            def signal_return():                
+                self.display.stop_blink()
+                self.display.clear_all()
+                if self.return_callback:
+                    self.return_callback()
+
+            window.setTimeout(signal_return, 2500)
+            
 
 
         def mode_button(self) -> None:
@@ -1462,18 +1635,75 @@
             
 
     # ----------------------------------------------------------------------------------------
+    
+    class DescriptorMemoryMap:
+
+        def __set_name__(self, owner, name: str):
+            self.atrname = '_' + name
+
+        def __get__(self, instance: object, owner):
+            return getattr(instance, self.atrname)
+
+        def __set__(self, instance: object, value: Any):
+            setattr(instance, self.atrname, value)
+
+
+
 
     class MemoryMap:
         """Память параметров прибора"""
 
-        par_1: dict = {"AL1": IMemPoint("p0", "AL1", 1250),
-                       "AL2": IMemPoint("p1", "AL2", 1250),
-                       "p": IMemPoint("p2", "p", 10),
-                       "I": IMemPoint("p3", "I", 0),
-                       "t": FMemPoint("p4", "t", 2.5),
-                       "d": IMemPoint("p5", "d", 0),
-                       "At": (SMemPoint("p6", "At", "oFF"), ("on", "oFF")),
-            }
+        AL1 = DescriptorMemoryMap()
+        AL2 = DescriptorMemoryMap()
+        P = DescriptorMemoryMap()
+        I = DescriptorMemoryMap()
+        D = DescriptorMemoryMap()
+        AT = DescriptorMemoryMap()
+        REST = DescriptorMemoryMap()
+        HYS = DescriptorMemoryMap()
+
+        IN_T = DescriptorMemoryMap()
+        UNIT = DescriptorMemoryMap()
+        LN_B = DescriptorMemoryMap()
+        aAUF = DescriptorMemoryMap()
+        L_SU = DescriptorMemoryMap()
+        H_SU = DescriptorMemoryMap()
+        O_FT = DescriptorMemoryMap()
+        C_aD = DescriptorMemoryMap()
+        OUT = DescriptorMemoryMap()
+        SSRa = DescriptorMemoryMap()
+        T = DescriptorMemoryMap()
+        AL_1 = DescriptorMemoryMap()
+        AL_2 = DescriptorMemoryMap()
+        AHYS = DescriptorMemoryMap()
+        LBAT = DescriptorMemoryMap()
+        LBAB = DescriptorMemoryMap()
+        DI_BTN = DescriptorMemoryMap()
+        ERaU = DescriptorMemoryMap()
+        LOC = DescriptorMemoryMap()
+
+        SV = DescriptorMemoryMap()
+        CURRENT = DescriptorMemoryMap()
+
+        def __init__(self) -> None:
+            self.SV = RunMemPoint("p0", 148, 19)
+
+            self.AL1 = IMemPoint("p1", "AL1", 1250)
+            self.AL2 = IMemPoint("p2", "AL2", 1250)
+            self.AT = (SMemPoint("p3", "At", "oFF"), ("on", "oFF"))
+            self.P = IMemPoint("p4", "p", 10)
+            self.I = IMemPoint("p5", "I", 0)
+            self.D = IMemPoint("p6", "d", 0)
+            self.REST = FMemPoint("p7", "rESt", 50.0)
+            self.HYS = IMemPoint("p8", "HYS", 2)
+
+
+        def get_par1(self) -> tuple:
+            par1: tuple = (self.AL1, self.AL2, self.AT, self.P, self.I, self.D, self.REST, self.HYS,)
+            return par1
+
+        def get_run_mode(self) -> tuple:
+            return (self.SV,)
 
         
 
@@ -1482,12 +1712,15 @@
     class Branch:
         """Ветка меню"""
     
-        def __init__(self, display, keyb) -> None:
+        def __init__(self, display: Display, keyboard: KeyBoard, components: tuple) -> None:
             self.stack_component = deque()
             self.display = display
-            self.keyb = keyb    
+            Component.objdisplay = self.display
+            self.keyboard = keyboard
             
-            for name, obj in MemoryMap.par_1.items():
+            self.back_method = None
+            
+            for obj in components:
                 if isinstance(obj, tuple):
                     _obj = SelectComponent(obj[0], obj[1])
                 else:
@@ -1495,18 +1728,54 @@
                         _obj = IntComponent(obj)
                     elif issubclass(obj.__class__, FloatMemPoint):               
                         _obj = FloatComponent(obj)
+                    elif issubclass(obj.__class__, RunMemPoint):
+                        _obj = RunModeComponent(obj)
                 _obj.set_return_callback(self.cback)
                 self.add_params_in_stack(_obj)
 
             self.select_param = self.select()
-            self.keyb.component = self.select_param
+            self.keyboard.component = self.select_param
             
-            self.keyb.registration_callback(up_method=self.upbutton,
-                                    down_method=self.downbutton,
-                                    mode_method=self.modebutton)
+            self.keyboard.registration_callback(up_method=self.upbutton,
+                                    down_method=self.downbutton, left_method=self.leftbutton,
+                                    mode_method={1: self.modebutton, })
 
-            self.keyb.bind_methods_component()
+            self.keyboard.bind_methods_component()
 
+
+        def set_callbacks(self, up_method=None, down_method=None,
+                            left_method=None, right_method=None, mode_method={}):
+
+            self.keyboard.registration_callback(up_method, down_method, left_method, right_method, mode_method)
+
+
+        
+        
+        def destroy_branch(self) -> None:
+            self.select_param = None
+            self.keyboard.component = None
+            self.keyboard.registration_callback()
+            self.keyboard.unbind_events()
+            self.keyboard.callback_mode.clear()
+            self.keyboard.time_push_mode = 0.0
+            self.keyboard._obj_push_timer: object = None
+            self.keyboard = None
+            
+            for _component in self.stack_component:
+                if isinstance(_component, DigitComponent):
+                    _component.numbers_param.clear()
+                _component.stack_select.clear()   
+                _component.select_param = None
+                _component.return_callback = None 
+                _component._mempoint = None
+                _component.display = None                
+            
+            self.stack_component.clear()
+            self.display.stop_blink()
+            self.display.clear_all()
+            self.display.clear_dots()
+            Component.objdisplay = None
+            self.display = None
 
 
 
@@ -1518,7 +1787,7 @@
         def select(self) -> Any:            
                 self.select_param = self.stack_component.popleft()
                 self.stack_component.append(self.select_param)
-                self.keyb.component = self.select_param 
+                self.keyboard.component = self.select_param 
                 self.display.clear_all()
                 self.display.printd(self.select_param.name)
                 
@@ -1526,7 +1795,7 @@
 
         
         def upbutton(self) -> None:
-            self.keyb.registration_callback()
+            self.keyboard.registration_callback()
             self.display.clear_all()
             self.select_param.select()
 
@@ -1543,31 +1812,138 @@
             
 
         def cback(self) -> None:
-            self.keyb.registration_callback(up_method=self.upbutton, 
-                                down_method=self.downbutton,
-                                mode_method=self.modebutton)
+            self.keyboard.registration_callback(up_method=self.upbutton, 
+                                down_method=self.downbutton, left_method=self.leftbutton,
+                                mode_method={1: self.modebutton, 2: self.back_method, })
                                            
             self.select()
             
             
-            
+        def func3s(self):
+            print("3 SECOND")
+
+        def func5s(self):
+            print("5 SECOND")
+
 
     # ----------------------------------------------------------------------------------------
 
+    class RunBranch(Branch):
+
+        def __init__(self, display: Display, keyboard: KeyBoard, components: tuple) -> None:
+            super().__init__(display, keyboard, components)
+
+
+        def select(self) -> Any:            
+            self.select_param = self.stack_component.popleft()
+            self.stack_component.append(self.select_param)
+            self.keyboard.component = self.select_param 
+            self.display.clear_all()
+            self.display.printd(self.select_param.name)
+            
+            return self.select_param
 
     
-    #first = MemPoint("p0", "PAr1")
-    """comp: list = [
-        DigitComponent(MemPoint("p1", "AL1", 1250)),
-        DigitComponent(MemPoint("p2", "AL2", 1250)),
-        SelectComponent(MemPoint("p3", "At", "oFF"), ("on", "oFF")),
-        DigitComponent(MemPoint("p4", "p", 10)),
-        DigitComponent(MemPoint("p5", "I", 0)),
-        DigitComponent(MemPoint("p6", "t", 25)),
-        DigitComponent(MemPoint("p7", "d", 0)),
-        DigitComponent(MemPoint("p8", "rESt", 50)),
-        DigitComponent(MemPoint("p9", "HYS", 2)),
-    ]"""
+        def upbutton(self) -> None:
+            self.keyboard.registration_callback()
+            self.display.clear_all()
+            self.select_param.select()
+
+        def downbutton(self) -> None:
+            self.upbutton()
+            
+
+        def leftbutton(self) -> None:
+            self.upbutton()
+
+
+        def modebutton(self) -> None:
+            self.upbutton()
+            
+
+        def cback(self) -> None:
+            self.keyboard.registration_callback(up_method=self.upbutton, 
+                                down_method=self.downbutton, left_method=self.leftbutton,
+                                mode_method={1: self.modebutton, 2: self.back_method})
+                                        
+            self.select()
+
+
+
+    # ----------------------------------------------------------------------------------------
+   
+    
+    class TC4H:
+        """Терморегулятор Autonics tc4h"""
+
+        def __init__(self) -> None:
+            self.init()
+
+
+
+        def init(self) -> None:
+            self.display: Display = Display()
+            self.keyboardoard: keyboard = KeyBoard(id_up="up-button",
+                                            id_dwn="down-button",
+                                            id_left="left-button",
+                                            id_mode="mode-button")
+            self.memory = MemoryMap()
+
+            self.states: dict = {
+                "RUNMODE": self.run_mode,
+                "PAR1": self.setting_par1,
+                "PAR2": self.setting_par2,
+            }
+
+            self.cbranch: Branch = None
+            self.state = "RUNMODE"
+            self.state_timer: object = window.setInterval(self.run, 100)
+
+
+
+        def run(self) -> None:
+            self.states[self.state]()
+                
+                    
+
+        def stop(self) -> None:
+            window.clearInterval(self.state_timer)
+
+
+        def run_mode(self) -> None:
+            if not self.cbranch:
+                self.cbranch = RunBranch(self.display, self.keyboardoard, self.memory.get_run_mode())
+                self.cbranch.set_callbacks(up_method=self.cbranch.upbutton,
+                                down_method=self.cbranch.downbutton, left_method=self.cbranch.leftbutton,
+                                mode_method={1: self.cbranch.modebutton, 2: self.go_par1,})
+                self.cbranch.back_method = self.go_par1
+                
+
+        def setting_par1(self) -> None:
+            if not self.cbranch:
+                self.cbranch = Branch(self.display, self.keyboardoard, self.memory.get_par1())
+                self.cbranch.set_callbacks(up_method=self.cbranch.upbutton,
+                                down_method=self.cbranch.downbutton, left_method=self.cbranch.leftbutton,
+                                mode_method={1: self.cbranch.modebutton, 2: self.go_run_mode,})
+                self.cbranch.back_method = self.go_run_mode
+
+
+        def setting_par2(self) -> None:
+            pass
+
+
+        def go_par1(self) -> None:
+            self.state = "PAR1"
+            self.cbranch.destroy_branch()
+            self.cbranch = None
+
+
+        def go_run_mode(self) -> None:
+            self.state = "RUNMODE"
+            self.cbranch.destroy_branch()
+            self.cbranch = None
+    
+    
 
     """keyb = KeyBoard(id_up="up-button", id_dwn="down-button", id_left="left-button", id_mode="mode-button")
     c = FloatComponent(FMemPoint("p1", "AL1", 7.3))
@@ -1575,17 +1951,17 @@
 
     keyb.bind_methods_component()
     c.write(24.64)
-    c.write(91.4)"""
+    c.write(91.4)
     
     d = Display()
     kb = KeyBoard(id_up="up-button", id_dwn="down-button", id_left="left-button", id_mode="mode-button")
     b = Branch(d, kb)
+    
    
+    """
     
+    tc4h = TC4H()
     
-    
-    
-
     
 
         

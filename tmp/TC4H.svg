@@ -89,5 +89,6 @@
         <text style="fill: rgb(119, 119, 119); font-family: Arial, sans-serif; font-size: 14px; font-weight: 700; white-space: pre;" x="264" y="252.693" transform="matrix(0.666334, 0, 0, 0.999999, 90.380859, 0.127027)" id="txt-lamp-OUT">OUT</text>
       </g>
     </g>
+    <text style="fill: rgb(241, 215, 112); font-family: Arial, sans-serif; font-size: 16px; white-space: pre;" x="17.674" y="335.922" transform="matrix(0.9375, 0, 0, 0.954546, 9.999998, 10.000001)" id="mode-timer">Нажато:</text>
   </g>
 </svg>
