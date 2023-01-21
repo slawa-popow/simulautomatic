@@ -1150,6 +1150,8 @@
             self.push_text: object = document["mode-timer"]
             self.push_text.textContent = ""
 
+            self.state_tc4h: str = None
+
                 # назначенный объект параметр
             self._component: Component = None
 
@@ -1308,10 +1310,18 @@
                 self.current_time_push_mode = time.time() - self.time_push_mode
                 self.push_text.textContent = f"Нажата MODE: {str(self.current_time_push_mode)[:3]} сек."
                 self.push_text.style = "fill: rgb(241, 215, 112); font-family: Arial, sans-serif; font-size: 16px; white-space: pre;"
-                if 2 <= self.current_time_push_mode < 4:
-                    self.push_text.style = "fill: rgba(91, 193, 241, 0.81); font-family: Arial, sans-serif; font-size: 16px; white-space: pre;"
-                elif self.current_time_push_mode >= 4:
-                    self.push_text.style = "fill: rgba(246, 165, 214, 0.92); font-family: Arial, sans-serif; font-size: 16px; white-space: pre;"
+
+                if (not self.state_tc4h) or self.state_tc4h == "RUNMODE":
+                    if 2 <= self.current_time_push_mode < 4:
+                        self.push_text.textContent = f"PAR-1: {str(self.current_time_push_mode)[:3]} сек."
+                        self.push_text.style = "fill: rgba(91, 193, 241, 0.81); font-family: Arial, sans-serif; font-size: 16px; white-space: pre;"
+                    elif self.current_time_push_mode >= 4:
+                        self.push_text.textContent = f"PAR-2: {str(self.current_time_push_mode)[:3]} сек."
+                        self.push_text.style = "fill: rgba(246, 165, 214, 0.92); font-family: Arial, sans-serif; font-size: 16px; white-space: pre;"
+                elif (self.state_tc4h == "PAR1") or (self.state_tc4h == "PAR2"):
+                    if  self.current_time_push_mode >= 3:
+                        self.push_text.textContent = f"В рабоч. режим: {str(self.current_time_push_mode)[:3]} сек."
+                        self.push_text.style = "fill: rgba(251, 251, 251, 0.82); font-family: Arial, sans-serif; font-size: 16px; white-space: pre;"  
 
             self._obj_push_timer = window.setInterval(start_push_mode, 50)
 
@@ -1326,18 +1336,28 @@
                 window.clearInterval(self._obj_push_timer)
             self.push_text.textContent = ""
             if self.callback_mode:
-                if self.current_time_push_mode <= 1:
-                    self.current_time_push_mode = 0.0
-                    if self.callback_mode.get(1, None): 
-                        self.callback_mode[1]()
-                elif 2 <= self.current_time_push_mode <= 4:
-                    self.current_time_push_mode = 0.0
-                    if self.callback_mode.get(2, None): 
-                        self.callback_mode[2]()
-                elif self.current_time_push_mode > 4:
-                    self.current_time_push_mode = 0.0
-                    if self.callback_mode.get(3, None): 
-                        self.callback_mode[3]()
+                if (not self.state_tc4h) or self.state_tc4h == "RUNMODE":
+                    if self.current_time_push_mode <= 1:
+                        self.current_time_push_mode = 0.0
+                        if self.callback_mode.get(1, None): 
+                            self.callback_mode[1]()
+                    elif 2 <= self.current_time_push_mode <= 4:
+                        self.current_time_push_mode = 0.0
+                        if self.callback_mode.get(2, None): 
+                            self.callback_mode[2]()
+                    elif self.current_time_push_mode > 4:
+                        self.current_time_push_mode = 0.0
+                        if self.callback_mode.get(3, None): 
+                            self.callback_mode[3]()
+                elif (self.state_tc4h == "PAR1") or (self.state_tc4h == "PAR2"):
+                    if self.current_time_push_mode < 3:
+                        self.current_time_push_mode = 0.0
+                        if self.callback_mode.get(1, None): 
+                            self.callback_mode[1]()
+                    elif self.current_time_push_mode >= 3 :
+                        self.current_time_push_mode = 0.0
+                        if self.callback_mode.get(2, None): 
+                            self.callback_mode[2]()
             else:
                 if self.component:
                     self.component.mode_button()
@@ -1883,7 +1903,7 @@
 
         def init(self) -> None:
             self.display: Display = Display()
-            self.keyboardoard: keyboard = KeyBoard(id_up="up-button",
+            self.keyboard: KeyBoard = KeyBoard(id_up="up-button",
                                             id_dwn="down-button",
                                             id_left="left-button",
                                             id_mode="mode-button")
@@ -1912,7 +1932,8 @@
 
         def run_mode(self) -> None:
             if not self.cbranch:
-                self.cbranch = RunBranch(self.display, self.keyboardoard, self.memory.get_run_mode())
+                self.keyboard.state_tc4h = self.state
+                self.cbranch = RunBranch(self.display, self.keyboard, self.memory.get_run_mode())
                 self.cbranch.set_callbacks(up_method=self.cbranch.upbutton,
                                 down_method=self.cbranch.downbutton, left_method=self.cbranch.leftbutton,
                                 mode_method={1: self.cbranch.modebutton, 2: self.go_par1,})
@@ -1920,8 +1941,9 @@
                 
 
         def setting_par1(self) -> None:
+            self.keyboard.state_tc4h = self.state
             if not self.cbranch:
-                self.cbranch = Branch(self.display, self.keyboardoard, self.memory.get_par1())
+                self.cbranch = Branch(self.display, self.keyboard, self.memory.get_par1())
                 self.cbranch.set_callbacks(up_method=self.cbranch.upbutton,
                                 down_method=self.cbranch.downbutton, left_method=self.cbranch.leftbutton,
                                 mode_method={1: self.cbranch.modebutton, 2: self.go_run_mode,})
