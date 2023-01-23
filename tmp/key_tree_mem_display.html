@@ -1843,57 +1843,12 @@
 
     # ----------------------------------------------------------------------------------------
     
-    class DescriptorMemoryMap:
-
-        def __set_name__(self, owner, name: str):
-            self.atrname = '_' + name
-
-        def __get__(self, instance: object, owner):
-            return getattr(instance, self.atrname)
-
-        def __set__(self, instance: object, value: Any):
-            setattr(instance, self.atrname, value)
-
-
-
-
     class MemoryMap:
         """Память параметров прибора"""
 
-        AL1 = DescriptorMemoryMap()
-        AL2 = DescriptorMemoryMap()
-        P = DescriptorMemoryMap()
-        I = DescriptorMemoryMap()
-        D = DescriptorMemoryMap()
-        AT = DescriptorMemoryMap()
-        REST = DescriptorMemoryMap()
-        HYS = DescriptorMemoryMap()
-
-        IN_T = DescriptorMemoryMap()
-        UNIT = DescriptorMemoryMap()
-        LN_B = DescriptorMemoryMap()
-        aAUF = DescriptorMemoryMap()
-        L_SU = DescriptorMemoryMap()
-        H_SU = DescriptorMemoryMap()
-        O_FT = DescriptorMemoryMap()
-        C_aD = DescriptorMemoryMap()
-        OUT = DescriptorMemoryMap()
-        SSRa = DescriptorMemoryMap()
-        T = DescriptorMemoryMap()
-        AL_1 = DescriptorMemoryMap()
-        AL_2 = DescriptorMemoryMap()
-        AHYS = DescriptorMemoryMap()
-        LBAT = DescriptorMemoryMap()
-        LBAB = DescriptorMemoryMap()
-        DI_BTN = DescriptorMemoryMap()
-        ERaU = DescriptorMemoryMap()
-        LOC = DescriptorMemoryMap()
-
-        SV = DescriptorMemoryMap()
-        CURRENT = DescriptorMemoryMap()
-
+       
         def __init__(self) -> None:
-            self.SV = RunMemPoint("p0", 148, 17)
+            self._temperature = RunMemPoint("p0", 148, 17)
 
             self.AL1 = IMemPoint("p1", "AL1", 1250)
             self.AL2 = IMemPoint("p2", "AL2", 1250)
@@ -1925,6 +1880,52 @@
             self.LOC = (SMemPoint("p27", "LoC", "oFF"), ("oFF", "LoC1"))
 
 
+        @property
+        def SV(self) -> int:
+            return int(self._temperature.value)
+
+        @SV.setter
+        def SV(self, value: Any) -> None:
+            value = value if isinstance(value, str) else str(value)
+            self._temperature.value = value
+
+        @property
+        def CURRTEMP(self) -> int:
+            return int(self._temperature.temperature)
+
+        @CURRTEMP.setter
+        def CURRTEMP(self, value: Any) -> None:
+            value = value if isinstance(value, str) else str(value)
+            self._temperature.temperature = value
+
+
+        def __getitem__(self, attr_name: str) -> Any:
+            try:
+                obj = self.check_getitem_attrname(attr_name)
+                return obj.value
+            except AttributeError as attre:
+                print(attre)
+            
+    
+        def __setitem__(self, attr_name: str, value: Any) -> None:
+            try:
+                obj = self.check_getitem_attrname(attr_name)
+                obj.value = value
+            except AttributeError as attre:
+                print(attre)
+            
+            
+            
+        def check_getitem_attrname(self, attr_name: str) -> Any:
+            if hasattr(self, attr_name):
+                attribute = getattr(self, attr_name)
+                if isinstance(attribute, tuple):
+                    return attribute[0]
+                return attribute
+            raise AttributeError(f"Атрибута <{attr_name}> не существует.")
+
+
+
         def get_par1(self) -> tuple:
             par1: tuple = (self.AL1, self.AL2, self.AT, self.P, self.I, self.D, self.REST, self.HYS,)
             return par1
@@ -1946,7 +1947,7 @@
 
 
         def get_run_mode(self) -> tuple:
-            return (self.SV,)
+            return (self._temperature,)
 
         
 
@@ -2125,7 +2126,8 @@
     class TC4H:
         """Терморегулятор Autonics tc4h"""
 
-        def __init__(self) -> None:
+        def __init__(self, _memory: MemoryMap) -> None:
+            self.memory = _memory
             self.init()
 
 
@@ -2136,7 +2138,7 @@
                                             id_dwn="down-button",
                                             id_left="left-button",
                                             id_mode="mode-button")
-            self.memory = MemoryMap()
+            
 
             self.states: dict = {
                 "RUNMODE": self.run_mode,
@@ -2159,10 +2161,10 @@
 
 
         def moreval(self, evn):
-            self.memory.SV.temperature = int(self.memory.SV.temperature) + 1
+            self.memory.CURRTEMP = self.memory.CURRTEMP + 1
 
         def lessval(self, evn):
-            self.memory.SV.temperature = int(self.memory.SV.temperature) - 1
+            self.memory.CURRTEMP = self.memory.CURRTEMP - 1
 
         
 
@@ -2188,7 +2190,7 @@
                 self.cbranch.back_method_par1 = self.go_par1
                 self.cbranch.back_method_par2 = self.go_par2
                     # лампа *C or *F
-            if self.memory.UNIT[0].value == "*C":
+            if self.memory["UNIT"] == "*C":
                 self.display.c_lamp(True)
                 self.display.f_lamp(False)
             else:
@@ -2254,8 +2256,8 @@
     
    
     """
-    
-    tc4h = TC4H()
+    memory = MemoryMap()
+    tc4h = TC4H(memory)
     
     
 
