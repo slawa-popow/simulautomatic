@@ -536,113 +536,14 @@
 
     from browser import window, html, document, bind, timer
     from functools import wraps
-    from typing import Any, Callable, Generator
+    from typing import Any, Union, Callable, Generator
     from abc import ABC, abstractmethod
     from collections import deque
+    import operator
     import time
     import math
     import javascript
 
-
-
-
-    class ABCComponent(ABC):
-        """Абстрактный класс для параметров"""
-
-            # Для веток меню
-        stack_component: deque = None
-
-            # Для цифр при редактировании параметров
-        stack_select: deque = None
-
-
-        @abstractmethod
-        def bind_memory(self, mempoint: object) -> None:
-            """Связать параметр с ячейкой памяти"""
-            pass
-
-
-        @property
-        @abstractmethod
-        def name(self) -> str:
-            """Имя параметра"""
-            pass
-
-
-        @property
-        @abstractmethod
-        def is_visible(self) -> bool:
-            """Показать параметр на дисплее?"""
-            pass
-
-
-        @abstractmethod
-        def write(self, data: Any) -> Any:
-            """Записать значение в параметр"""
-            pass
-
-        @abstractmethod
-        def read(self) -> str:
-            """Прочитать значение из параметра"""
-            pass
-
-        @abstractmethod
-        def select(self) -> Any:
-            """Выбор из очереди deque"""
-            pass
-
-
-        @abstractmethod
-        def up_button(self) -> None:
-            """Вызов после нажатия на кнопку вверх"""
-            pass
-
-        @abstractmethod
-        def down_button(self) -> None:
-            """Вызов после нажатия вниз"""
-            pass
-
-        @abstractmethod
-        def left_button(self) -> None:
-            """Вызов после нажатия влево"""
-            pass
-
-        @abstractmethod
-        def right_button(self) -> None:
-            """Вызов после нажатия вправо (если кнопка есть)"""
-            pass
-
-        @abstractmethod
-        def mode_button(self) -> None:
-            """Вызов после нажатия кнопки mode"""
-            pass
-
-
-
-
-
-    class ABCDisplay(ABC):
-        """Абстрактный класс дисплея"""
-
-        @abstractmethod
-        def printd(self, value: str) -> None:
-            """Вывод строки на дисплей"""
-            pass
-
-        @abstractmethod
-        def print_seg(self, segment: int, value: str) -> None:
-            """Вывод значения на один индикатор"""
-            pass
-
-        @abstractmethod
-        def clear_segment(self, segment: int) -> None:
-            """Очистить один индикатор"""
-            pass
-
-        @abstractmethod
-        def clear_all(self) -> None:
-            """Очистить все индикаторы"""
-            pass
 
 
     # ----------------------------------------------------------------------------------------
@@ -991,7 +892,7 @@
    
     # ----------------------------------------------------
 
-    class Display(ABCDisplay):
+    class Display:
         """Дисплей"""
 
             # кол-во индикаторов
@@ -1222,7 +1123,7 @@
 
     # ---------------------------------------------------------------------------------------
 
-    class Component(ABCComponent):
+    class Component:
         """Базовый для парамeтров"""
 
         logarea = document["logging"]
@@ -1588,11 +1489,23 @@
             self.convert_param(self.read())
 
                 # выбрать из очереди цифру числа для редактирования
-            # self.select_param = self.select()
+                # self.select_param = self.select()
 
                 # Метод для выхода в меню выбора параметра из редактирования
                 # Передается в Branch конструкторе
             self.return_callback: Callable = None
+
+            self.editable_value: Any = self.read()
+
+            self.min_value: Union[int, float] = -60
+            self.max_value: Union[int, float] = 1250
+
+
+        def change_type_to_NUMBER(self, value: str) -> int:
+            return int(value)
+
+        def change_type_to_STRING(self, value: int) -> str:
+            return self._mempoint.check_value(value)
 
 
         def set_return_callback(self, method: Callable) -> None:
@@ -1634,26 +1547,43 @@
             return self.select_param
 
 
+        def verify_range_editable_value(self) -> None:
+            if self.editable_value > self.max_value:
+                self.editable_value = self.max_value
+            elif self.editable_value < self.min_value:
+                self.editable_value = self.min_value
+        
+
+
+        def edit_value(self, operation_function: Callable = None) -> None:
+            if not operation_function:
+                raise ValueError("Не задан метод операции edit_value(operation_function)")
+            
+            edit_params: dict = {3: 1, 2: 10, 1: 100, 0: 1000}
+            self.editable_value = self.change_type_to_NUMBER(self.editable_value)
+            self.editable_value = operation_function(self.editable_value, edit_params[self.select_param])
+            self.verify_range_editable_value()
+            
+
+
         def down_button(self) -> None:
             """По нажатии кнопки вниз, изменяется 
                 текущее выбранное из очереди значение
                 цифры числа и перезаписывается в словарь self.numbers_param"""
 
-            digit: int = int(self.numbers_param[self.select_param])  
-            digit -= 1
-            digit = 9 if digit < 0 else digit
-            self.numbers_param[self.select_param] = str(digit)
+            self.edit_value(operator.sub)
+            self.editable_value = self.change_type_to_STRING(self.editable_value)
+            self.convert_param(self.editable_value)
             self.setting()
 
 
         def up_button(self) -> None:
             """Тоже что и для down_button(), только изменение
                 цифры в плюс."""
-                
-            digit: int = int(self.numbers_param[self.select_param])  
-            digit += 1
-            digit = 0 if digit > 9 else digit
-            self.numbers_param[self.select_param] = str(digit)
+
+            self.edit_value(operator.add)
+            self.editable_value = self.change_type_to_STRING(self.editable_value)
+            self.convert_param(self.editable_value)
             self.setting()
 
 
@@ -1717,7 +1647,14 @@
 
         def __init__(self, mempoint: FMemPoint) -> None:
             super().__init__(mempoint)
+            self.min_value: Union[int, float] = -999
+            self.max_value: Union[int, float] = 9999
 
+
+        def change_type_to_STRING(self, value: float) -> str:
+            string_value: str = str(value).replace('.', '') 
+            return string_value.zfill(4)
+            
 
         def setting(self) -> None:
             """Вызов кода родительского метода, потом
@@ -1747,18 +1684,40 @@
 
             window.setTimeout(signal_return, 2500)
 
-    
-                              
 
-        def mode_button(self) -> None:
+        def _convert_to_print_value(self) -> str:
             """Отдельно записывается значение для вывода на 
-               дисплей значения без точки, отдельно запись
-               в ячейку памяти нормального числа с точкой"""
+            дисплей значения без точки"""
 
             new_value = "".join([i for i in self.numbers_param.values()])
             self._mempoint.print_value = new_value
-            _new_value = new_value[:self._mempoint.fraction_position[self._mempoint.fraction]] + "." + new_value[self._mempoint.fraction_position[self._mempoint.fraction]:]
-            self.write(str.lstrip(_new_value, "0"))
+
+            return new_value
+
+
+
+        def _convert_to_write(self) -> str:
+            """Убираются лишние нули слева и 
+            после знака минус перед записью для перевода во float"""
+
+            new_val: str = self._convert_to_print_value()
+            _new_value: str = new_val[:self._mempoint.fraction_position[self._mempoint.fraction]] + "." + new_val[self._mempoint.fraction_position[self._mempoint.fraction]:]
+            delim_new_value: list = _new_value.split(".")
+            if delim_new_value[0].startswith("-"):
+                delim_new_value[0] = "-" + delim_new_value[0][1:].lstrip("0")
+            else:
+                delim_new_value[0] = delim_new_value[0].lstrip("0")
+            _new_value = ".".join(delim_new_value)
+
+            return _new_value
+
+
+
+        def mode_button(self) -> None:
+            """отдельно запись
+               в ячейку памяти нормального числа с точкой"""
+            
+            self.write(self._convert_to_write())
             self.return_in_menu()
             
 
@@ -1775,7 +1734,7 @@
 
         def set_return_callback(self, method: Callable) -> None:
             self.return_callback = method
-
+            
 
         def select(self) -> Any:
             """Выбор из очереди значения."""
@@ -1846,38 +1805,42 @@
     class MemoryMap:
         """Память параметров прибора"""
 
+        parameters: dict = {
+            "AL1": IMemPoint("p1", "AL1", 1250),
+            "AL2": IMemPoint("p2", "AL2", 1250),
+            "AT": (SMemPoint("p3", "At", "oFF"), ("on", "oFF")),
+            "P": IMemPoint("p4", "p", 10),
+            "I": IMemPoint("p5", "I", 0),
+            "D": IMemPoint("p6", "d", 0),
+            "REST": FMemPoint("p7", "rESt", 5.0),
+            "HYS": IMemPoint("p8", "HYS", 2),
+
+            "IN_T": (SMemPoint("p9", "In-t", "yCA"), ("yCA", "JIC", "LIC", "L_r", "dPtH", "dPtL", "CUSH", "CUSL")),
+            "UNIT": (SMemPoint("p10", "UnIt", "*C"), ("*C", "*F")),
+            "LN_B": IMemPoint("p11", "In-b", 0),
+            "aAUF": FMemPoint("p12", "aAUF", 0.1),
+            "L_SU": IMemPoint("p13", "L-SU", -50),
+            "H_SU": IMemPoint("p14", "H-SU", 1200),
+            "O_FT": (SMemPoint("p15", "o-Ft", "HEAt"), ("HEAt", "CooL")),
+            "C_aD": (SMemPoint("p16", "C-ad", "PId"), ("PId", "onoF")),
+            "OUT": (SMemPoint("p17", "oUt", "rLY"), ("rLY", "SSr")),
+            "SSRa": (SMemPoint("p18", "SSra", "Stnd"), ("Stnd", "CYCL", "PHAS")),
+            "T": FMemPoint("p19", "t", 20.0),
+            "AL_1": (SMemPoint("p20", "AL-1", "Aa1A"), ("Aa1A", "Aa2A", "Aa3A", "Aa4A", "Aa5A", "Aa6A", "SbaA", "LbaA")),
+            "AL_2": (SMemPoint("p21", "AL-2", "Aa2A"), ("Aa1A", "Aa2A", "Aa3A", "Aa4A", "Aa5A", "Aa6A", "SbaA", "LbaA")),
+            "AHYS": IMemPoint("p22", "AHYS", 1),
+            "LBAT": IMemPoint("p23", "LbAt", 0),
+            "LBAB": IMemPoint("p24", "LbAb", 2),
+            "DI_BTN": (SMemPoint("p25", "dI-y", "StoP"), ("oFF", "StoP", "ALrE", "At")),
+            "ERaU": FMemPoint("p26", "Erau", 0.0),
+            "LOC": (SMemPoint("p27", "LoC", "oFF"), ("oFF", "LoC1")),
+        }
+
        
         def __init__(self) -> None:
             self._temperature = RunMemPoint("p0", 148, 17)
 
-            self.AL1 = IMemPoint("p1", "AL1", 1250)
-            self.AL2 = IMemPoint("p2", "AL2", 1250)
-            self.AT = (SMemPoint("p3", "At", "oFF"), ("on", "oFF"))
-            self.P = IMemPoint("p4", "p", 10)
-            self.I = IMemPoint("p5", "I", 0)
-            self.D = IMemPoint("p6", "d", 0)
-            self.REST = FMemPoint("p7", "rESt", 50.0)
-            self.HYS = IMemPoint("p8", "HYS", 2)
-
-            self.IN_T = (SMemPoint("p9", "In-t", "yCA"), ("yCA", "JIC", "LIC", "L_r", "dPtH", "dPtL", "CUSH", "CUSL"))
-            self.UNIT = (SMemPoint("p10", "UnIt", "*C"), ("*C", "*F"))
-            self.LN_B = IMemPoint("p11", "In-b", 0)
-            self.aAUF = FMemPoint("p12", "aAUF", 0.1)
-            self.L_SU = IMemPoint("p13", "L-SU", -50)
-            self.H_SU = IMemPoint("p14", "H-SU", 1200)
-            self.O_FT = (SMemPoint("p15", "o-Ft", "HEAt"), ("HEAt", "CooL"))
-            self.C_aD = (SMemPoint("p16", "C-ad", "PId"), ("PId", "onoF"))
-            self.OUT = (SMemPoint("p17", "oUt", "rLY"), ("rLY", "SSr"))
-            self.SSRa = (SMemPoint("p18", "SSra", "Stnd"), ("Stnd", "CYCL", "PHAS"))
-            self.T = FMemPoint("p19", "t", 20.0)
-            self.AL_1 = (SMemPoint("p20", "AL-1", "Aa1A"), ("Aa1A", "Aa2A", "Aa3A", "Aa4A", "Aa5A", "Aa6A", "SbaA", "LbaA"))
-            self.AL_2 = (SMemPoint("p21", "AL-2", "Aa2A"), ("Aa1A", "Aa2A", "Aa3A", "Aa4A", "Aa5A", "Aa6A", "SbaA", "LbaA"))
-            self.AHYS = IMemPoint("p22", "AHYS", 1)
-            self.LBAT = IMemPoint("p23", "LbAt", 0)
-            self.LBAB = IMemPoint("p24", "LbAb", 2)
-            self.DI_BTN = (SMemPoint("p25", "dI-y", "StoP"), ("oFF", "StoP", "ALrE", "At"))
-            self.ERaU = FMemPoint("p26", "Erau", 0.0)
-            self.LOC = (SMemPoint("p27", "LoC", "oFF"), ("oFF", "LoC1"))
+            
 
 
         @property
@@ -1898,10 +1861,14 @@
             value = value if isinstance(value, str) else str(value)
             self._temperature.temperature = value
 
+        
+        def __len__(self) -> int:
+            return len(self.parameters)
+
 
         def __getitem__(self, attr_name: str) -> Any:
             try:
-                obj = self.check_getitem_attrname(attr_name)
+                obj = self._check_getitem_attrname(attr_name)
                 return obj.value
             except AttributeError as attre:
                 print(attre)
@@ -1909,39 +1876,30 @@
     
         def __setitem__(self, attr_name: str, value: Any) -> None:
             try:
-                obj = self.check_getitem_attrname(attr_name)
+                obj = self._check_getitem_attrname(attr_name)
                 obj.value = value
             except AttributeError as attre:
                 print(attre)
             
             
             
-        def check_getitem_attrname(self, attr_name: str) -> Any:
-            if hasattr(self, attr_name):
-                attribute = getattr(self, attr_name)
-                if isinstance(attribute, tuple):
-                    return attribute[0]
-                return attribute
-            raise AttributeError(f"Атрибута <{attr_name}> не существует.")
+        def _check_getitem_attrname(self, attr_name: str) -> MemPoint:
+            if attr_name in self.parameters:
+                _mempoint = self.parameters[attr_name]
+                if isinstance(_mempoint, tuple):
+                    return _mempoint[0]
+                return _mempoint
+            raise AttributeError(f"Параметра  <{attr_name}> не существует.")
 
 
 
         def get_par1(self) -> tuple:
-            par1: tuple = (self.AL1, self.AL2, self.AT, self.P, self.I, self.D, self.REST, self.HYS,)
-            return par1
+            return tuple(self.parameters.values())[:8]
 
 
 
         def get_par2(self) -> tuple:
-            par2: tuple = (self.IN_T, self.UNIT,
-                        self.LN_B, self.aAUF, self.L_SU,
-                        self.H_SU, self.O_FT, self.C_aD,
-                        self.OUT, self.SSRa, self.T,
-                        self.AL_1, self.AL_2, self.AHYS,
-                        self.LBAT, self.LBAB, self.DI_BTN,
-                        self.ERaU, self.LOC,
-            )
-            return par2
+            return tuple(self.parameters.values())[8:]
 
 
 
@@ -2129,8 +2087,7 @@
         def __init__(self, _memory: MemoryMap) -> None:
             self.memory = _memory
             self.init()
-
-
+            
 
         def init(self) -> None:
             self.display: Display = Display()
@@ -2242,20 +2199,8 @@
     
     
 
-    """keyb = KeyBoard(id_up="up-button", id_dwn="down-button", id_left="left-button", id_mode="mode-button")
-    c = FloatComponent(FMemPoint("p1", "AL1", 7.3))
-    keyb.component = c
+    # ---------------- main -----------------------------------------------------------
 
-    keyb.bind_methods_component()
-    c.write(24.64)
-    c.write(91.4)
-    
-    d = Display()
-    kb = KeyBoard(id_up="up-button", id_dwn="down-button", id_left="left-button", id_mode="mode-button")
-    b = Branch(d, kb)
-    
-   
-    """
     memory = MemoryMap()
     tc4h = TC4H(memory)
     
