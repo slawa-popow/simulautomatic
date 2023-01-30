@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 425 345" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <bx:grid x="0" y="0" width="2" height="2"/>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="110.159" y1="60.919" x2="110.159" y2="158.919" id="gradient-0" gradientTransform="matrix(0.000144, 1, -0.105602, 0.000015, 128.565384, 10.319615)">
+      <stop offset="0" style="stop-color: rgb(246, 246, 246);"/>
+      <stop offset="0.494" style="stop-color: rgb(229, 227, 227);"/>
+      <stop offset="1" style="stop-color: rgb(248, 248, 248);"/>
+    </linearGradient>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="118" y1="196" x2="118" y2="212" id="gradient-1" gradientTransform="matrix(1, 0, 0, 1, 7.342571, 6.759627)">
+      <stop offset="0" style="stop-color: rgb(194, 194, 194);"/>
+      <stop offset="0.463" style="stop-color: rgb(144, 144, 144);"/>
+      <stop offset="1" style="stop-color: rgb(141, 141, 141);"/>
+    </linearGradient>
+    <pattern x="0" y="0" width="25" height="25" patternUnits="userSpaceOnUse" viewBox="0 0 100 100" id="pattern-0">
+      <rect width="50" height="100" style="fill: rgb(235, 233, 147);" transform="matrix(0, 1, -1, 0, 99.769875, 50.104603)"/>
+      <rect x="49.875" width="50" height="100" style="fill: rgb(77, 124, 65);" transform="matrix(0, 1, -1, 0, 99.881973, -49.868027)"/>
+    </pattern>
+    <pattern id="pattern-0-1" patternTransform="matrix(1, 0, 0, 1, 230.51828, 238.771973)" xlink:href="#pattern-0"/>
+    <pattern id="pattern-1" viewBox="0 0 100 100" patternUnits="userSpaceOnUse" preserveAspectRatio="none" width="100" height="100" bx:pinned="true">
+      <rect width="50" height="100" style="fill: rgb(235, 233, 147);" transform="matrix(-1, 0, 0, -1, 0, 0)" x="-50.16" y="-99.623"/>
+      <rect x="-100.147" width="50" height="100" style="fill: rgb(77, 124, 65);" transform="matrix(-1, 0, 0, -1, 0, 0)" y="-100.181"/>
+    </pattern>
+    <pattern id="pattern-1-0" patternTransform="matrix(0.253777, -0.001245, 0.003701, 0.754524, 196.763702, 243.513855)" xlink:href="#pattern-1"/>
+  </defs>
+  <g transform="matrix(1, 0, 0, 1, 0, -0.871078)">
+    <g transform="matrix(1, 0, 0, 1, -38.092079, -10.165537)">
+      <rect x="356.547" width="87.029" height="300" style="stroke: rgb(180, 180, 180); paint-order: stroke; vector-effect: non-scaling-stroke; fill: rgb(255, 253, 246);" y="14.254"/>
+      <rect style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgb(255, 255, 255);" x="356.547" y="44.254" width="16" height="14" rx="2" ry="2"/>
+      <g id="group-kontact-OUT">
+        <rect style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgb(210, 236, 193);" x="356.547" y="219.254" width="16" height="14" rx="2" ry="2"/>
+        <rect style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgb(210, 236, 193);" x="356.547" y="244.254" width="16" height="14" rx="2" ry="2"/>
+      </g>
+      <rect style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgb(218, 218, 218);" x="356.547" y="269.254" width="16" height="14" rx="2" ry="2"/>
+      <rect style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgb(225, 190, 239);" x="356.547" y="194.254" width="16" height="14" rx="2" ry="2"/>
+      <rect style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgb(218, 218, 218);" x="356.547" y="294.254" width="16" height="14" rx="2" ry="2"/>
+      <rect style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgb(255, 255, 255);" x="356.547" y="69.254" width="16" height="14" rx="2" ry="2"/>
+      <rect style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgb(255, 255, 255);" x="356.547" y="94.254" width="16" height="14" rx="2" ry="2"/>
+      <rect style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgb(255, 255, 255);" x="356.547" y="119.254" width="16" height="14" rx="2" ry="2"/>
+      <rect style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgb(255, 255, 255);" x="356.547" y="144.254" width="16" height="14" rx="2" ry="2"/>
+      <rect style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgb(225, 190, 239);" x="356.547" y="169.254" width="16" height="14" rx="2" ry="2"/>
+      <rect style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgb(255, 255, 255);" x="356.547" y="19.254" width="16" height="14" rx="2" ry="2"/>
+      <rect style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgb(255, 255, 255);" x="427.547" y="19.254" width="16" height="14" rx="2" ry="2"/>
+      <rect style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgb(255, 255, 255);" x="427.547" y="44.254" width="16" height="14" rx="2" ry="2"/>
+      <rect style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgb(255, 255, 255);" x="427.576" y="69.254" width="16" height="14" rx="2" ry="2"/>
+      <rect style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgb(255, 255, 255);" x="427.547" y="94.254" width="16" height="14" rx="2" ry="2"/>
+      <rect style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgb(255, 255, 255);" x="427.576" y="119.254" width="16" height="14" rx="2" ry="2"/>
+      <rect style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgb(255, 255, 255);" x="427.576" y="144.254" width="16" height="14" rx="2" ry="2"/>
+      <rect style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgb(249, 244, 211);" x="427.576" y="169.254" width="16" height="14" rx="2" ry="2" id="kontact-AL1"/>
+      <rect style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgb(249, 244, 211);" x="427.576" y="194.254" width="16" height="14" rx="2" ry="2" id="kontact-COM-AL12"/>
+      <rect style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgb(249, 244, 211);" x="427.576" y="220" width="16" height="14" rx="2" ry="2" id="contact-AL2"/>
+      <rect style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgb(213, 235, 254);" x="427.576" y="244.254" width="16" height="14" rx="2" ry="2"/>
+      <rect style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgb(254, 164, 164);" x="427.576" y="269.254" width="16" height="14" rx="2" ry="2"/>
+      <rect style="vector-effect: non-scaling-stroke; paint-order: stroke; stroke: rgb(0, 0, 0); fill: rgb(255, 255, 255);" x="427.576" y="294.254" width="16" height="14" rx="2" ry="2"/>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; white-space: pre;" x="362" y="28.211">1</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; white-space: pre;" x="362" y="54.211">2</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; white-space: pre;" x="362" y="78.211">3</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; white-space: pre;" x="362" y="104.091">4</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; white-space: pre;" x="362" y="128.211">5</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; white-space: pre;" x="362" y="154.211">6</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; white-space: pre;" x="362" y="178.091">7</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; white-space: pre;" x="362" y="204.091">8</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; white-space: pre;" x="362" y="228.211">9</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; white-space: pre;" x="360" y="254.091">10</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; white-space: pre;" x="359.99" y="278.211">11</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; white-space: pre;" x="360" y="304.091">12</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; white-space: pre;" x="430" y="28.048">13</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; white-space: pre;" x="430" y="54.048">14</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; white-space: pre;" x="430" y="78.211">15</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; white-space: pre;" x="430" y="104.048">16</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; white-space: pre;" x="430" y="130.048">17</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; white-space: pre;" x="430" y="154.048">18</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; white-space: pre;" x="430" y="180.048">19</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; white-space: pre;" x="430" y="204.048">20</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; white-space: pre;" x="430" y="230.048">21</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; white-space: pre;" x="429.991" y="254.048">22</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; white-space: pre;" x="430" y="280.048">23</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; white-space: pre;" x="429.991" y="304.131">24</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 6px; font-weight: 700; white-space: pre;" transform="matrix(0.000001, -1, 1, 0.000001, 98.28981, 687.425659)" x="381.911" y="288.188">~220v 50Hz</text>
+      <line style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0); stroke-width: 0.5px; vector-effect: non-scaling-stroke;" x1="376.622" y1="308.023" x2="384" y2="308"/>
+      <line style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0); stroke-width: 0.5px; vector-effect: non-scaling-stroke;" x1="375.885" y1="269.912" x2="384" y2="270"/>
+      <polyline style="stroke: rgb(0, 0, 0); fill: none; paint-order: stroke; stroke-width: 0.2px;" points="374.453 226.018 386 226 386 236"/>
+      <g>
+        <ellipse style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke;" cx="386.032" cy="235.946" rx="1" ry="1"/>
+        <line style="stroke: rgb(0, 0, 0); fill: none;" x1="386.073" y1="236" x2="386.053" y2="244" transform="matrix(0.707107, -0.707107, 0.707107, 0.707107, -53.801707, 342.111189)" id="NO-out" bx:origin="0.544 0"/>
+        <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" d="M 386.523 242.375 H 387.023 A 0.5 0.5 0 0 1 387.523 242.875 V 242.875 A 0.5 0.5 0 0 1 387.023 243.375 H 386.523 V 242.375 Z" bx:shape="rect 386.523 242.375 1 1 0 0.5 0.5 0 1@aa5ab7d4"/>
+      </g>
+      <polyline style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 0.2px;" points="386.085 241.937 386 256.018 374 256"/>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 7px; font-weight: 700; white-space: pre; text-anchor: middle;" transform="matrix(1, 0.000002, -0.000002, 1, -45.070724, -55.936733)" y="288.188" x="381.911">OUT<tspan x="381.9110107421875" dy="1em">​</tspan>релейный<tspan x="381.9110107421875" dy="1em">​</tspan>выход</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 7px; font-weight: 700; white-space: pre; text-anchor: middle;" transform="matrix(1, 0.000002, -0.000002, 1, -58.040604, -107.538239)" y="288.188" x="381.911">Выход<tspan x="381.9110107421875" dy="1em">​</tspan>к бесконтактному<tspan x="381.9110107421875" dy="1em">​</tspan>пускателю 12В</text>
+      <g transform="matrix(1, 0, 0, 1, -96.721985, 4.181746)">
+        <ellipse style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0); stroke-width: 0px;" cx="474.327" cy="173.537" rx="3.605" ry="3.896"/>
+        <text style="fill: rgb(255, 5, 5); font-family: Arial, sans-serif; font-size: 17.4px; white-space: pre;" transform="matrix(0.599908, 0, 0, 0.582983, 243.513214, 68.821175)" x="379.904" y="185.062">+</text>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, -87.569977, -3.661224)">
+        <g>
+          <ellipse style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0); stroke-width: 0px;" cx="465.175" cy="204.737" rx="3.605" ry="3.896"/>
+        </g>
+        <text style="fill: rgb(1, 1, 250); font-family: Arial, sans-serif; font-size: 14px; white-space: pre;" transform="matrix(1.278943, 0, 0, 1, -29.632927, 8.136502)" x="384.611" y="200.703">-</text>
+      </g>
+      <g transform="matrix(-1, 0, 0, -1, 797.727295, 455.875)">
+        <ellipse style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke;" cx="386.032" cy="235.946" rx="1" ry="1"/>
+        <line style="stroke: rgb(0, 0, 0); fill: none;" x1="386.073" y1="236" x2="386.053" y2="244" transform="matrix(0.707107, -0.707107, 0.707107, 0.707107, -53.801707, 342.111189)" id="NO-al2" bx:origin="0.544 0"/>
+        <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" d="M 386.523 242.375 H 387.023 A 0.5 0.5 0 0 1 387.523 242.875 V 242.875 A 0.5 0.5 0 0 1 387.023 243.375 H 386.523 V 242.375 Z" bx:shape="rect 386.523 242.375 1 1 0 0.5 0.5 0 1@aa5ab7d4"/>
+        <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 8px; font-weight: 700; white-space: pre;" transform="matrix(-1, 0, 0, -1, 0, 0)" x="-410.064" y="-264.447">AL1</text>
+        <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 8px; font-weight: 700; white-space: pre;" transform="matrix(-1, 0, 0, -1, 0, 0)" x="-410.064" y="-238.804">AL2</text>
+      </g>
+      <g transform="matrix(-1, 0, 0, 1, 797.727295, -51.857239)">
+        <ellipse style="stroke: rgb(0, 0, 0); vector-effect: non-scaling-stroke; paint-order: stroke;" cx="386.032" cy="235.946" rx="1" ry="1"/>
+        <line style="stroke: rgb(0, 0, 0); fill: none;" x1="386.073" y1="236" x2="386.053" y2="244" transform="matrix(0.707107, -0.707107, 0.707107, 0.707107, -53.801707, 342.111189)" id="NO-al1" bx:origin="0.544 0"/>
+        <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" d="M 386.523 242.375 H 387.023 A 0.5 0.5 0 0 1 387.523 242.875 V 242.875 A 0.5 0.5 0 0 1 387.023 243.375 H 386.523 V 242.375 Z" bx:shape="rect 386.523 242.375 1 1 0 0.5 0.5 0 1@aa5ab7d4"/>
+      </g>
+      <polyline style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 0.5px;" points="412 183.254 412 174.276 427.576 174.276"/>
+      <line style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0); stroke-width: 0.5px;" x1="411.747" y1="190" x2="412" y2="214"/>
+      <line style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0); stroke-width: 0.5px;" x1="411.938" y1="201.781" x2="427.576" y2="202"/>
+      <polyline style="stroke: rgb(0, 0, 0); fill: none; stroke-width: 0.5px;" points="411.938 220.43 411.938 228 427.576 228"/>
+      <g transform="matrix(1, 0, 0, 1, -51.721985, 101.348145)">
+        <ellipse style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0); stroke-width: 0px;" cx="474.327" cy="173.537" rx="3.605" ry="3.896"/>
+        <text style="fill: rgb(255, 5, 5); font-family: Arial, sans-serif; font-size: 17.4px; white-space: pre;" transform="matrix(0.599908, 0, 0, 0.582983, 243.513214, 68.821175)" x="379.904" y="185.062">+</text>
+      </g>
+      <g transform="matrix(1, 0, 0, 1, -42.569977, 46.338776)">
+        <g>
+          <ellipse style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0); stroke-width: 0px;" cx="465.175" cy="204.737" rx="3.605" ry="3.896"/>
+        </g>
+        <text style="fill: rgb(1, 1, 250); font-family: Arial, sans-serif; font-size: 14px; white-space: pre;" transform="matrix(1.278943, 0, 0, 1, -29.632927, 8.136502)" x="384.611" y="200.703">-</text>
+      </g>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 8px; font-weight: 700; white-space: pre; text-anchor: middle;" transform="matrix(0.000001, -1, 1, 0.000001, 121.11042, 646.004089)" y="288.188" x="381.911">Термопара<tspan x="381.9110107421875" dy="1em">​</tspan>вход</text>
+    </g>
+    <path style="fill: rgb(216, 216, 216); stroke-width: 0.4px; stroke: rgb(173, 173, 173);" d="M 39.343 204.76 L 39.343 216.76 C 39.343 218.969 41.134 220.76 43.343 220.76 L 205.343 220.76 L 205.343 242.76 L 21.343 242.76 L 21.343 102.76 L 111.343 102.76 L 111.343 160.76 C 111.343 164.074 114.029 166.76 117.343 166.76 C 120.657 166.76 123.343 164.074 123.343 160.76 L 123.343 102.76 L 175.798 102.76 L 205.343 157.246 L 205.343 200.76 L 43.343 200.76 C 41.134 200.76 39.343 202.551 39.343 204.76 Z" id="ferrum"/>
+    <path style="vector-effect: non-scaling-stroke; stroke-width: 0.4px; stroke: rgb(143, 140, 140); fill: url(#gradient-0); fill-rule: nonzero;" d="M 112.502 67.679 H 122.502 V 160.679 A 5 5 0 0 1 117.502 165.679 H 117.502 A 5 5 0 0 1 112.502 160.679 V 67.679 Z" bx:shape="rect 112.502 67.679 10 98 0 0 5 5 1@c948427c"/>
+    <path style="stroke-width: 0.4px; stroke: rgb(146, 146, 146); fill: url(#gradient-1);" d="M 44.343 202.76 H 209.343 V 218.76 H 44.343 A 3 3 0 0 1 41.343 215.76 V 205.76 A 3 3 0 0 1 44.343 202.76 Z" bx:shape="rect 41.343 202.76 168 16 3 0 0 3 1@5c314e7d"/>
+    <rect style="stroke: rgb(0, 0, 0); stroke-width: 0.4px; fill: rgb(77, 77, 77);" x="209.343" y="200.469" width="19.304" height="21.729" rx="2" ry="2"/>
+    <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 8px; white-space: pre;" x="26.714" y="109.922">кусок железа</text>
+    <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 8px; font-weight: 700; white-space: pre;" x="127.296" y="74.771">термопара</text>
+    <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 9px; font-weight: 700; white-space: pre;" x="209.343" y="235.191">ТЭН</text>
+    <polyline style="fill: none; stroke: rgb(235, 67, 67); stroke-width: 2px;" points="115.623 67.507 115.677 59.415 9.721 59.289 10.236 334.343 415.677 333.415 415.677 265.415 405.677 265.415"/>
+    <polyline style="fill: none; stroke: rgb(53, 142, 237); stroke-width: 2px;" points="117.843 67.656 117.918 55.415 4.835 55.581 4.491 342.867 421.749 341.768 421.677 243.415 405.484 243.415"/>
+    <line style="fill: rgb(216, 216, 216); stroke-width: 2px; stroke: rgb(100, 100, 100);" x1="176.553" y1="268.217" x2="317.677" y2="269.415"/>
+    <line style="fill: rgb(216, 216, 216); stroke-width: 2px; paint-order: fill; stroke: url(#pattern-1-0);" x1="176.221" y1="293.487" x2="317.677" y2="293.415"/>
+    <ellipse style="stroke: rgb(0, 0, 0); stroke-width: 0px; fill: rgb(100, 100, 100);" cx="317.901" cy="215.988" rx="2.257" ry="2.257"/>
+    <ellipse style="stroke: rgb(0, 0, 0); stroke-width: 0px; fill: rgb(100, 100, 100);" cx="317.482" cy="241.476" rx="2.257" ry="2.257"/>
+    <ellipse style="stroke: rgb(0, 0, 0); stroke-width: 0px; fill: rgb(100, 100, 100);" cx="317.702" cy="269.107" rx="2.257" ry="2.257"/>
+    <polyline style="stroke-width: 2px; fill: none; stroke: rgb(100, 100, 100);" points="317.66 268.808 308.776 261.838 308.64 247.351 318.206 241.065"/>
+    <ellipse style="stroke: rgb(0, 0, 0); stroke-width: 0px; fill: rgb(100, 100, 100);" cx="317.49" cy="293.342" rx="2.257" ry="2.257"/>
+    <polyline style="fill: none; stroke-width: 2px; stroke: rgb(100, 100, 100);" points="228.689 207.445 299.677 207.415 317.677 215.415"/>
+    <path style="fill: none; stroke-width: 2px; stroke: url(#pattern-0-1);" d="M 228.782 217.455 L 257.847 217.218 L 257.453 293.612"/>
+    <ellipse style="stroke: rgb(0, 0, 0); stroke-width: 0px; fill: rgb(100, 100, 100);" cx="257.485" cy="293.348" rx="3" ry="3"/>
+    <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 12px; font-weight: 700; white-space: pre;" x="161.372" y="268.522">L</text>
+    <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 12px; font-weight: 700; white-space: pre;" x="161.94" y="294.944">N</text>
+    <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 6px; white-space: pre;" transform="matrix(1, 0, 0, 1, -15.244098, 7.40428)"><tspan x="37.593" y="305.077">*Нагрузку (нагреватель) как на схеме</tspan><tspan x="37.593" dy="1em">​</tspan><tspan>подключать к прибору не рекомендуется!</tspan><tspan x="37.593" dy="1em">​</tspan><tspan>Эта схема служит для демонстрации работы прибора.</tspan></text>
+    <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 6px; white-space: pre;" transform="matrix(1.05863, 0, 0, 1.347514, 71.470207, 8.871749)"><tspan x="251.881" y="9.777">Задняя сторона</tspan><tspan x="251.881" dy="1em">​</tspan><tspan>прибора TC4H</tspan></text>
+  </g>
+</svg>

@@ -14,17 +14,286 @@
     href="https://fonts.googleapis.com/css?family=Roboto:400,300,700&subset=latin,Cyrillic"
     rel="stylesheet"
     type="text/css"
-    /> 
-    <title>Терморегуляторы с П.И.Д</title>
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <title>Терморегулятор Autonics TC4H</title>
 
     <style>
+ /* сброс стилей браузера */
+        * {
+            box-sizing: border-box; 
+        }
+        html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, 
+        figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            vertical-align: baseline;
+        }
+        article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+        body {
+            line-height: 1.2;
+        }
+        ol { 
+            padding-left: 1.4em;
+            list-style: decimal;
+        }
+        ul {
+            padding-left: 1.4em;
+            list-style: square;
+        }
+        li {
+            padding: 4px;
+            padding-top: 10px;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        } 
+        /* конец кода сброса стилей браузера */
+        html {
+            background-color: white
+        }
+        body {
+            margin: 0 auto;
+            width: 95%;    
+        }
+        .main {
+            font-size: 0.9em;
+            font-family: 'Roboto', serif;
+        }
+        .main .maincontent {
+            display: flex;
+            flex-flow: column wrap;
+        }
+       
+        .main .maincontent .main-title h2, .subtitle{
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2em;
+            font-weight: 300;
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px 0;
+        }
+        .main .subtitle {
+            font-size: 1.6em;
+            font-weight: 300;
+        
+        }
 
+        .preloader {
+            position: fixed;
+            top: 25%;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            z-index: 2000;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .preloader .preloader__block {
+            position: relative;
+            background-image: linear-gradient(to right, #434343 0%, black 100%);
+            width: 100%;
+            height: 100%;
+        }
 
+        .preloader__block span{
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            text-align: center;
+            padding: 0 15px;
+            color: rgb(247, 247, 247);
+        }
+        .hidden_preload {
+            display: none;
+        }
+
+        header {
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            flex-flow: column wrap;
+        }
+        .title_header {
+            width: 100%;
+            display: flex;
+            flex-flow: row wrap;
+            padding: 30px 10px;
+            background: #ADA996;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+            
+        }
+        .title__header_indicator {
+            order: 2;
+            width: 50%;
+        }
+        .title__header_name{
+            order: 1;
+            width: 50%;
+            padding-left: 20px;
+        }
+        .title__header_name h1{
+            
+           font-weight: 400;
+           font-size: 2.4em;
+    
+        }
+        .title__header_name h2 {
+            margin-top: 30px;
+            font-weight: 300;
+            font-size: 1.9em;
+            
+        }
+        
+        
+
+    /*| Navigation |*/
+    nav{
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        margin-top: 30px;
+        width: 100%;
+        box-shadow: 0 3px 10px -2px rgba(0,0,0,.1);
+        border-bottom: 1px solid rgba(0,0,0,.1);
+    }
+    
+    nav ul{
+        display: flex;
+        flex-flow: row wrap;
+        padding: 0;
+        list-style: none;
+        position: relative;
+        
+    }
+    nav ul li:nth-of-type(1n+2) {
+       border-left: 2px solid rgba(0,0,0,.1);
+    }
+    nav ul li{
+        -webkit-transition: all .1s ease-in-out;
+        -moz-transition: all .1s ease-in-out;
+        transition: all .1s ease-in-out;
+        background: linear-gradient(179.7deg, rgb(197, 214, 227) 2.9%, rgb(144, 175, 202) 97.1%);
+    }
+    nav ul li:hover{background: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);}
+    nav ul li:hover > ul{
+        display: flex;
+        flex-flow: column wrap;
+    }
+    nav ul li{
+        display: flex;
+        flex-flow: row wrap;
+        -webkit-transition: all .1s ease-in-out;
+        -moz-transition: all .1s ease-in-out;
+        transition: all .1s ease-in-out;
+    }
+        nav ul li a{
+            padding: 10px 20px;
+            color: rgb(18, 18, 18); 
+            font-size: .7em;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+        nav ul ul{
+            display: none;
+            background: #fff;
+            position: absolute; 
+            top: 100%;
+            box-shadow: -3px 3px 10px -2px rgba(0,0,0,.1);
+            border: 1px solid rgba(0,0,0,.1);
+        }
+            nav ul ul li{position: relative;}
+            nav ul ul li a {
+                padding: 10px 30px; 
+                border-bottom: 1px solid rgba(0,0,0,.05);
+            }
+            nav ul ul ul {
+                position: absolute; 
+                left: 100%; 
+                top:0;
+            }	
+        
+        .main {
+            height: 200px;
+            /* border: 1px solid rgb(73, 73, 76); */
+        }
+
+        @media (max-width: 702px) {
+            nav ul{
+                flex-flow: column;
+                width: 100%;
+            }
+            nav ul li {
+                margin-bottom: 4px;
+            }
+        }
+        @media (min-width: 702px) {
+            nav ul {
+            flex-flow: row wrap;
+            justify-content: center;
+            }
+            nav ul li {
+                margin-bottom: 4px;
+            }
+        }
     </style>
  
 </head>
 <body onload="brython({debug: 1})">
 
+    <div id="id_preloader" class="preloader">
+        <div class="preloader__block">
+            <span >Построение структуры документа. Подождите несколько сек.</span>
+        </div>
+    </div>
+
+    <header>
+        <div class="title_header">
+            <div class="title__header_name">
+                <h1>Терморегулятор</h1>
+                <h1>Autonics TC4H</h1>
+                <h2>Настройка. Подключение.</h2>
+            </div>
+            <div class="title__header_indicator">
+                <!--  -->
+            </div>
+
+        </div>
+        <nav>
+            <ul>
+                <li><a id="about" href="#">О приборе</a></li>
+                <li><a id="par1" href="#">Группа параметров par1</a></li>
+                <li><a id="par2" href="#">Группа параметров par2</a></li>
+                <li><a id="alarm" href="#">Сигнализация</a></li>
+                <li><a id="default-settings" href="#">Заводские настройки</a></li>
+                <li><a id="setting" href="#">Настройка прибора</a></li>
+                <li><a id="connect" href="#">Подключение</a></li>
+              </ul>
+        </nav>
+    </header>
+
+
+    <!-- Контейнер генерируемого контента  -->
+    <article  class="main">
+        <div class="maincontent" id="main-content"></div>
+    </article>
+    <!--  -->
+
+
+    <footer>
+
+    </footer>
 
 
 
@@ -37,7 +306,314 @@
     from abc import ABC, abstractmethod
     import time
     import math
-    import random
+    
+
+
+    
+
+
+
+
+
+    # --------------------------------------------------------------------
+    # --------------------------------------------------------------------
+
+    class ContentPage:
+        """Базовый класс для разделов 
+            документа"""
+
+            # хранит для удаления объектов setTimeout
+            # иначе после запуска анимации и перехода на другую страницу
+            # ошибка таймера
+        timeout_obj: list = list()
+
+
+        def __init__(self, title: str) -> None:
+                # заголовок
+            self._title = title
+            self.container = None
+            window.addEventListener("resize", self.resize_page)
+            
+            
+        @classmethod
+        def add_timer(cls, obj_tmr) -> None:
+            cls.timeout_obj.append(obj_tmr)   
+
+
+        def make_content(self, e) -> None:
+            """Наследники сами переопределяют"""
+            pass
+
+
+        def delete_content(self) -> None:
+            """Удалить всех дочерних html элементов 
+                в контейнере [.main-content]"""
+
+            if ContentPage.timeout_obj:
+                for cleartmr in ContentPage.timeout_obj:
+                    window.clearTimeout(cleartmr)
+
+            for elem in self.container.children:
+                self.container.removeChild(elem)
+
+
+        def get_width_page(self) -> int:
+            w1 = window.innerWidth
+            w2 = document.documentElement.clientWidth
+            w3 = document.body.clientWidth
+            return w1 or w2 or w3
+
+        def get_height_page(self) -> int: 
+            h1 = window.innerHeight
+            h2 = document.documentElement.clientHeight
+            h3 = document.body.clientHeight
+            return h1 or h2 or h3 
+
+
+        def resize_page(self, e) -> None:
+            pass
+
+
+
+        def make_title(self) -> None:
+            """Создание заголовка и вставка его в контейнер.
+                Заголовок: <div class='main-title'><h2>str-title</h2></div>
+                Заголовок общий для всех экземпляров класса 
+                (кроме текста в нем конечно)"""
+
+            title_contain = document.createElement("div")
+            title_h = document.createElement("h2")
+            title_h.textContent = self._title
+            title_contain.appendChild(title_h)
+            title_contain.classList.add("main-title")
+            self.container.appendChild(title_contain)
+
+
+        def make_subtitle(self, subtitle_text: str, css_class="subtitle") -> None: 
+            """Вставляет в контейнер страницы подзаголовок <h3>
+                К нему применяется стиль по умолчанию css_class"""
+
+            subtitle_h = document.createElement("h3")
+            subtitle_h.textContent = subtitle_text
+            subtitle_h.classList.add(css_class) 
+            self.container.appendChild(subtitle_h)
+
+
+        def make_paragraph(self, ptext: str) -> None:
+            """Вставляет в контейнер страницы параграф <p>"""
+
+            p = document.createElement("p")
+            p.innerHTML = ptext
+            self.container.appendChild(p)
+
+   
+
+
+    # ---------------------------------------------------------
+    def del_content(method: Callable) -> Callable:
+        """Декоратор оборачивающий интерфейсный
+            метод make_content(instance, event)"""
+
+        @wraps(method)
+        def wrapper(self, e):
+                # показать блок загрузки
+            document["id_preloader"].className = "preload"    
+                # Очистить страницу контента
+            self.delete_content()
+                # Заполнить контентом
+            method(self, e)
+                # скрыть блок загрузки
+            document["id_preloader"].className = "hidden_preload"
+        return wrapper
+
+    # --------------------------------------------------------------------
+    
+    class About(ContentPage):
+        """О приборе"""
+
+        def __init__(self, title: str) -> None:
+                super().__init__(title)
+
+        @del_content
+        def make_content(self, e) -> None:
+            """Встравляет по порядку контент в 
+            контейнер. Методы создают html теги
+            с данными и вставляют в контейнер.
+            Порядок вставки контента совпадает с порядком
+            вызова методов."""
+
+            self.make_title() # заголовок
+            
+
+
+    # --------------------------------------------------------------------
+
+    class GroupPar1(ContentPage):
+        """Группа параметров par1"""
+
+        def __init__(self, title: str) -> None:
+                super().__init__(title)
+
+        @del_content
+        def make_content(self, e) -> None:
+            """Встравляет по порядку контент в 
+            контейнер. Методы создают html теги
+            с данными и вставляют в контейнер.
+            Порядок вставки контента совпадает с порядком
+            вызова методов."""
+
+            self.make_title() # заголовок
+
+
+
+    # --------------------------------------------------------------------
+
+    class GroupPar2(ContentPage):
+        """Группа параметров par2"""
+
+        def __init__(self, title: str) -> None:
+                super().__init__(title)
+
+        @del_content
+        def make_content(self, e) -> None:
+            """Встравляет по порядку контент в 
+            контейнер. Методы создают html теги
+            с данными и вставляют в контейнер.
+            Порядок вставки контента совпадает с порядком
+            вызова методов."""
+
+            self.make_title() # заголовок
+
+
+
+
+
+    # --------------------------------------------------------------------
+
+    class Alarm(ContentPage):
+        """Сигнализация"""
+
+        def __init__(self, title: str) -> None:
+                super().__init__(title)
+
+        @del_content
+        def make_content(self, e) -> None:
+            """Встравляет по порядку контент в 
+            контейнер. Методы создают html теги
+            с данными и вставляют в контейнер.
+            Порядок вставки контента совпадает с порядком
+            вызова методов."""
+
+            self.make_title() # заголовок
+
+
+
+
+
+    # --------------------------------------------------------------------
+
+    class DefaultSettings(ContentPage):
+        """Заводские настройки"""
+
+        def __init__(self, title: str) -> None:
+                super().__init__(title)
+
+        @del_content
+        def make_content(self, e) -> None:
+            """Встравляет по порядку контент в 
+            контейнер. Методы создают html теги
+            с данными и вставляют в контейнер.
+            Порядок вставки контента совпадает с порядком
+            вызова методов."""
+
+            self.make_title() # заголовок
+
+
+
+
+
+    # --------------------------------------------------------------------
+
+    class Setting(ContentPage):
+        """Настройки прибора"""
+
+        def __init__(self, title: str) -> None:
+                super().__init__(title)
+
+        @del_content
+        def make_content(self, e) -> None:
+            """Встравляет по порядку контент в 
+            контейнер. Методы создают html теги
+            с данными и вставляют в контейнер.
+            Порядок вставки контента совпадает с порядком
+            вызова методов."""
+
+            self.make_title() # заголовок
+
+
+
+
+    # --------------------------------------------------------------------
+
+    class ElectroConnect(ContentPage):
+        """Подключение"""
+
+        def __init__(self, title: str) -> None:
+                super().__init__(title)
+
+        @del_content
+        def make_content(self, e) -> None:
+            """Встравляет по порядку контент в 
+            контейнер. Методы создают html теги
+            с данными и вставляют в контейнер.
+            Порядок вставки контента совпадает с порядком
+            вызова методов."""
+
+            self.make_title() # заголовок
+
+
+
+    # --------------------------------------------------------------------
+    # --------------------------------------------------------------------
+
+    class Manager:
+        """Управляет созданием контента"""
+
+            # {Класс: {"имя экземпляра класса": ["название заголовка раздела", ["id элем. списка строчного меню"]]} }
+            
+        _obj_pages: dict = {
+            About: {"about": ["О приборе", ["about",]]},
+            GroupPar1: {"par1": ["Группа параметров par1", ["par1",]]},
+            GroupPar2: {"par2": ["Группа параметров par2", ["par2",]]},
+            Alarm: {"alarm": ["Сигнализация", ["alarm",]]},
+            DefaultSettings: {"default_set": ["Заводские настройки", ["default-settings",]]},
+            Setting: {"setting": ["Настройка прибора", ["setting",]]},
+            ElectroConnect: {"elconnect": ["Подключение", ["connect",]]},
+        }
+
+        def __init__(self, id_container: str) -> None:
+                # Объект главного контейнера контента '.main-content'
+            self._container = document[id_container]
+
+                # создание атрибутов экземпляров классов разделов и привязка обработчиков событий
+                # к id элементам линейного списка меню (черное)
+                # также добавление во временный словарь temp_dict_burger_menu{"заголовок": объект экземпляра}
+
+            for key, values in self._obj_pages.items():
+                name, all_attrs = tuple(values.items())[0]                
+                title, evn_action_list = all_attrs
+                instance = key(title)
+                instance.container = self._container
+                for action in evn_action_list:
+                    document[action].bind("click", instance.make_content)
+                super().__setattr__(name, instance)
+
+                # После загрузки страницы первым построится и покажется раздел "о приборе"
+            self.about.make_content(0)
+
+                
+
+    main = Manager("main-content")   
 
 </script>
     
